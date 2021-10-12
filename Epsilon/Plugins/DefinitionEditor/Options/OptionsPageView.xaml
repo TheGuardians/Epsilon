@@ -4,17 +4,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:DefinitionEditor.Options">
     <StackPanel>
-        <CheckBox
+        <CheckBox Name="DisplayTypesCheckbox"
             Margin="4,9,4,5"
             Content="Display Field Types"
             ToolTip="Data type labels will be shown to the right of each value."
             IsChecked="{Binding DisplayFieldTypes, Mode=TwoWay}" />
-        <CheckBox
+        <CheckBox Name="DisplayOffsetsCheckbox"
             Margin="4,9,4,5"
             Content="Display Field Offsets"
             ToolTip="Displays the offset of the field."
             IsChecked="{Binding DisplayFieldOffsets, Mode=TwoWay}" />
-        <CheckBox
+        <CheckBox Name="CollapseBlocksCheckbox"
             Margin="4,9,4,5"
             Content="Collapse Blocks By Default"
             ToolTip="On opening a new tag, its blocks (and child blocks within) are collapsed."

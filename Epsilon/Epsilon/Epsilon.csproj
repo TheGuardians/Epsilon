@@ -98,6 +98,7 @@
     <Compile Include="Commands\ShowAboutCommand.cs" />
     <Compile Include="Commands\ShowAboutCommandHandler.cs" />
     <Compile Include="Commands\ShowOptionsCommand.cs" />
+    <Compile Include="Commands\ToggleTopMostCommand.cs" />
     <Compile Include="Logging\DefaultLogger.cs" />
     <Compile Include="MefBootstrapper.cs" />
     <Compile Include="MenuDefinitions.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="Plugins\PluginLoader.cs" />
     <Compile Include="Plugins\PluginInfo.cs" />
     <Compile Include="Plugins\PluginLoaderException.cs" />
+    <Compile Include="Themes\Blur.cs" />
     <Compile Include="Themes\LayoutInitializer.cs" />
     <Compile Include="Themes\PanesStyleSelector.cs" />
     <Compile Include="Themes\Controls\ChromeWindow.cs" />
@@ -188,6 +190,22 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\AccentColors\AccentColors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Transparent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\HotWheels.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ClownWorld.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -263,9 +281,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\Frosted.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Solid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

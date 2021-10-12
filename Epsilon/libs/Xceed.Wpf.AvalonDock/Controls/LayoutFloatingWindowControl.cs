@@ -51,8 +51,9 @@ namespace Xceed.Wpf.AvalonDock.Controls
 
     static LayoutFloatingWindowControl()
     {
-      LayoutFloatingWindowControl.ContentProperty.OverrideMetadata( typeof( LayoutFloatingWindowControl ), new FrameworkPropertyMetadata( null, null, new CoerceValueCallback( CoerceContentValue ) ) );
-      AllowsTransparencyProperty.OverrideMetadata( typeof( LayoutFloatingWindowControl ), new FrameworkPropertyMetadata( false ) );
+      ContentProperty.OverrideMetadata( typeof( LayoutFloatingWindowControl ), new FrameworkPropertyMetadata( null, null, new CoerceValueCallback( CoerceContentValue ) ) );
+      AllowsTransparencyProperty.OverrideMetadata( typeof( LayoutFloatingWindowControl ), new FrameworkPropertyMetadata( true ) );
+      WindowStyleProperty.OverrideMetadata(typeof(LayoutFloatingWindowControl), new FrameworkPropertyMetadata(WindowStyle.None));
       ShowInTaskbarProperty.OverrideMetadata( typeof( LayoutFloatingWindowControl ), new FrameworkPropertyMetadata( false ) );
     }
 

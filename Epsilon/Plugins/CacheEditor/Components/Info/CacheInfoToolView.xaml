@@ -3,56 +3,41 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:CacheEditor.Components.Info"
-    Padding="4"
-    Background="#262626"
+    Padding="6,6,4,4"
+    Background="{DynamicResource BackgroundDark}"
     FontSize="14"
-    Foreground="#f1f1f1">
+    Foreground="{DynamicResource Foreground}"
+    Margin="0">
     <Grid>
         <StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock
-                    Width="140"
-                    Text="Display Name:" />
-                <TextBlock
-                    Width="140"
-                    Text="{Binding Info.CacheDisplayName}" />
+            <StackPanel Orientation="Horizontal" Margin="3">
+                <TextBlock Width="130" Text="Display Name:" FontFamily="BahnSchrift Light"/>
+                <TextBlock Width="auto" Text="{Binding Info.CacheDisplayName}" FontFamily="BahnSchrift SemiLight" FontSize="13"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock
-                    Width="140"
-                    Text="Version:" />
-                <TextBlock Text="{Binding Info.Version}" />
+            <StackPanel Orientation="Horizontal" Margin="3">
+                <TextBlock Width="130" Text="Version:" FontFamily="BahnSchrift Light"/>
+                <TextBlock Text="{Binding Info.Version}" FontFamily="BahnSchrift SemiLight" FontSize="13"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock
-                    Width="140"
-                    Text="Endianness:" />
-                <TextBlock Text="{Binding Info.Endianess}" />
+            <StackPanel Orientation="Horizontal" Margin="3">
+                <TextBlock Width="130" Text="Endianness:" FontFamily="BahnSchrift Light"/>
+                <TextBlock Text="{Binding Info.Endianess}" FontFamily="BahnSchrift SemiLight" FontSize="13"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock
-                    Width="140"
-                    Text="Locale Count:" />
-                <TextBlock Text="{Binding Info.LocaleCount}" />
+            <StackPanel Orientation="Horizontal" Margin="3">
+                <TextBlock Width="130" Text="Locale Count:" FontFamily="BahnSchrift Light"/>
+                <TextBlock Text="{Binding Info.LocaleCount}" FontFamily="BahnSchrift SemiLight" FontSize="13"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock
-                    Width="140"
-                    Text="Tag Count:" />
-                <TextBlock Text="{Binding Info.TagCount}" />
+            <StackPanel Orientation="Horizontal" Margin="3">
+                <TextBlock Width="130" Text="Tag Count:" FontFamily="BahnSchrift Light"/>
+                <TextBlock Text="{Binding Info.TagCount}" FontFamily="BahnSchrift SemiLight" FontSize="13"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock
-                    Width="140"
-                    Text="String Count:" />
-                <TextBlock Text="{Binding Info.StringCount}" />
+            <StackPanel Orientation="Horizontal" Margin="3">
+                <TextBlock Width="130" Text="String Count:" FontFamily="BahnSchrift Light"/>
+                <TextBlock Text="{Binding Info.StringCount}" FontFamily="BahnSchrift SemiLight" FontSize="13"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock
-                    Width="140"
-                    Text="Directory:"
-                    TextTrimming="CharacterEllipsis" />
-                <TextBlock Text="{Binding Info.CacheDirectory}" />
+            <StackPanel Orientation="Horizontal" Margin="3">
+                <TextBlock Width="130" Text="Directory:" FontFamily="BahnSchrift Light"/>
+                <TextBlock Text="{Binding Info.CacheDirectory}" TextTrimming="CharacterEllipsis" 
+                           FontFamily="BahnSchrift SemiLight" FontSize="13"/>
             </StackPanel>
         </StackPanel>
     </Grid>

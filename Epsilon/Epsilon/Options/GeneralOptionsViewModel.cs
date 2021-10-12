@@ -2,15 +2,65 @@
 using EpsilonLib.Settings;
 using System.IO;
 using System.ComponentModel.Composition;
+using System.Windows;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Epsilon.Options
 {
+    enum Theme
+    {
+        Solid,
+        Frosted,
+        Transparent,
+        ClownWorld,
+        HotWheels
+    }
+
+    enum Accent
+    {
+        Steel,
+        Silver,
+        White,
+        Red,
+        Mauve,
+        Salmon,
+        Orange,
+        Coral,
+        Peach,
+        Gold,
+        Yellow,
+        Pale,
+        Sage,
+        Green,
+        Olive,
+        Teal,
+        Aqua,
+        Cyan,
+        Blue,
+        Cobalt,
+        Sapphire,
+        Violet,
+        Crimson,
+        Orchid,
+        Lavender,
+        Rubine,
+        Pink,
+        Brown,
+        Tan,
+        Khaki
+    }
+
     [Export(typeof(IOptionsPage))]
     class GeneralOptionsViewModel : OptionPageBase
     {
-        private readonly ISettingsCollection _settings;
+        public readonly ISettingsCollection _settings;
+        private Theme _theme;
+        private Accent _accentColor;
         private string _defaultCachePath;
         private bool _defaultCachePathIsValid;
+        private bool _alwaysOnTop;
 
         [ImportingConstructor]
         public GeneralOptionsViewModel(ISettingsService settingsService) : base("General", "General")
@@ -18,11 +68,32 @@ namespace Epsilon.Options
             _settings = settingsService.GetCollection(GeneralSettings.CollectionKey);
         }
 
+        public Theme EpsilonTheme
+        {
+            get => _theme;
+            set
+            {
+                SetOptionAndNotify(ref _theme, value, "EpsilonTheme");
+            }
+        }
+
+        public Accent AccentColor
+        {
+            get => _accentColor;
+            set
+            {
+                SetOptionAndNotify(ref _accentColor, value, "AccentColor");
+                //OnPropertyChanged("Accent");
+                //UpdateAppearance(@"AccentColors/" + AccentColor.ToString());
+            }
+        }
+
         public string DefaultCachePath
         {
             get => _defaultCachePath;
             set => SetOptionAndNotify(ref _defaultCachePath, value);
         }
+
         public bool PathIsValid
         {
             get
@@ -33,15 +104,27 @@ namespace Epsilon.Options
             set => SetOptionAndNotify(ref _defaultCachePathIsValid, value);
         }
 
+        public bool AlwaysOnTop
+        {
+            get => _alwaysOnTop;
+            set => SetOptionAndNotify(ref _alwaysOnTop, value);
+        }
+
         public override void Apply()
         {
+            _settings.Set<Theme>(GeneralSettings.ThemeSetting.Key, EpsilonTheme);
+            _settings.Set<Accent>(GeneralSettings.AccentColorSetting.Key, AccentColor);
             if (PathIsValid)
                 _settings.Set(GeneralSettings.DefaultTagCacheSetting.Key, DefaultCachePath);
+            _settings.Set(GeneralSettings.AlwaysOnTopSetting.Key, AlwaysOnTop);
         }
 
         public override void Load()
         {
+            EpsilonTheme = _settings.Get(GeneralSettings.ThemeSetting.Key, Theme.Solid);
+            AccentColor = _settings.Get(GeneralSettings.AccentColorSetting.Key, Accent.Cobalt);
             DefaultCachePath = _settings.Get(GeneralSettings.DefaultTagCacheSetting.Key, "");
+            AlwaysOnTop = _settings.Get(GeneralSettings.AlwaysOnTopSetting.Key, false);
         }
     }
 }

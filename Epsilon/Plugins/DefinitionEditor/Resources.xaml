@@ -6,13 +6,20 @@
     xmlns:converters="clr-namespace:TagStructEditor.Converters;assembly=TagStructEditor"
     xmlns:fields="clr-namespace:TagStructEditor.Fields;assembly=TagStructEditor"
     xmlns:local="clr-namespace:DefinitionEditor"
-    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero">
 
-    <Style
-        x:Key="ToolBarStyle"
+
+
+    <!--  Constants  -->
+    <system:String x:Key="RealFormatString">{0}</system:String>
+
+    <!--  Styles  -->
+
+    <Style x:Key="ToolBarStyle"
         TargetType="{x:Type Border}">
         <Setter Property="Padding" Value="0,4" />
-        <Setter Property="BorderBrush" Value="#FF252526" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BackgroundDark}" />
         <Setter Property="BorderThickness" Value="0,0,0,1" />
         <Style.Resources>
             <Style
@@ -42,7 +49,7 @@
                                             Margin="8,2,0,0"
                                             VerticalAlignment="Center"
                                             Data="M 0 0 L 3 3 L 6 0 Z"
-                                            Fill="#FFF1F1F1" />
+                                            Fill="{DynamicResource Foreground}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </Setter.Value>
@@ -61,79 +68,75 @@
         </Style.Resources>
     </Style>
 
-    <!--  Constants  -->
-    <system:String x:Key="RealFormatString">{0}</system:String>
-
-    <!--  Styles  -->
-    <Style
-        x:Key="FieldLabelStyle"
-        TargetType="{x:Type TextBlock}">
+    <Style x:Key="FieldLabelStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
-        <Setter Property="Width" Value="183" />
-        <Setter Property="Padding" Value="3,1,0,0" />
+        <Setter Property="MinWidth" Value="220" />
+        <Setter Property="Padding" Value="10,0,10,0" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
-    <Style
-        x:Key="FieldTypeLabelStyle"
-        BasedOn="{StaticResource FieldLabelStyle}"
-        TargetType="{x:Type TextBlock}">
+    <Style x:Key="FieldTypeLabelStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="Width" Value="Auto" />
-        <Setter Property="Margin" Value="6,0,0,0" />
-        <Setter Property="Foreground" Value="#A0A0A0" />
+        <Setter Property="Margin" Value="3,1,0,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="FontFamily" Value="Bahnschrift" />
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundDark}" />
         <Setter Property="Visibility" Value="{Binding TypeNameIsVisible, Converter={x:Static converters:BoolToVisbilityConverter.Instance}}" />
     </Style>
 
-    <Style
-        x:Key="InlineFieldLabelStyle"
-        BasedOn="{StaticResource FieldLabelStyle}"
-        TargetType="{x:Type TextBlock}">
-        <Setter Property="Width" Value="16" />
-        <Setter Property="Margin" Value="4,0,0,0" />
+    <Style x:Key="InlineFieldLabelStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="Width" Value="auto" />
+        <Setter Property="Margin" Value="2,0,2,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal"/>
+        <Setter Property="TextOptions.TextRenderingMode" Value="ClearType"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundDark}" />
     </Style>
 
-    <Style
-        x:Key="FieldTextBoxStyle"
+    <Style x:Key="FieldTextBoxStyle"
         BasedOn="{StaticResource {x:Type TextBox}}"
         TargetType="{x:Type TextBox}">
-        <Setter Property="Width" Value="70" />
+        <Setter Property="MinWidth" Value="75" />
+        <Setter Property="Width" Value="auto" />
+        <Setter Property="Height" Value="22" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Padding" Value="2,1,0,0" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="1.5,0,0,0" />
+        <Setter Property="Margin" Value="0,0,0,0" />
     </Style>
 
-    <Style
-        x:Key="InlineFieldTextBoxStyle"
+    <Style x:Key="InlineFieldTextBoxStyle"
         BasedOn="{StaticResource FieldTextBoxStyle}"
         TargetType="{x:Type TextBox}">
-        <Setter Property="MinWidth" Value="70" />
-        <Setter Property="Width" Value="auto" />
-        <Setter Property="Margin" Value="-1,0,3,0" />
-        <Setter Property="Padding" Value="2,1,2,0" />
+        <Setter Property="MinWidth" Value="80" />
+        <Setter Property="Padding" Value="2,0,2,0" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
     </Style>
 
-    <Style
-        x:Key="InlineFieldTextBoxFixedStyle"
-        BasedOn="{StaticResource FieldTextBoxStyle}"
+    <Style x:Key="StringTextBoxStyle"
+        BasedOn="{StaticResource {x:Type TextBox}}"
         TargetType="{x:Type TextBox}">
-        <Setter Property="MinWidth" Value="100" />
+        <Setter Property="Background" Value="{DynamicResource StringBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource StringBorder}" />
+        <Setter Property="MinWidth" Value="260" />
         <Setter Property="Width" Value="auto" />
-        <Setter Property="Margin" Value="-1,0,3,0" />
-        <Setter Property="Padding" Value="2,1,2,0" />
+        <Setter Property="Height" Value="22" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="2,0" />
+        <Setter Property="Margin" Value="0,0,0,0" />
     </Style>
-    
-    <Style
-        x:Key="StructListBoxStyle"
-        BasedOn="{StaticResource {x:Type ListBox}}"
-        TargetType="{x:Type ListBox}">
+
+    <Style x:Key="StructListBoxStyle" BasedOn="{StaticResource {x:Type ListBox}}" TargetType="{x:Type ListBox}">
         <Setter Property="VirtualizingPanel.ScrollUnit" Value="Pixel" />
         <Setter Property="BorderBrush" Value="{x:Null}" />
-        <Setter Property="Padding" Value="8,4" />
+        <Setter Property="Padding" Value="4,4" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
-                <Style
-                    BasedOn="{StaticResource {x:Type ListBoxItem}}"
-                    TargetType="{x:Type ListBoxItem}">
+                <Style BasedOn="{StaticResource {x:Type ListBoxItem}}" TargetType="{x:Type ListBoxItem}">
                     <Setter Property="Padding" Value="2" />
                     <Setter Property="Focusable" Value="False" />
                     <Setter Property="ListBoxItem.BorderBrush" Value="{x:Null}" />
@@ -142,7 +145,9 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListBoxItem}">
                                 <Border
+                                    CornerRadius="3"
                                     Padding="{TemplateBinding Padding}"
+                                    Background="Transparent"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}">
                                     <ContentPresenter />
@@ -151,11 +156,9 @@
                         </Setter.Value>
                     </Setter>
                     <Style.Triggers>
-                        <DataTrigger
-                            Binding="{Binding IsHighlighted}"
-                            Value="True">
-                            <Setter Property="ListBoxItem.Background" Value="#3D007ACC" />
-                            <Setter Property="ListBoxItem.BorderBrush" Value="#007ACC" />
+                        <DataTrigger Binding="{Binding IsHighlighted}" Value="True">
+                            <Setter Property="ListBoxItem.Background" Value="Transparent" />
+                            <Setter Property="ListBoxItem.BorderBrush" Value="{DynamicResource ForegroundMedium}" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -163,21 +166,395 @@
         </Setter>
     </Style>
 
-    <Style
-        x:Key="ExpanderStyleBase"
+    <Style x:Key="ExpanderStyleBase"
         BasedOn="{StaticResource {x:Type Expander}}"
         TargetType="{x:Type Expander}">
-        <Setter Property="BorderBrush" Value="#3F3F46" />
-        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ExpanderClosedBorder}" />
+        <Setter Property="Background" Value="{DynamicResource ExpanderClosedBackground}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="Margin" Value="0,0" />
         <Setter Property="Width" Value="Auto" />
         <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Margin" Value="7,0,0,0" />
     </Style>
 
+    <Style x:Key="CachedTagGroupComboBoxToggle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="IsTabStop" Value="false" />
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="ClickMode" Value="Press" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border x:Name="templateRoot"
+                        Width="50"
+                        Background="{DynamicResource Relief}"
+                        BorderBrush="{DynamicResource Relief}"
+                        BorderThickness="1,1,1,1"
+                        SnapsToDevicePixels="true"
+                        CornerRadius="1,0,0,1"
+                        Margin="0,0,0,0"
+                        Padding="2">
+                        <Border x:Name="splitBorder"
+                            Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"
+                            Margin="0"
+                            HorizontalAlignment="Right"
+                            BorderBrush="Transparent"
+                            BorderThickness="0"
+                            SnapsToDevicePixels="true">
+                            <Path x:Name="arrow"
+                                Margin="4,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Data="M0,0L4,4 8,0z"
+                                Fill="{DynamicResource ForegroundDark}" />
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="true" />
+                                <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="false" />
+                                <Condition Binding="{Binding Path=IsPressed, RelativeSource={RelativeSource Self}}" Value="false" />
+                                <Condition Binding="{Binding Path=IsEnabled, RelativeSource={RelativeSource Self}}" Value="true" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="templateRoot" Property="Background" Value="White" />
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource ForegroundDark}" />
+                            <Setter TargetName="splitBorder" Property="Background" Value="{StaticResource ComboBox.Static.Editable.Button.Background}" />
+                            <Setter TargetName="splitBorder" Property="BorderBrush" Value="{StaticResource ComboBox.Static.Editable.Button.Border}" />
+                        </MultiDataTrigger>
+
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="arrow" Property="Fill" Value="{DynamicResource Accent}" />
+                        </Trigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
+                                <Condition Binding="{Binding Path=IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="false" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource BorderDark}" />
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                        </MultiDataTrigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
+                                <Condition Binding="{Binding Path=IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="true" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="templateRoot" Property="Background" Value="{StaticResource ComboBox.MouseOver.Editable.Background}" />
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                            <Setter TargetName="splitBorder" Property="Background" Value="{StaticResource ComboBox.MouseOver.Editable.Button.Background}" />
+                            <Setter TargetName="splitBorder" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                        </MultiDataTrigger>
+
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="arrow" Property="Fill" Value="{DynamicResource Accent}" />
+                        </Trigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsPressed, RelativeSource={RelativeSource Self}}" Value="true" />
+                                <Condition Binding="{Binding Path=IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="false" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource BorderDark}" />
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                        </MultiDataTrigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsPressed, RelativeSource={RelativeSource Self}}" Value="true" />
+                                <Condition Binding="{Binding Path=IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="true" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="templateRoot" Property="Background" Value="{StaticResource ComboBox.Pressed.Editable.Background}" />
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                            <Setter TargetName="splitBorder" Property="Background" Value="{StaticResource ComboBox.Pressed.Editable.Button.Background}" />
+                            <Setter TargetName="splitBorder" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                        </MultiDataTrigger>
+
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="templateRoot" Property="Background" Value="Transparent" />
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource Disabled}" />
+                            <Setter TargetName="arrow" Property="Fill" Value="{DynamicResource ForegroundDisabled}" />
+                        </Trigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
+                                <Condition Binding="{Binding Path=IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="false" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource Transparent}" />
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource Background}" />
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
+                                <Condition Binding="{Binding Path=IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="true" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="templateRoot" Property="Background" Value="{StaticResource ComboBox.Disabled.Editable.Background}" />
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource Disabled}" />
+                        </MultiDataTrigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CachedTagNameComboBoxToggle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="IsTabStop" Value="false" />
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="ClickMode" Value="Press" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border x:Name="templateRoot"
+                        Background="{DynamicResource CachedTagBackground}"
+                        BorderBrush="{DynamicResource Relief}"
+                        BorderThickness="0,1"
+                        SnapsToDevicePixels="true"
+                        CornerRadius="0"
+                        Margin="0,0,0,0"
+                        Padding="1" >
+                        <Border x:Name="splitBorder"
+                            Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"
+                            Margin="0"
+                            HorizontalAlignment="Right"
+                            BorderBrush="Transparent"
+                            BorderThickness="0"
+                            SnapsToDevicePixels="true">
+                            <Path x:Name="arrow"
+                                Margin="0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Data="M0,0L4,4 8,0z"
+                                Fill="{DynamicResource ForegroundDark}" />
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="true" />
+                                <Condition Binding="{Binding Path=IsEnabled, RelativeSource={RelativeSource Self}}" Value="true" />
+                                <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="false" />
+                                <Condition Binding="{Binding Path=IsPressed, RelativeSource={RelativeSource Self}}" Value="false" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="templateRoot" Property="Background" Value="White" />
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource ForegroundDark}" />
+                            <Setter TargetName="splitBorder" Property="Background" Value="Transparent" />
+                            <Setter TargetName="splitBorder" Property="BorderBrush" Value="Transparent" />
+                        </MultiDataTrigger>
+
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="arrow" Property="Fill" Value="{DynamicResource Foreground}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="arrow" Property="Fill" Value="{DynamicResource Accent}" />
+                        </Trigger>
+                        
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
+                                <Condition Binding="{Binding Path=IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="false" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="templateRoot" Property="Panel.ZIndex" Value="1000" />
+                            <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource MouseOver}" />
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                        </MultiDataTrigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
+                                <Condition Binding="{Binding Path=IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="true" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="templateRoot" Property="Background" Value="Transparent" />
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                            <Setter TargetName="splitBorder" Property="Background" Value="Transparent" />
+                            <Setter TargetName="splitBorder" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                        </MultiDataTrigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsPressed, RelativeSource={RelativeSource Self}}" Value="true" />
+                                <Condition Binding="{Binding Path=IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="false" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource BorderDark}" />
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                        </MultiDataTrigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsPressed, RelativeSource={RelativeSource Self}}" Value="true" />
+                                <Condition Binding="{Binding Path=IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="true" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="templateRoot" Property="Background" Value="{StaticResource ComboBox.Pressed.Editable.Background}" />
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                            <Setter TargetName="splitBorder" Property="Background" Value="{StaticResource ComboBox.Pressed.Editable.Button.Background}" />
+                            <Setter TargetName="splitBorder" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                        </MultiDataTrigger>
+
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="templateRoot" Property="Background" Value="Transparent" />
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource Disabled}" />
+                            <Setter TargetName="templateRoot" Property="BorderThickness" Value="0,1,0,1" />
+                            <Setter TargetName="arrow" Property="Fill" Value="{DynamicResource Disabled}" />
+                        </Trigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
+                                <Condition Binding="{Binding Path=IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="false" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="templateRoot" Property="Background" Value="Transparent" />
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource Disabled}" />
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
+                                <Condition Binding="{Binding Path=IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="true" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="templateRoot" Property="Background" Value="Transparent" />
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource Disabled}" />
+                        </MultiDataTrigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CachedTagButton" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="Background" Value="{DynamicResource Relief}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Relief}" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        SnapsToDevicePixels="true"
+                        CornerRadius="0">
+                        <ContentPresenter x:Name="contentPresenter"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Focusable="False"
+                            RecognizesAccessKey="True"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsDefaulted" Value="true">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Panel.ZIndex" Value="2"/>
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource BorderDark}" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource Accent}" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="border" Property="Margin" Value="0,0,-1,0" />
+                            <Setter TargetName="border" Property="BorderThickness" Value="0,1,0,1" />
+                            <Setter TargetName="border" Property="Background" Value="Transparent" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Disabled}" />
+                            <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{DynamicResource Disabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CachedTagButtonRight" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="Background" Value="{DynamicResource Relief}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Relief}" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        SnapsToDevicePixels="true"
+                        CornerRadius="0,1,1,0">
+                        <ContentPresenter x:Name="contentPresenter"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Focusable="False"
+                            RecognizesAccessKey="True"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsDefaulted" Value="true">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Panel.ZIndex" Value="10"/>
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource MouseOver}" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Panel.ZIndex" Value="10"/>
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource Accent}" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="border" Property="Margin" Value="0,0,0,0" />
+                            <Setter TargetName="border" Property="BorderThickness" Value="0,1,1,1" />
+                            <Setter TargetName="border" Property="Background" Value="Transparent" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Disabled}" />
+                            <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{DynamicResource Disabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BlockHeaderDropdownComboboxStyle" TargetType="{x:Type ComboBox}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="Background" Value="{DynamicResource Background}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderDark}" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="Padding" Value="7,3" />
+        <Setter Property="Opacity" Value="0.95" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
+        <Setter Property="ScrollViewer.PanningMode" Value="Both" />
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <Setter Property="Template" Value="{StaticResource ComboBoxTemplate}" />
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Background" Value="{DynamicResource Disabled}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource Disabled}" />
+                <Setter Property="BorderThickness" Value="0" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
     <!--  Control Templates  -->
-    <ControlTemplate
-        x:Key="NoScrollListBoxTemplate"
+    <ControlTemplate x:Key="NoScrollListBoxTemplate"
         TargetType="{x:Type ListBox}">
         <Border
             Padding="{TemplateBinding Padding}"
@@ -189,27 +566,280 @@
         </Border>
     </ControlTemplate>
 
+    <ControlTemplate x:Key="InlineNoScrollListBoxTemplate"
+        TargetType="{x:Type ListBox}">
+        <Border
+            CornerRadius="3"
+            Padding="{TemplateBinding Padding}"
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            Focusable="False">
+            <ItemsPresenter />
+        </Border>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="CachedTagGroupComboBoxTemplate" TargetType="{x:Type ComboBox}">
+        <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0" MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
+            </Grid.ColumnDefinitions>
+            <Popup x:Name="PART_Popup"
+                Grid.ColumnSpan="2"
+                Margin="1"
+                AllowsTransparency="true"
+                IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                Placement="Bottom"
+                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+                <theme:SystemDropShadowChrome x:Name="shadow"
+                    MinWidth="{Binding ActualWidth, ElementName=templateRoot}"
+                    MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                    Color="Transparent">
+                    <Border x:Name="dropDownBorder"
+                        Background="{DynamicResource SubMenu}"
+                        BorderBrush="{DynamicResource MouseOver}"
+                        BorderThickness="1">
+                        <ScrollViewer x:Name="DropDownScrollViewer">
+                            <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
+                                <Canvas x:Name="canvas"
+                                    Width="0"
+                                    Height="0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top">
+                                    <Rectangle x:Name="opaqueRect"
+                                        Width="{Binding ActualWidth, ElementName=dropDownBorder}"
+                                        Height="{Binding ActualHeight, ElementName=dropDownBorder}"
+                                        Fill="{Binding Background, ElementName=dropDownBorder}" />
+                                </Canvas>
+                                <ItemsPresenter x:Name="ItemsPresenter"
+                                    KeyboardNavigation.DirectionalNavigation="Contained"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </Grid>
+                        </ScrollViewer>
+                    </Border>
+                </theme:SystemDropShadowChrome>
+            </Popup>
+            <ToggleButton x:Name="toggleButton"
+                Grid.ColumnSpan="2"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                Style="{StaticResource CachedTagGroupComboBoxToggle}" />
+            <ContentPresenter x:Name="contentPresenter"
+                Margin="{TemplateBinding Padding}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                Content="{TemplateBinding SelectionBoxItem}"
+                ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
+                ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                IsHitTestVisible="false"
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger SourceName="PART_Popup" Property="HasDropShadow" Value="true">
+                <Setter TargetName="shadow" Property="Margin" Value="0,0,5,5" />
+                <Setter TargetName="shadow" Property="Color" Value="{DynamicResource Shadow}" />
+            </Trigger>
+            <Trigger Property="HasItems" Value="false">
+                <Setter TargetName="dropDownBorder" Property="Height" Value="95" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsGrouping" Value="true" />
+                    <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false" />
+                </MultiTrigger.Conditions>
+                <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+            </MultiTrigger>
+            <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="false">
+                <Setter TargetName="opaqueRect" Property="Canvas.Top" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}" />
+                <Setter TargetName="opaqueRect" Property="Canvas.Left" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="CachedTagNameComboBoxTemplate" TargetType="{x:Type ComboBox}">
+        <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0" MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
+            </Grid.ColumnDefinitions>
+            <Popup x:Name="PART_Popup"
+                Grid.ColumnSpan="2"
+                Margin="1"
+                AllowsTransparency="true"
+                IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                Placement="Bottom"
+                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+                <theme:SystemDropShadowChrome x:Name="shadow"
+                    MinWidth="{Binding ActualWidth, ElementName=templateRoot}"
+                    MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                    Color="Transparent">
+                    <Border x:Name="dropDownBorder"
+                        Background="{DynamicResource SubMenu}"
+                        BorderBrush="{DynamicResource BorderDark}"
+                        BorderThickness="1">
+                        <ScrollViewer x:Name="DropDownScrollViewer">
+                            <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
+                                <Canvas x:Name="canvas"
+                                    Width="0"
+                                    Height="0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top">
+                                    <Rectangle x:Name="opaqueRect"
+                                        Width="{Binding ActualWidth, ElementName=dropDownBorder}"
+                                        Height="{Binding ActualHeight, ElementName=dropDownBorder}"
+                                        Fill="{Binding Background, ElementName=dropDownBorder}" />
+                                </Canvas>
+                                <ItemsPresenter x:Name="ItemsPresenter"
+                                    KeyboardNavigation.DirectionalNavigation="Contained"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </Grid>
+                        </ScrollViewer>
+                    </Border>
+                </theme:SystemDropShadowChrome>
+            </Popup>
+            <ToggleButton x:Name="toggleButton"
+                Grid.ColumnSpan="2"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                Style="{StaticResource CachedTagNameComboBoxToggle}" />
+            <ContentPresenter x:Name="contentPresenter"
+                Margin="{TemplateBinding Padding}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                Content="{TemplateBinding SelectionBoxItem}"
+                ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
+                ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                IsHitTestVisible="false"
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger SourceName="PART_Popup" Property="HasDropShadow" Value="true">
+                <Setter TargetName="shadow" Property="Margin" Value="0,0,5,5" />
+                <Setter TargetName="shadow" Property="Color" Value="{DynamicResource Shadow}" />
+            </Trigger>
+            <Trigger Property="HasItems" Value="false">
+                <Setter TargetName="dropDownBorder" Property="Height" Value="95" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsGrouping" Value="true" />
+                    <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false" />
+                </MultiTrigger.Conditions>
+                <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+            </MultiTrigger>
+            <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="false">
+                <Setter TargetName="opaqueRect" Property="Canvas.Top" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}" />
+                <Setter TargetName="opaqueRect" Property="Canvas.Left" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ComboBoxTemplate" TargetType="{x:Type ComboBox}">
+        <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0" MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
+            </Grid.ColumnDefinitions>
+            <Popup x:Name="PART_Popup"
+                Grid.ColumnSpan="2"
+                Margin="1"
+                AllowsTransparency="true"
+                IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                Placement="Bottom"
+                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+                <theme:SystemDropShadowChrome x:Name="shadow"
+                    MinWidth="{Binding ActualWidth, ElementName=templateRoot}"
+                    MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                    Color="Transparent">
+                    <Border x:Name="dropDownBorder"
+                        Background="{DynamicResource SubMenu}"
+                        BorderBrush="{DynamicResource BorderDark}"
+                        BorderThickness="1">
+                        <ScrollViewer x:Name="DropDownScrollViewer">
+                            <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
+                                <Canvas x:Name="canvas"
+                                    Width="0"
+                                    Height="0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top">
+                                    <Rectangle x:Name="opaqueRect"
+                                        Width="{Binding ActualWidth, ElementName=dropDownBorder}"
+                                        Height="{Binding ActualHeight, ElementName=dropDownBorder}"
+                                        Fill="{Binding Background, ElementName=dropDownBorder}" />
+                                </Canvas>
+                                <ItemsPresenter x:Name="ItemsPresenter"
+                                    KeyboardNavigation.DirectionalNavigation="Contained"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </Grid>
+                        </ScrollViewer>
+                    </Border>
+                </theme:SystemDropShadowChrome>
+            </Popup>
+            <ToggleButton x:Name="toggleButton"
+                Grid.ColumnSpan="2"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                Style="{StaticResource ComboBoxToggleButton}" />
+            <ContentPresenter x:Name="contentPresenter"
+                Margin="{TemplateBinding Padding}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                Content="{TemplateBinding SelectionBoxItem}"
+                ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
+                ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                IsHitTestVisible="false"
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger SourceName="PART_Popup" Property="HasDropShadow" Value="true">
+                <Setter TargetName="shadow" Property="Margin" Value="0,0,5,5" />
+                <Setter TargetName="shadow" Property="Color" Value="{DynamicResource Shadow}" />
+            </Trigger>
+            <Trigger Property="HasItems" Value="false">
+                <Setter TargetName="dropDownBorder" Property="Height" Value="95" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsGrouping" Value="true" />
+                    <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false" />
+                </MultiTrigger.Conditions>
+                <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+            </MultiTrigger>
+            <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="false">
+                <Setter TargetName="opaqueRect" Property="Canvas.Top" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}" />
+                <Setter TargetName="opaqueRect" Property="Canvas.Left" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
     <!--  Value Field  -->
     <DataTemplate DataType="{x:Type fields:ValueField}">
-        <StackPanel Orientation="Horizontal">
-
+        <StackPanel x:Name="ValueField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}"/>
             <TextBox
                 Style="{StaticResource FieldTextBoxStyle}"
                 Text="{Binding Value}" />
-
             <TextBlock
                 Style="{StaticResource FieldTypeLabelStyle}"
                 Text="{Binding FieldTypeName}" />
-
         </StackPanel>
     </DataTemplate>
 
     <!--  Bool  -->
     <DataTemplate DataType="{x:Type fields:BoolField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="BoolField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
@@ -222,24 +852,23 @@
 
     <!--  Float32  -->
     <DataTemplate DataType="{x:Type fields:Float32Field}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="Float32Field" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
-                Text="{Binding Name, Mode=OneTime}" />
+                Text="{Binding Name, Mode=OneTime}"/>
             <!--  Value  -->
             <TextBox
                 Style="{StaticResource FieldTextBoxStyle}"
                 Text="{Binding Value, StringFormat={StaticResource RealFormatString}}" />
-
             <TextBlock
                 Style="{StaticResource FieldTypeLabelStyle}"
-                Text="{Binding FieldTypeName}" />
+                Text="{Binding FieldTypeName}"/>
         </StackPanel>
     </DataTemplate>
 
     <!--  Float64  -->
     <DataTemplate DataType="{x:Type fields:Float64Field}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="Float64Field" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
@@ -256,17 +885,16 @@
 
     <!--  String  -->
     <DataTemplate DataType="{x:Type fields:StringField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="StringField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
             <!--  Value  -->
             <TextBox
-                Width="250"
+                MinWidth="250"
                 MaxLength="{Binding MaxLength}"
-                Style="{StaticResource FieldTextBoxStyle}"
+                Style="{StaticResource StringTextBoxStyle}"
                 Text="{Binding Value, ValidatesOnExceptions=True}" />
-
             <TextBlock
                 Style="{StaticResource FieldTypeLabelStyle}"
                 Text="{Binding FieldTypeName}" />
@@ -275,16 +903,15 @@
 
     <!--  StringId  -->
     <DataTemplate DataType="{x:Type fields:StringIdField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="StringIDField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
             <!--  Value  -->
             <TextBox
-                Width="250"
-                Style="{StaticResource FieldTextBoxStyle}"
-                Text="{Binding Value, ValidatesOnExceptions=True}" />
-
+                FontFamily="Consolas"
+                Style="{StaticResource StringTextBoxStyle}"
+                Text="{Binding Value, ValidatesOnExceptions=True}"/>
             <TextBlock
                 Style="{StaticResource FieldTypeLabelStyle}"
                 Text="{Binding FieldTypeName}" />
@@ -293,39 +920,35 @@
 
     <!--  RealArgbColor  -->
     <DataTemplate DataType="{x:Type fields:RealArgbColorField}">
-        <StackPanel Orientation="Horizontal">
-            <TextBlock
-                Style="{StaticResource FieldLabelStyle}"
-                Text="{Binding Name, Mode=OneTime}" />
+        <StackPanel x:Name="RealARGBField" Orientation="Horizontal">
+            <TextBlock Text="{Binding Name, Mode=OneTime}"
+                Style="{StaticResource FieldLabelStyle}" />
             <!--  Alpha  -->
-            <TextBlock
-                Style="{StaticResource InlineFieldLabelStyle}"
-                Text="A:" />
+            <TextBlock Text="A" Style="{StaticResource InlineFieldLabelStyle}" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Alpha, StringFormat={StaticResource RealFormatString}}" />
             <!--  Red  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="R:" />
+                Text="R" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Red, StringFormat={StaticResource RealFormatString}}" />
             <!--  Green  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="G:" />
+                Text="G" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Green, StringFormat={StaticResource RealFormatString}}" />
             <!--  Blue  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="B:" />
+                Text="B" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Blue, StringFormat={StaticResource RealFormatString}}" />
-
             <TextBlock
                 Style="{StaticResource FieldTypeLabelStyle}"
                 Text="{Binding FieldTypeName}" />
@@ -334,28 +957,28 @@
 
     <!--  RealRgbColor  -->
     <DataTemplate DataType="{x:Type fields:RealRgbColorField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="RealRGBField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
             <!--  Red  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="R:" />
+                Text="R" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Red, StringFormat={StaticResource RealFormatString}}" />
             <!--  Green  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="G:" />
+                Text="G" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Green, StringFormat={StaticResource RealFormatString}}" />
             <!--  Blue  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="B:" />
+                Text="B" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Blue, StringFormat={StaticResource RealFormatString}}" />
@@ -368,43 +991,34 @@
 
     <!--  ArgbColor  -->
     <DataTemplate DataType="{x:Type fields:ArgbColorField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="ARGBField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
             <!--  Alpha  -->
-            <TextBlock
-                Style="{StaticResource InlineFieldLabelStyle}"
-                Text="A:" />
+            <TextBlock Text="A" Style="{StaticResource InlineFieldLabelStyle}" />
             <TextBox
                 Width="40"
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Alpha}" />
             <!--  Red  -->
-            <TextBlock
-                Style="{StaticResource InlineFieldLabelStyle}"
-                Text="R:" />
+            <TextBlock Text="R" Style="{StaticResource InlineFieldLabelStyle}" />
             <TextBox
                 Width="40"
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Red}" />
             <!--  Green  -->
-            <TextBlock
-                Style="{StaticResource InlineFieldLabelStyle}"
-                Text="G:" />
+            <TextBlock Text="G" Style="{StaticResource InlineFieldLabelStyle}" />
             <TextBox
                 Width="40"
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Green}" />
             <!--  Blue  -->
-            <TextBlock
-                Style="{StaticResource InlineFieldLabelStyle}"
-                Text="B:" />
+            <TextBlock Text="B" Style="{StaticResource InlineFieldLabelStyle}" />
             <TextBox
                 Width="40"
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Blue}" />
-
             <TextBlock
                 Style="{StaticResource FieldTypeLabelStyle}"
                 Text="{Binding FieldTypeName}" />
@@ -413,28 +1027,28 @@
 
     <!--  RealPlane2d  -->
     <DataTemplate DataType="{x:Type fields:RealPlane2dField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="RealPlane2DField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
             <!--  I  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="I:" />
+                Text="I" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding I, StringFormat={StaticResource RealFormatString}}" />
             <!--  J  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="J:" />
+                Text="J" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding J, StringFormat={StaticResource RealFormatString}}" />
             <!--  D  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="D:" />
+                Text="D" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding D, StringFormat={StaticResource RealFormatString}}" />
@@ -446,35 +1060,35 @@
 
     <!--  RealPlane3d  -->
     <DataTemplate DataType="{x:Type fields:RealPlane3dField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="RealPlane3DField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
             <!--  I  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="I:" />
+                Text="I" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding I, StringFormat={StaticResource RealFormatString}}" />
             <!--  J  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="J:" />
+                Text="J" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding J, StringFormat={StaticResource RealFormatString}}" />
             <!--  K  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="K:" />
+                Text="K" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding K, StringFormat={StaticResource RealFormatString}}" />
             <!--  D  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="D:" />
+                Text="D" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding D, StringFormat={StaticResource RealFormatString}}" />
@@ -486,37 +1100,37 @@
 
     <!--  RealQuaternion  -->
     <DataTemplate DataType="{x:Type fields:RealQuaternionField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="RealQuaternionField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
             <!--  I  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="I:" />
+                Text="I" />
             <TextBox
-                Style="{StaticResource InlineFieldTextBoxFixedStyle}"
+                Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding I, StringFormat={StaticResource RealFormatString}}" />
             <!--  J  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="J:" />
+                Text="J" />
             <TextBox
-                Style="{StaticResource InlineFieldTextBoxFixedStyle}"
+                Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding J, StringFormat={StaticResource RealFormatString}}" />
             <!--  K  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="K: " />
+                Text="K" />
             <TextBox
-                Style="{StaticResource InlineFieldTextBoxFixedStyle}"
+                Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding K, StringFormat={StaticResource RealFormatString}}" />
             <!--  W  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="W: " />
+                Text="W" />
             <TextBox
-                Style="{StaticResource InlineFieldTextBoxFixedStyle}"
+                Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding W, StringFormat={StaticResource RealFormatString}}" />
             <TextBlock
                 Style="{StaticResource FieldTypeLabelStyle}"
@@ -526,28 +1140,28 @@
 
     <!--  RealVector3d  -->
     <DataTemplate DataType="{x:Type fields:RealVector3dField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="RealVector3DField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
             <!--  I  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="I:" />
+                Text="I" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding I, StringFormat={StaticResource RealFormatString}}" />
             <!--  J  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="J:" />
+                Text="J" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding J, StringFormat={StaticResource RealFormatString}}" />
             <!--  K  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="K:" />
+                Text="K" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding K, StringFormat={StaticResource RealFormatString}}" />
@@ -559,21 +1173,21 @@
 
     <!--  RealVector2d  -->
     <DataTemplate DataType="{x:Type fields:RealVector2dField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="RealVector2DField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
             <!--  I  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="I:" />
+                Text="I" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding I, StringFormat={StaticResource RealFormatString}}" />
             <!--  J  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="J:" />
+                Text="J" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding J, StringFormat={StaticResource RealFormatString}}" />
@@ -585,30 +1199,30 @@
 
     <!--  RealPoint3d  -->
     <DataTemplate DataType="{x:Type fields:RealPoint3dField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="RealPoint3DField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
             <!--  X  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="X:" />
+                Text="X" />
             <TextBox
-                Style="{StaticResource InlineFieldTextBoxFixedStyle}"
+                Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding X, StringFormat={StaticResource RealFormatString}}" />
             <!--  Y  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="Y:" />
+                Text="Y" />
             <TextBox
-                Style="{StaticResource InlineFieldTextBoxFixedStyle}"
+                Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Y, StringFormat={StaticResource RealFormatString}}" />
             <!--  Z  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="Z: " />
+                Text="Z" />
             <TextBox
-                Style="{StaticResource InlineFieldTextBoxFixedStyle}"
+                Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Z, StringFormat={StaticResource RealFormatString}}" />
             <TextBlock
                 Style="{StaticResource FieldTypeLabelStyle}"
@@ -618,21 +1232,21 @@
 
     <!--  RealPoint2d  -->
     <DataTemplate DataType="{x:Type fields:RealPoint2dField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="RealPoint2DField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
             <!--  X  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="X:" />
+                Text="X" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding X, StringFormat={StaticResource RealFormatString}}" />
             <!--  Y  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="Y:" />
+                Text="Y" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Y, StringFormat={StaticResource RealFormatString}}" />
@@ -644,28 +1258,25 @@
 
     <!--  RealEulerAngles3d  -->
     <DataTemplate DataType="{x:Type fields:RealEulerAngles3dField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="RealEulerAngles3DField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
             <!--  Yaw  -->
-            <TextBlock
-                Style="{StaticResource InlineFieldLabelStyle}"
-                Text="Y:" />
+            <TextBlock Text="Yaw"
+                Style="{StaticResource InlineFieldLabelStyle}" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Yaw, StringFormat={StaticResource RealFormatString}}" />
             <!--  Pitch  -->
-            <TextBlock
-                Style="{StaticResource InlineFieldLabelStyle}"
-                Text="P:" />
+            <TextBlock Text="Pitch"
+                Style="{StaticResource InlineFieldLabelStyle}" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Pitch, StringFormat={StaticResource RealFormatString}}" />
             <!--  Roll  -->
-            <TextBlock
-                Style="{StaticResource InlineFieldLabelStyle}"
-                Text="R:" />
+            <TextBlock Text="Roll"
+                Style="{StaticResource InlineFieldLabelStyle}" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Roll, StringFormat={StaticResource RealFormatString}}" />
@@ -677,21 +1288,21 @@
 
     <!--  RealEulerAngles2d  -->
     <DataTemplate DataType="{x:Type fields:RealEulerAngles2dField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="RealEulerAngles2DField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
             <!--  Yaw  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="Y:" />
+                Text="Yaw" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Yaw, StringFormat={StaticResource RealFormatString}}" />
             <!--  Pitch  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="P:" />
+                Text="Pitch" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Pitch, StringFormat={StaticResource RealFormatString}}" />
@@ -703,21 +1314,21 @@
 
     <!--  Point2d  -->
     <DataTemplate DataType="{x:Type fields:Point2dField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="Point2DField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
             <!--  X  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="X:" />
+                Text="X" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding X}" />
             <!--  Y  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="Y:" />
+                Text="Y" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Y}" />
@@ -730,7 +1341,7 @@
 
     <!--  Rectangle2d  -->
     <DataTemplate DataType="{x:Type fields:Rectangle2dField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="Rectangle2DField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
@@ -738,7 +1349,7 @@
             <TextBlock
                 Width="Auto"
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="Right:" />
+                Text="Right" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Top}" />
@@ -746,7 +1357,7 @@
             <TextBlock
                 Width="Auto"
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="Bottom:" />
+                Text="Bottom" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Left}" />
@@ -754,7 +1365,7 @@
             <TextBlock
                 Width="Auto"
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="Left:" />
+                Text="Left" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Bottom}" />
@@ -762,7 +1373,7 @@
             <TextBlock
                 Width="Auto"
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="Top:" />
+                Text="Top" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Right}" />
@@ -775,49 +1386,49 @@
 
     <!--  RealRectangle3d  -->
     <DataTemplate DataType="{x:Type fields:RealRectangle3dField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="RealRectangle3DField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
             <!--  X0  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="X0:" />
+                Text="X0" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding X0}" />
             <!--  X1  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="X1:" />
+                Text="X1" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding X1}" />
             <!--  Y0  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="Y0:" />
+                Text="Y0" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Y0}" />
             <!--  Y1  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="Y1:" />
+                Text="Y1" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Y1}" />
             <!--  Z0  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="Z0:" />
+                Text="Z0" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Z0}" />
             <!--  Z1  -->
             <TextBlock
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="Z1:" />
+                Text="Z1" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Z1}" />
@@ -830,12 +1441,12 @@
 
     <!--  Enum  -->
     <DataTemplate DataType="{x:Type fields:EnumField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="EnumField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
             <ComboBox
-                Width="200"
+                Width="180"
                 VerticalAlignment="Center"
                 DisplayMemberPath="Name"
                 ItemsSource="{Binding Values, Mode=OneTime}"
@@ -845,15 +1456,16 @@
 
     <!--  Flags  -->
     <DataTemplate DataType="{x:Type fields:FlagsField}">
-        <StackPanel Orientation="Horizontal">
-            <TextBlock
+        <StackPanel x:Name="FlagsField" Orientation="Horizontal">
+            <TextBlock Style="{StaticResource FieldLabelStyle}"
+                Text="{Binding Name, Mode=OneTime}"
                 VerticalAlignment="Top"
-                Style="{StaticResource FieldLabelStyle}"
-                Text="{Binding Name, Mode=OneTime}" />
-            <ListBox
-                Width="300"
-                MaxHeight="150"
-                ItemsSource="{Binding Flags, Mode=OneTime}"
+                Margin="0,0,0,0" />
+            <ListBox ItemsSource="{Binding Flags, Mode=OneTime}"
+                Padding="1,2,1,10"
+                MinWidth="200"
+                MaxHeight="160"
+                Background="Transparent"
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
                 SnapsToDevicePixels="True">
                 <ListBox.ItemContainerStyle>
@@ -861,13 +1473,14 @@
                         BasedOn="{StaticResource {x:Type ListBoxItem}}"
                         TargetType="{x:Type ListBoxItem}">
                         <Setter Property="Focusable" Value="False" />
-                        <Setter Property="Padding" Value="0" />
-
+                        <Setter Property="Padding" Value="0,0,3,0" />
                     </Style>
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <CheckBox
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"
                             HorizontalAlignment="Stretch"
                             Content="{Binding Name, Mode=OneTime}"
                             IsChecked="{Binding IsChecked}" />
@@ -879,35 +1492,41 @@
 
     <!--  CachedTag  -->
     <DataTemplate DataType="{x:Type fields:CachedTagField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="CachedTagField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
-            <ComboBox
-                Width="60"
+            <ComboBox x:Name="TagGroup"
+                Panel.ZIndex="1"
+                Width="50"
                 Height="24"
-                Padding="6,3,3,3"
+                Padding="4,0,1,1"
                 VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
                 DisplayMemberPath="TagAscii"
+                ToolTip="{Binding SelectedGroupName}"
                 ItemsSource="{Binding Groups, Mode=OneTime}"
-                SelectedItem="{Binding SelectedGroup}" />
-            <ComboBox
-                Width="320"
+                SelectedItem="{Binding SelectedGroup}" 
+                Template="{StaticResource CachedTagGroupComboBoxTemplate}" />
+            <ComboBox x:Name="Tag"
+                Width="330"
                 Height="24"
-                Margin="4,0,0,0"
+                Margin="0,0,0,0"
+                Padding="4,3.3,0,0"
                 VerticalAlignment="Center"
                 ContextMenuService.ShowOnDisabled="True"
                 DisplayMemberPath="Name"
                 IsEnabled="{Binding SelectedGroupValid}"
                 ItemsSource="{Binding SelectedGroup.Instances}"
                 SelectedItem="{Binding SelectedInstance}"
+                ToolTip="{Binding SelectedInstanceName}"
                 VirtualizingPanel.IsVirtualizing="True"
                 VirtualizingPanel.ScrollUnit="Item"
-                VirtualizingPanel.VirtualizationMode="Standard">
+                VirtualizingPanel.VirtualizationMode="Standard"
+                Template="{StaticResource CachedTagNameComboBoxTemplate}">
                 <ComboBox.Resources>
                     <Style TargetType="ScrollViewer">
-                        <Setter Property="Width" Value="auto" />
-                        <Setter Property="MinWidth" Value="320" />
+                        <Setter Property="Width" Value="600" />
                         <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
                     </Style>
                 </ComboBox.Resources>
@@ -918,65 +1537,45 @@
                 </ComboBox.ItemsPanel>
                 <ComboBox.ContextMenu>
                     <ContextMenu>
-                        <MenuItem
-                            Command="{Binding CopyTagNameCommand}"
-                            Header="Copy Tag Name" />
-                        <MenuItem
-                            Command="{Binding CopyTagIndexCommand}"
-                            Header="Copy Tag Index" />
-                        <MenuItem
-                            Command="{Binding PasteTagNameCommand}"
-                            Header="Paste Tag Name" />
                         <Separator />
-                        <MenuItem
-                            Command="{Binding GotoCommand}"
-                            Header="Open in a new tab" />
+                        <MenuItem Command="{Binding CopyTagNameCommand}" Header="Copy Tag Name" />
+                        <MenuItem Command="{Binding CopyTagIndexCommand}" Header="Copy Tag Index" />
+                        <MenuItem Command="{Binding PasteTagNameCommand}" Header="Paste Tag Name" />
                         <Separator />
-                        <MenuItem
-                            Command="{Binding BrowseCommand}"
-                            Header="Browse"
-                            ToolTip="Select a tag" />
+                        <MenuItem Command="{Binding GotoCommand}" Header="Open in a new tab" />
                         <Separator />
-                        <MenuItem
-                            Command="{Binding NullCommand}"
-                            Header="Null"
-                            ToolTip="Null this tag reference" />
+                        <MenuItem Command="{Binding BrowseCommand}" Header="Browse" ToolTip="Select a tag" />
+                        <MenuItem Command="{Binding NullCommand}" Header="Null" ToolTip="Null this tag reference" />
                     </ContextMenu>
                 </ComboBox.ContextMenu>
             </ComboBox>
-            <Button
-                Width="24"
-                Height="24"
-                Margin="4,0,0,0"
-                Padding="4,0,4,1"
+            <Button x:Name="BrowseButton" Style="{StaticResource CachedTagButton}"
+                Panel.ZIndex="3"
+                Width="24" Height="24"
+                Margin="0,0,0,0" Padding="3,0,4,2"
                 VerticalAlignment="Center"
                 VerticalContentAlignment="Center"
                 Command="{Binding BrowseCommand}"
-                FontSize="14"
-                FontFamily="Segoe UI"
-                Content="⋯"
-                ToolTip="Select a tag from the Tag Browser." />
-            <Button
-                Width="24"
-                Height="24"
-                Margin="4,0,0,0"
-                Padding="3,3,4,4"
+                FontSize="14" FontFamily="Segoe UI"
+                Content="⋯" ToolTip="Select a tag from the Tag Browser.">
+            </Button>
+            <Button x:Name="NullButton" Style="{StaticResource CachedTagButton}"
+                Panel.ZIndex="2"
+                Width="24" Height="24"
+                Margin="0,0,0,0" Padding="3,3,4,4"
                 VerticalAlignment="Center"
                 VerticalContentAlignment="Center"
                 Command="{Binding NullCommand}"
-                FontFamily="Segoe UI"
-                FontSize="12"
-                Content="Ø"
-                ToolTip="Null this tag reference." />
-            <Button
+                FontSize="12" FontFamily="Segoe UI"
+                Content="Ø" ToolTip="Null this tag reference." />
+            <Button x:Name="GoToButton" Style="{StaticResource CachedTagButtonRight}"
+                Panel.ZIndex="1"
                 Height="24"
-                Margin="4,0,0,0"
-                Padding="3,4,4,4"
-                VerticalAlignment="Center"
-                VerticalContentAlignment="Center"
+                Margin="0,0,0,0" Padding="3,3,4,4"
+                VerticalAlignment="Stretch"
+                VerticalContentAlignment="Stretch"
                 Command="{Binding GotoCommand}"
-                FontSize="18"
-                FontFamily="Segoe UI"
+                FontSize="18" FontFamily="Segoe UI"
                 ToolTip="Open this tag in a new tab.">
                 <Button.ContentTemplate>
                     <DataTemplate>
@@ -985,14 +1584,13 @@
                             Text="➝" />
                     </DataTemplate>
                 </Button.ContentTemplate>
-
             </Button>
         </StackPanel>
     </DataTemplate>
 
     <!--  GroupTag  -->
     <DataTemplate DataType="{x:Type fields:GroupTagField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="GroupTagField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
@@ -1006,7 +1604,7 @@
 
     <!--  CacheAddress  -->
     <DataTemplate DataType="{x:Type fields:CacheAddressField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="CacheAddressField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
@@ -1028,7 +1626,7 @@
 
     <!--  DatumHandle  -->
     <DataTemplate DataType="{x:Type fields:DatumHandleField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="DatumHandleField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
@@ -1053,7 +1651,7 @@
 
     <!--  TagBlockIndex  -->
     <DataTemplate DataType="{x:Type fields:TagBlockIndexField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="TagBlockIndexField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
@@ -1118,7 +1716,7 @@
 
     <!--  PackedSamplerAddressMode  -->
     <DataTemplate DataType="{x:Type fields:PackedSamplerAddressModeField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="PackedSamplerAddressModeField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
@@ -1150,7 +1748,7 @@
 
     <!--  PackedSamplerFilterMode  -->
     <DataTemplate DataType="{x:Type fields:PackedSamplerFilterModeField}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="PackedSamplerFilterModeField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
@@ -1179,9 +1777,7 @@
 
     <!--  Bsp3dNode  -->
     <DataTemplate DataType="{x:Type fields:Bsp3dNodeField}">
-
-        <StackPanel Orientation="Horizontal">
-
+        <StackPanel x:Name="BSP3DField" Orientation="Horizontal">
             <TextBlock
                 Style="{StaticResource FieldLabelStyle}"
                 Text="{Binding Name, Mode=OneTime}" />
@@ -1277,61 +1873,67 @@
 
     <!--  Data  -->
     <DataTemplate DataType="{x:Type fields:DataField}">
-        <Expander
+        <Expander x:Name="FunctionExpander"
+            Style="{StaticResource ExpanderStyleBase}"
             Header="{Binding}"
-            IsExpanded="{Binding IsExpanded}"
-            Style="{StaticResource ExpanderStyleBase}">
+            IsExpanded="{Binding IsExpanded}">
             <Expander.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock
-                        Width="180"
-                        Padding="0,4"
+                        MinWidth="170"
+                        Padding="0,3,9,4"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Text="{Binding Name, Mode=OneTime}" />
                 </DataTemplate>
             </Expander.HeaderTemplate>
-            <Border Padding="4">
+            <Border Padding="0,0,0,1">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
-                        <TextBox
-                            x:Name="ValueTextBox"
-                            Width="320"
-                            MinHeight="80"
-                            MaxHeight="130"
+                        <TextBox x:Name="ValueTextBox"
+                            Style="{StaticResource InlineFieldTextBoxStyle}"
+                            FontFamily="Consolas"
+                            TextOptions.TextRenderingMode="ClearType"
+                            Width="325"
+                            MinHeight="60"
+                            Padding="2"
+                            Margin="0"
                             ScrollViewer.VerticalScrollBarVisibility="Visible"
-                            TextWrapping="Wrap" />
-                        <StackPanel
+                            TextWrapping="Wrap"
+                            Background="{DynamicResource Struct}"/>
+                        <StackPanel Height="16"
                             Margin="0,4,0,0"
                             HorizontalAlignment="Right"
                             Orientation="Horizontal">
                             <TextBlock
                                 Width="Auto"
-                                Margin="4,0"
+                                Margin="4,-1,4,0"
                                 VerticalAlignment="Center"
                                 Style="{StaticResource InlineFieldLabelStyle}"
                                 Text="Size:" />
-                            <TextBox
-                                x:Name="DataTextBox"
+                            <TextBox x:Name="DataTextBox"
                                 Width="Auto"
-                                MinWidth="60"
-                                Margin="2,0"
+                                MinWidth="10"
+                                Margin="2,-1"
+                                Padding="1,0,1,0"
                                 VerticalAlignment="Center"
                                 Focusable="False"
+                                VerticalContentAlignment="Center"
                                 IsReadOnly="True"
                                 Text="{Binding Path=Length, Mode=OneWay, StringFormat={}0x{0:X}}"
-                                TextWrapping="Wrap" />
-                            <Button
-                                Margin="2,0"
-                                Padding="4,2"
+                                TextWrapping="Wrap"
+                                Background="{DynamicResource BackgroundDark}"/>
+                            <Button Command="{Binding ImportCommand}"
+                                Background="{DynamicResource Relief}"
+                                Margin="0,-1"
+                                Padding="5,0,6,0"
                                 VerticalAlignment="Center"
-                                Command="{Binding ImportCommand}"
                                 Content="Import" />
-                            <Button
-                                Margin="2,0"
-                                Padding="4,2"
-                                VerticalAlignment="Center"
-                                Command="{Binding ExportCommand}"
+                            <Button Command="{Binding ExportCommand}"
+                                Background="{DynamicResource Relief}"
+                                Margin="2,-1"
+                                Padding="5,0,6,0"
+                                VerticalAlignment="Center" 
                                 Content="Export" />
                         </StackPanel>
                     </StackPanel>
@@ -1339,9 +1941,7 @@
             </Border>
         </Expander>
         <DataTemplate.Triggers>
-            <DataTrigger
-                Binding="{Binding IsExpanded}"
-                Value="True">
+            <DataTrigger Binding="{Binding IsExpanded}" Value="True">
                 <Setter TargetName="ValueTextBox" Property="Text" Value="{Binding Path=Data, Converter={x:Static converters:HexValueConverter.Instance}, ValidatesOnExceptions=True}" />
             </DataTrigger>
         </DataTemplate.Triggers>
@@ -1349,33 +1949,38 @@
 
     <!--  Struct  -->
     <DataTemplate DataType="{x:Type fields:StructField}">
-        <ListBox
+        <ListBox x:Name="StructListBox"
+            BorderThickness="0"
             ItemsSource="{Binding Fields}"
             Style="{StaticResource StructListBoxStyle}" />
     </DataTemplate>
 
     <!--  Inline Struct  -->
     <DataTemplate DataType="{x:Type fields:InlineStructField}">
-        <Expander
-            MinWidth="250"
+        <Expander x:Name="InlineStructExpander"
+            Style="{StaticResource ExpanderStyleBase}"
+            MinWidth="298"
             Header="{Binding}"
             IsExpanded="{Binding IsExpanded}"
-            Style="{StaticResource ExpanderStyleBase}">
+            Background="{DynamicResource ExpanderClosedBackground}">
             <Expander.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock
                         MinWidth="180"
-                        Padding="0,4"
+                        Padding="0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Text="{Binding Name, Mode=OneTime}" />
                 </DataTemplate>
             </Expander.HeaderTemplate>
-            <Border Background="Transparent">
-                <ListBox
+            <Border Background="Transparent" x:Name="InlineStructBorder" CornerRadius="3" >
+                <ListBox x:Name="InlineStructListBox"
+                    Background="{DynamicResource Struct}"
+                    Margin="-1,0,-1,-1"
+                    Padding="0,5,5,5"
                     ItemsSource="{Binding Fields}"
                     Style="{StaticResource StructListBoxStyle}"
-                    Template="{StaticResource NoScrollListBoxTemplate}" />
+                    Template="{StaticResource InlineNoScrollListBoxTemplate}" />
             </Border>
         </Expander>
     </DataTemplate>
@@ -1388,60 +1993,43 @@
                 <ListBox
                     Margin="0"
                     Padding="0"
+                    Background="{DynamicResource Struct}"
                     ItemsSource="{Binding Fields}"
                     Style="{StaticResource StructListBoxStyle}"
                     Template="{StaticResource NoScrollListBoxTemplate}" />
             </DataTemplate>
         </DataTemplate.Resources>
 
-        <Expander
-            x:Name="Expander"
-            Background="#2d2d30"
+        <Expander x:Name="Expander"
+            Style="{StaticResource ExpanderStyleBase}"
+            BorderBrush="{DynamicResource BorderDark}"
             ContextMenuService.ShowOnDisabled="True"
             Header="{Binding}"
             IsExpanded="{Binding IsExpanded}"
-            Style="{StaticResource ExpanderStyleBase}">
+            MinWidth="360">
             <Expander.ContextMenu>
                 <ContextMenu>
-                    <MenuItem
-                        Command="{Binding AddCommand, Mode=OneTime}"
-                        Header="Add"
-                        ToolTip="Add a new element" />
-                    <MenuItem
-                        Command="{Binding InsertCommand, Mode=OneTime}"
-                        Header="Insert"
-                        ToolTip="Insert a new element at the current index" />
-                    <MenuItem
-                        Command="{Binding DuplicateCommand, Mode=OneTime}"
-                        Header="Duplicate"
-                        ToolTip="Duplicate the element at the current index" />
-                    <MenuItem
-                        Command="{Binding DeleteCommand, Mode=OneTime}"
-                        Header="Delete"
-                        ToolTip="Delete the element at the current index" />
+                    <MenuItem Command="{Binding AddCommand, Mode=OneTime}"
+                        Header="Add" ToolTip="Add a new element" />
+                    <MenuItem Command="{Binding InsertCommand, Mode=OneTime}"
+                        Header="Insert" ToolTip="Insert a new element at the current index" />
+                    <MenuItem Command="{Binding DuplicateCommand, Mode=OneTime}"
+                        Header="Duplicate" ToolTip="Duplicate the element at the current index" />
+                    <MenuItem Command="{Binding DeleteCommand, Mode=OneTime}"
+                        Header="Delete" ToolTip="Delete the element at the current index" />
                     <Separator />
-                    <MenuItem
-                        Command="{Binding ShiftUpCommand, Mode=OneTime}"
-                        Header="Shift Up"
-                        ToolTip="Shift the current element up one" />
-                    <MenuItem
-                        Command="{Binding ShiftDownCommand, Mode=OneTime}"
-                        Header="Shift Down"
-                        ToolTip="Shift the current element down one" />
+                    <MenuItem Command="{Binding ShiftUpCommand, Mode=OneTime}"
+                        Header="Shift Up" ToolTip="Shift the current element up one" />
+                    <MenuItem Command="{Binding ShiftDownCommand, Mode=OneTime}"
+                        Header="Shift Down" ToolTip="Shift the current element down one" />
                     <Separator />
-                    <MenuItem
-                        Command="{Binding DeleteAllCommand, Mode=OneTime}"
-                        Header="Delete All"
-                        ToolTip="Delete all elements" />
+                    <MenuItem Command="{Binding DeleteAllCommand, Mode=OneTime}"
+                        Header="Delete All" ToolTip="Delete all elements" />
                     <Separator />
-                    <MenuItem
-                        Command="{Binding CollapseAllCommand, Mode=OneTime}"
-                        Header="Collapse All"
-                        ToolTip="Collapse all children" />
-                    <MenuItem
-                        Command="{Binding ExpandAllCommand, Mode=OneTime}"
-                        Header="Expand All"
-                        ToolTip="Expand all children" />
+                    <MenuItem Command="{Binding CollapseAllCommand, Mode=OneTime}"
+                        Header="Collapse All" ToolTip="Collapse all children" />
+                    <MenuItem Command="{Binding ExpandAllCommand, Mode=OneTime}"
+                        Header="Expand All" ToolTip="Expand all children" />
                 </ContextMenu>
             </Expander.ContextMenu>
             <!--  Header  -->
@@ -1454,15 +2042,12 @@
                                 MinWidth="250" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-
                         <!--  Name  -->
-                        <TextBlock
-                            x:Name="HeaderText"
+                        <TextBlock x:Name="HeaderText"
                             MinWidth="180"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Text="{Binding Name, Mode=OneTime}" />
-
                         <StackPanel
                             Grid.Column="1"
                             VerticalAlignment="Center"
@@ -1473,9 +2058,7 @@
                         </StackPanel>
                     </Grid>
                     <DataTemplate.Triggers>
-                        <DataTrigger
-                            Binding="{Binding CurrentIndex}"
-                            Value="-1">
+                        <DataTrigger Binding="{Binding CurrentIndex}" Value="-1">
                             <Setter Property="IsEnabled" Value="False" />
                         </DataTrigger>
                     </DataTemplate.Triggers>
@@ -1483,15 +2066,14 @@
             </Expander.HeaderTemplate>
             <!--  Template  -->
             <Border
-                Padding="4"
-                Background="#252526">
+                Padding="0,5,5,5"
+                Background="{DynamicResource Struct}"
+                CornerRadius="3">
                 <ContentPresenter Content="{Binding Template, Mode=OneTime}" />
             </Border>
         </Expander>
         <DataTemplate.Triggers>
-            <DataTrigger
-                Binding="{Binding CurrentIndex}"
-                Value="-1">
+            <DataTrigger Binding="{Binding CurrentIndex}" Value="-1">
                 <Setter Property="Expander.IsEnabled" Value="False" />
             </DataTrigger>
         </DataTemplate.Triggers>
@@ -1503,10 +2085,12 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:BlockHeaderDropdown}">
                     <!--  Binding the count to the tag for use in the item template yields better performance than RelativeSource bindings  -->
-                    <ComboBox
-                        x:Name="PART_Combo"
+                    <ComboBox x:Name="PART_Combo"
+                        Style="{DynamicResource BlockHeaderDropdownComboboxStyle}"
                         Width="Auto"
                         MinWidth="60"
+                        Margin="2,0"
+                        Padding="6,2,0,2"
                         SelectedValue="{Binding Path=CurrentIndex, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                         SelectedValuePath=""
                         Tag="{Binding Path=Count, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}">
@@ -1518,8 +2102,8 @@
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock>
-                                    <Run Text="{Binding Mode=OneWay}" />
-                                    <Run Text="- (" /><Run Text="{Binding Path=Tag, ElementName=PART_Combo, Mode=OneWay}" /><Run Text=")" />
+                                    <Run Text="{Binding Mode=OneWay}"/>
+                                    <Run Text="("/><Run Text="{Binding Path=Tag, ElementName=PART_Combo, Mode=OneWay}"/><Run Text=")"/>
                                 </TextBlock>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
@@ -1546,7 +2130,7 @@
             <Border
                 Padding="4,4"
                 Background="Transparent"
-                BorderBrush="#333337"
+                BorderBrush="{DynamicResource BorderDarker}"
                 DockPanel.Dock="Top"
                 Style="{StaticResource ToolBarStyle}">
                 <Grid>
@@ -1554,48 +2138,39 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-
                     <StackPanel
                         Grid.Column="0"
                         HorizontalAlignment="Stretch"
                         Orientation="Horizontal">
-                        <Button
-                            Command="{Binding Field.AddCommand, Mode=OneTime}"
+                        <Button Command="{Binding Field.AddCommand, Mode=OneTime}"
                             Content="Add"
                             Focusable="False"
                             ToolTip="Add a new element" />
-                        <Button
-                            Command="{Binding Field.InsertCommand, Mode=OneTime}"
+                        <Button Command="{Binding Field.InsertCommand, Mode=OneTime}"
                             Content="Insert"
                             Focusable="False"
                             ToolTip="Insert a new element at the current index" />
-                        <Button
-                            Command="{Binding Field.DuplicateCommand}"
+                        <Button Command="{Binding Field.DuplicateCommand}"
                             Content="Duplicate"
                             Focusable="False"
                             ToolTip="Duplicate the element at the current index" />
-                        <Button
-                            Command="{Binding Field.DeleteCommand, Mode=OneTime}"
+                        <Button Command="{Binding Field.DeleteCommand, Mode=OneTime}"
                             Content="Delete"
                             Focusable="False"
                             ToolTip="Delete the element at the current index" />
-                        <Button
-                            Command="{Binding Field.DeleteAllCommand, Mode=OneTime}"
+                        <Button Command="{Binding Field.DeleteAllCommand, Mode=OneTime}"
                             Content="Delete All"
                             ToolTip="Delete all elements" />
                         <Separator />
-                        <Button
-                            Command="{Binding Field.ShiftUpCommand, Mode=OneTime}"
+                        <Button Command="{Binding Field.ShiftUpCommand, Mode=OneTime}"
                             Content="Shit Up"
                             Focusable="False"
                             ToolTip="Shift the current element up one" />
-                        <Button
-                            Command="{Binding Field.ShiftDownCommand, Mode=OneTime}"
+                        <Button Command="{Binding Field.ShiftDownCommand, Mode=OneTime}"
                             Content="Shift Down"
                             Focusable="False"
                             ToolTip="Shift the current element down one" />
                     </StackPanel>
-
                     <StackPanel
                         Grid.Column="1"
                         HorizontalAlignment="Stretch"
@@ -1606,14 +2181,11 @@
                                 x:Name="ElementDropDown"
                                 Count="{Binding Field.Block.Count}"
                                 CurrentIndex="{Binding Field.CurrentIndex, Mode=TwoWay}" />
-
                         </StackPanel>
                     </StackPanel>
-
                 </Grid>
             </Border>
-            <ContentPresenter
-                x:Name="Template"
+            <ContentPresenter x:Name="Template"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Content="{Binding Template}" />

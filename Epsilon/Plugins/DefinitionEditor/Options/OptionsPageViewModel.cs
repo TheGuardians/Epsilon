@@ -22,7 +22,7 @@ namespace DefinitionEditor.Options
         public bool DisplayFieldTypes
         {
             get => _displayFieldTypes;
-            set => SetOptionAndNotify(ref _displayFieldTypes, value);
+            set => SetOptionAndNotify(ref _displayFieldTypes, value, "DisplayFieldTypes");
         }
 
         public bool DisplayFieldOffsets
@@ -34,7 +34,7 @@ namespace DefinitionEditor.Options
         public bool CollapseBlocks
         {
             get => _collapseBlocks;
-            set =>  SetOptionAndNotify(ref _collapseBlocks, value);
+            set => SetOptionAndNotify(ref _collapseBlocks, value);
         }
 
         public override void Apply()

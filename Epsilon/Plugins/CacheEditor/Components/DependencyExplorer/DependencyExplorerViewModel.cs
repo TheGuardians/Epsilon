@@ -3,7 +3,6 @@ using EpsilonLib.Shell;
 using EpsilonLib.Shell.TreeModels;
 using Stylet;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 using TagTool.Cache;
 using TagTool.Cache.HaloOnline;
@@ -22,11 +21,11 @@ namespace CacheEditor.Components.DependencyExplorer
 
             Name = ToolName;
             DisplayName = "Dependency Explorer";
-            PreferredLocation = EpsilonLib.Shell.PaneLocation.Right;
+            PreferredLocation = PaneLocation.Right;
             PreferredWidth = 450;
             IsVisible = true;
 
-            var tagTree = (editor.TagTree as Components.TagTree.TagTreeViewModel);
+            var tagTree = editor.TagTree as TagTree.TagTreeViewModel;
             tagTree.NodeSelected += TagTree_NodeSelected;
 
             _editor.CurrentTagChanged += _editor_CurrentTagChanged;

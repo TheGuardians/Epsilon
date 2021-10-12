@@ -43,7 +43,10 @@ namespace Xceed.Wpf.AvalonDock.Controls
 
     static LayoutAnchorableFloatingWindowControl()
     {
-      DefaultStyleKeyProperty.OverrideMetadata( typeof( LayoutAnchorableFloatingWindowControl ), new FrameworkPropertyMetadata( typeof( LayoutAnchorableFloatingWindowControl ) ) );
+        DefaultStyleKeyProperty.OverrideMetadata( typeof( LayoutAnchorableFloatingWindowControl ), new FrameworkPropertyMetadata( typeof( LayoutAnchorableFloatingWindowControl ) ) );
+        ContentProperty.OverrideMetadata(typeof(LayoutAnchorableFloatingWindowControl), new FrameworkPropertyMetadata(null, null));
+        WindowStyleProperty.OverrideMetadata(typeof(LayoutAnchorableFloatingWindowControl), new FrameworkPropertyMetadata(WindowStyle.None));
+        AllowsTransparencyProperty.OverrideMetadata(typeof(LayoutAnchorableFloatingWindowControl), new FrameworkPropertyMetadata(true));
     }
 
     internal LayoutAnchorableFloatingWindowControl( LayoutAnchorableFloatingWindow model, bool isContentImmutable )

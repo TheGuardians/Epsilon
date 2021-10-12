@@ -137,6 +137,10 @@
       <Name>TagTool</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\components\TagStructEditor\TagStructEditor.csproj">
+      <Project>{613aa9f0-1dc4-451a-a0c1-d9d1d4499d0c}</Project>
+      <Name>TagStructEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\EpsilonLib\EpsilonLib.csproj">
       <Project>{110511dd-0a26-4843-9cc4-bf2cf42b8e44}</Project>
       <Name>EpsilonLib</Name>
@@ -146,6 +150,10 @@
       <Project>{9de40a24-8308-4c7d-b77e-71e9d389bbfa}</Project>
       <Name>CacheEditor</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DefinitionEditor\DefinitionEditor.csproj">
+      <Project>{cdce8946-359a-488f-802e-cb664b6f97df}</Project>
+      <Name>DefinitionEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

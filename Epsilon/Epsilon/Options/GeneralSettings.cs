@@ -12,5 +12,8 @@ namespace Epsilon.Options
         public const string CollectionKey = "General";
 
         public static SettingDefinition DefaultTagCacheSetting = new SettingDefinition("DefaultTagCache", "");
+        public static SettingDefinition ThemeSetting = new SettingDefinition("Theme", Theme.Solid);
+        public static SettingDefinition AccentColorSetting = new SettingDefinition("Accent", Accent.Cobalt);
+        public static SettingDefinition AlwaysOnTopSetting = new SettingDefinition("AlwaysOnTop", false);
     }
 }

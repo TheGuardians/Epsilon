@@ -7,7 +7,7 @@
     Width="800"
     Height="500"
     Padding="4"
-    Background="#2d2d30">
+    Background="{DynamicResource Background}">
     <ContentControl
         s:View.Model="{Binding TagTree}"
         Margin="8,12,8,8"/>

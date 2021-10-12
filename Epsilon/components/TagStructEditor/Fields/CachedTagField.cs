@@ -34,6 +34,10 @@ namespace TagStructEditor.Fields
         public TagGroupItem SelectedGroup { get; set; }
         public TagInstanceItem SelectedInstance { get; set; }
 
+        public string SelectedInstanceName { get; set; }
+
+        public string SelectedGroupName { get; set; }
+
         public bool SelectedGroupValid => SelectedGroup != null;
         public bool SelectedInstanceValid => SelectedInstance != null;
 
@@ -66,18 +70,32 @@ namespace TagStructEditor.Fields
         {
             SelectedGroup = Groups.FirstOrDefault(item => item.Group == instance.Group);
             SelectedInstance = SelectedGroup?.Instances.FirstOrDefault(item => $"{item.Instance}" == $"{instance}");
+            SelectedInstanceName = $"{SelectedInstance.Instance}";
+            SelectedGroupName = $"{SelectedGroup.Group}";
         }
 
         public void OnSelectedInstanceChanged()
         {
-            if (SelectedInstance != null || SelectedGroup == null)
+            if (SelectedInstance != null)
+            {
                 SetActualValue(SelectedInstance?.Instance);
+                SelectedInstanceName = $"{SelectedInstance.Instance}";
+            }
+            else
+                SelectedInstanceName = null;
 
             InvalidateCommands();
         }
 
         public void OnSelectedGroupChanged()
         {
+            if (SelectedGroup != null)
+            {
+                SelectedGroupName = $"{SelectedGroup.Group}";
+            }
+            else
+                SelectedGroupName = null;
+
             InvalidateCommands();
         }
 
@@ -124,6 +142,8 @@ namespace TagStructEditor.Fields
             {
                 SelectedGroup = Groups.FirstOrDefault(item => ((TagTool.Cache.Gen3.TagGroupGen3)item.Group).Name == split.Last()) ?? SelectedGroup;
                 SelectedInstance = SelectedGroup.Instances.First(item => item.Name == split.First()) ?? SelectedInstance;
+                SelectedInstanceName = $"{SelectedInstance.Instance}";
+                SelectedGroupName = $"{SelectedGroup.Group}";
             }
         }
     }

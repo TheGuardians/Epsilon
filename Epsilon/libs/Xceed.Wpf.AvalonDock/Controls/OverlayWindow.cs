@@ -76,12 +76,11 @@ namespace Xceed.Wpf.AvalonDock.Controls
     static OverlayWindow()
     {
       DefaultStyleKeyProperty.OverrideMetadata( typeof( OverlayWindow ), new FrameworkPropertyMetadata( typeof( OverlayWindow ) ) );
-
-      OverlayWindow.AllowsTransparencyProperty.OverrideMetadata( typeof( OverlayWindow ), new FrameworkPropertyMetadata( true ) );
-      OverlayWindow.WindowStyleProperty.OverrideMetadata( typeof( OverlayWindow ), new FrameworkPropertyMetadata( WindowStyle.None ) );
-      OverlayWindow.ShowInTaskbarProperty.OverrideMetadata( typeof( OverlayWindow ), new FrameworkPropertyMetadata( false ) );
-      OverlayWindow.ShowActivatedProperty.OverrideMetadata( typeof( OverlayWindow ), new FrameworkPropertyMetadata( false ) );
-      OverlayWindow.VisibilityProperty.OverrideMetadata( typeof( OverlayWindow ), new FrameworkPropertyMetadata( Visibility.Hidden ) );
+      AllowsTransparencyProperty.OverrideMetadata( typeof( OverlayWindow ), new FrameworkPropertyMetadata( true ) );
+      WindowStyleProperty.OverrideMetadata( typeof( OverlayWindow ), new FrameworkPropertyMetadata( WindowStyle.None ) );
+      ShowInTaskbarProperty.OverrideMetadata( typeof( OverlayWindow ), new FrameworkPropertyMetadata( false ) );
+      ShowActivatedProperty.OverrideMetadata( typeof( OverlayWindow ), new FrameworkPropertyMetadata( false ) );
+      VisibilityProperty.OverrideMetadata( typeof( OverlayWindow ), new FrameworkPropertyMetadata( Visibility.Hidden ) );
     }
 
     internal OverlayWindow( IOverlayWindowHost host )

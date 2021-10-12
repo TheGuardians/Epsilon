@@ -4,10 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Epsilon.Pages"
     Title="Epsilon - Unhandled Exception"
-    Width="640"
+    Width="800"
     Height="480"
-    Background="#2d2d30"
-    Foreground="#f1f1f1">
+    Topmost="True"
+    Background="{DynamicResource Background}"
+    Foreground="{DynamicResource Foreground}">
     <Grid Margin="8">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -15,15 +16,14 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel Margin="0,4">
-            <TextBlock
+            <TextBlock Text="An unhandled exception has occured. See below for details:" 
                 FontSize="18"
                 FontFamily="Bahnschrift Light"
-                Foreground="White"
-                Text="An unhandled exception has occured. See below for details:" />
-            <TextBlock
-                Margin="0,0,0,10"
-                Foreground="#ff5555"
-                Text="Ignoring may leave the application in an invalid state." />
+                Margin="1" Padding="8,0,0,0"
+                Foreground="{DynamicResource TitleColor}"/>
+            <TextBlock Text="Ignoring may leave the application in an invalid state."
+                Margin="0,0,0,4" Padding="16,0,0,0"
+                Foreground="#ff5555" />
         </StackPanel>
 
         <TextBox
@@ -31,6 +31,7 @@
             Margin="0,4"
             Padding="4"
             IsReadOnly="True"
+            Background="{DynamicResource BackgroundDark}"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
             Text="{Binding Exception, Mode=OneWay}"
             TextWrapping="Wrap" />
@@ -39,7 +40,7 @@
             Grid.ColumnSpan="3"
             Margin="0,4"
             Padding="0,8,0,0"
-            BorderBrush="#3F3F46"
+            BorderBrush="{DynamicResource BorderDark}"
             BorderThickness="0,1,0,0">
             <StackPanel
                 Margin="4"

@@ -172,21 +172,22 @@ namespace Xceed.Wpf.AvalonDock.Controls
       {
         _model.Root.Manager.ShowAutoHideWindow( this );
         _model.IsActive = true;
+        _model.Root.Manager._ExecuteAutoHideCommand(_model);
       }
     }
-
-    protected override void OnMouseEnter( System.Windows.Input.MouseEventArgs e )
-    {
-      base.OnMouseEnter( e );
-
-      if( !e.Handled )
-      {
-        _openUpTimer = new DispatcherTimer( DispatcherPriority.ApplicationIdle );
-        _openUpTimer.Interval = TimeSpan.FromMilliseconds( 400 );
-        _openUpTimer.Tick += new EventHandler( _openUpTimer_Tick );
-        _openUpTimer.Start();
-      }
-    }
+    // nuked due to issue with allowstransparency and child windows
+        //protected override void OnMouseEnter( System.Windows.Input.MouseEventArgs e )
+        //{
+        //  base.OnMouseEnter( e );
+        //
+        //  if( !e.Handled )
+        //  {
+        //    _openUpTimer = new DispatcherTimer( DispatcherPriority.ApplicationIdle );
+        //    _openUpTimer.Interval = TimeSpan.FromMilliseconds( 400 );
+        //    _openUpTimer.Tick += new EventHandler( _openUpTimer_Tick );
+        //    _openUpTimer.Start();
+        //  }
+        //}
 
     protected override void OnMouseLeave( System.Windows.Input.MouseEventArgs e )
     {

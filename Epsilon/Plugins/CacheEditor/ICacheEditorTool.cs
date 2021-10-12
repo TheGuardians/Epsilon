@@ -1,7 +1,6 @@
 ﻿using EpsilonLib.Shell;
 using Shared;
 using Stylet;
-using System.Windows.Threading;
 
 namespace CacheEditor
 {

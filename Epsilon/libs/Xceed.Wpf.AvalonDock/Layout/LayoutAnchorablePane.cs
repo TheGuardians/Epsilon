@@ -181,7 +181,7 @@ namespace Xceed.Wpf.AvalonDock.Layout
       AutoFixSelectedContent();
       for( int i = 0; i < Children.Count; i++ )
       {
-        if( Children[ i ].IsSelected )
+        if (Children[i].IsSelected)
         {
           SelectedContentIndex = i;
           break;

@@ -1,4 +1,5 @@
 ﻿using Epsilon;
+using Epsilon.Options;
 using Epsilon.Pages;
 using EpsilonLib.Commands;
 using EpsilonLib.Editors;
@@ -26,6 +27,9 @@ namespace WpfApp20
         private IEditorService _editorService;
         private ISettingsCollection _settings;
         private string DefaultCachePath;
+        private bool AlwaysOnTop;
+        private Theme EpsilonTheme;
+        private Accent AccentColor;
 
         protected async override void Launch()
         {
@@ -54,6 +58,8 @@ namespace WpfApp20
                 OpenDefault(DefaultCachePath, providers.ElementAt(0));
             }
 
+            FrameworkCompatibilityPreferences.KeepTextBoxDisplaySynchronizedWithTextProperty = false;
+
             base.Launch();
 
             PostLaunchInitShell();
@@ -79,7 +85,7 @@ namespace WpfApp20
             pluginManager.LoadPlugins();
 
             yield return Assembly.GetExecutingAssembly();
-            yield return (typeof(IShell).Assembly); // EpsilonLib
+            yield return typeof(IShell).Assembly; // EpsilonLib
 
             foreach (var file in pluginManager.Plugins)
                 yield return file.Assembly;
@@ -92,17 +98,22 @@ namespace WpfApp20
 
             _editorService = GetInstance<IEditorService>();
             _settings = GetInstance<ISettingsService>().GetCollection("General");
-            DefaultCachePath = _settings.Get("DefaultTagCache", "");
 
-            App.Current.Resources.Add(typeof(ICommandRegistry), GetInstance<ICommandRegistry>());
-            App.Current.Resources.Add(typeof(IMenuFactory), GetInstance<IMenuFactory>());
-            App.Current.Resources.Add(SystemParameters.MenuPopupAnimationKey, PopupAnimation.None);
+            DefaultCachePath = _settings.Get("DefaultTagCache", "");
+            EpsilonTheme = _settings.Get("Theme", Theme.Solid);
+            AccentColor = _settings.Get("Accent", Accent.Cobalt);
+            AlwaysOnTop = _settings.Get("AlwaysOnTop", false);
+
+            Application.Current.Resources.Add(typeof(ICommandRegistry), GetInstance<ICommandRegistry>());
+            Application.Current.Resources.Add(typeof(IMenuFactory), GetInstance<IMenuFactory>());
+            Application.Current.Resources.Add(SystemParameters.MenuPopupAnimationKey, PopupAnimation.None);
+            Application.Current.Resources["AlwaysOnTop"] = AlwaysOnTop;
+
+            InitializeAppearance(EpsilonTheme, AccentColor);
         }
 
         private void PostLaunchInitShell()
         {
-            FrameworkCompatibilityPreferences.KeepTextBoxDisplaySynchronizedWithTextProperty = false;
-
             // better font rendering
             TextOptions.TextFormattingModeProperty.OverrideMetadata(typeof(Window),
                new FrameworkPropertyMetadata(TextFormattingMode.Display,
@@ -122,6 +133,16 @@ namespace WpfApp20
                 MessageBox.Show($"Path to default cache is invalid: \n\"{path}\"", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 Logger.Error(ex.ToString());
             }
+        }
+        private void InitializeAppearance(Theme epsilonTheme, Accent accentColor)
+        {
+            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri("/Epsilon;component/Themes/" + epsilonTheme.ToString() + ".xaml", UriKind.Relative)
+            });
+
+            Application.Current.Resources["AccentColor"] = Application.Current.Resources[accentColor.ToString()];
+            Application.Current.Resources["BlurEnabledByTheme"] = Application.Current.Resources["BlurBehind"] ?? false;
         }
     }
 }

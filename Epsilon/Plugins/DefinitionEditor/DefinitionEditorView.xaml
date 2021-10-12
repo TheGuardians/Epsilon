@@ -4,54 +4,197 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:TagStructEditor="https://github.com/unk-1/tag-struct-editor"
     xmlns:local="clr-namespace:DefinitionEditor"
-    xmlns:shared="clr-namespace:DefinitionEditor"
+    xmlns:xcad1="https://github.com/canton7/Stylet"
     Background="Transparent"
     SnapsToDevicePixels="True">
 
+    <UserControl.Resources>
+        <xcad1:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+
+        <Style x:Key="ToolbarSearchBoxStyle" TargetType="{x:Type TextBoxBase}">
+            <Setter Property="Background" Value="{DynamicResource SearchBoxBackground}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="AllowDrop" Value="true" />
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContextMenu">
+                <Setter.Value>
+                    <ContextMenu>
+                        <MenuItem Command="Cut" Header="Cut" Visibility="{Binding Path=IsEnabled, 
+                            RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                        <MenuItem Command="Copy" Header="Copy" Visibility="{Binding Path=IsEnabled, 
+                            RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                        <MenuItem Command="Paste" Header="Paste" />
+                    </ContextMenu>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                        <Border x:Name="border"
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="0,0,0,0"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True">
+                            <Grid>
+                                <ScrollViewer x:Name="PART_ContentHost"
+                                    Focusable="false"
+                                    HorizontalScrollBarVisibility="Hidden"
+                                    VerticalScrollBarVisibility="Hidden" />
+                                <TextBlock x:Name="PlaceholderText"
+                                    Margin="7,2,2,2"
+                                    VerticalAlignment="Center"
+                                    FontSize="{TemplateBinding FontSize}"
+                                    Foreground="{DynamicResource Foreground}"
+                                    IsHitTestVisible="False"
+                                    Text="{TemplateBinding Tag}"
+                                    Visibility="Hidden" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="border" Property="Opacity" Value="0.56" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="border" Property="Background" Value="{DynamicResource MouseOver}" />
+                            </Trigger>
+                            <Trigger Property="TextBox.Text" Value="">
+                                <Setter TargetName="PlaceholderText" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter TargetName="border" Property="Background" Value="{DynamicResource MouseOver}" />
+                                <Setter TargetName="PlaceholderText" Property="Visibility" Value="Hidden" />
+                            </Trigger>
+                            <Trigger Property="Validation.HasError" Value="true">
+                                <Setter TargetName="border" Property="BorderBrush" Value="Red" />
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true" />
+                        <Condition Property="IsSelectionActive" Value="false" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" />
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ToolbarButtonStyle" TargetType="{x:Type ButtonBase}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Height" Value="23" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ButtonBase}">
+                        <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        SnapsToDevicePixels="true"
+                        CornerRadius="0">
+                            <ContentPresenter x:Name="contentPresenter"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Focusable="False"
+                            RecognizesAccessKey="True"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsDefaulted" Value="true">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="border" Property="Background" Value="{DynamicResource BorderDark}" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="border" Property="Background" Value="{DynamicResource Accent}" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="border" Property="Background" Value="{DynamicResource ShadowBrush}" />
+                                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{DynamicResource Relief}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </UserControl.Resources>
+    
     <UserControl.InputBindings>
         <KeyBinding Command="{Binding SaveCommand}" Modifiers="Control" Key="S"/>
     </UserControl.InputBindings>
-    
-    <DockPanel>
+
+    <DockPanel Margin="0,0,-0.1,0" x:Name="DefinitionDockPanel" KeyDown="DefinitionContent_KeyDown">
         <!--  Toolbar  -->
-        <Border
-            Padding="4,6,4,2"
-            Background="Transparent"
-            BorderBrush="#333337"
+        <Border x:Name="Toolbar"
+            Height="24"
+            Padding="0,0,0,0"
+            CornerRadius="0,1,0,0"
+            Background="{DynamicResource Inset}"
+            BorderBrush="{DynamicResource StringBackground}"
+            BorderThickness="0,0,0,0"
             DockPanel.Dock="Top"
             Style="{StaticResource ToolBarStyle}">
-            <Grid DockPanel.Dock="Top">
+            <Grid DockPanel.Dock="Top" x:Name="ToolbarGrid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <!--  Search  -->
-                <StackPanel
+                <StackPanel x:Name="ToolbarSearch"
                     HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch">
-
+                    VerticalAlignment="Center">
                     <StackPanel Orientation="Horizontal">
-                        <TextBox
-                            Width="200"
+                        <TextBox x:Name="SearchBox"
+                            Style="{StaticResource ToolbarSearchBoxStyle}"
+                            MinWidth="205"
                             VerticalAlignment="Center"
                             Tag="Search..."
-                            Margin="-2,1,2,0"
-                            Padding="1,0,0,0"
+                            Padding="3,0,0,0"
+                            Margin="0,0,0,0"
+                            Height="26"
                             VerticalContentAlignment="Center"
                             Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}">
                             <TextBox.InputBindings>
-                                <KeyBinding
-                                    Key="Up"
-                                    Command="{Binding SearchResults.PreviousCommand}" />
-                                <KeyBinding
-                                    Key="Down"
-                                    Command="{Binding SearchResults.NextCommand}" />
+                                <KeyBinding Key="Up" Command="{Binding SearchResults.PreviousCommand}" />
+                                <KeyBinding Key="Down" Command="{Binding SearchResults.NextCommand}" />
                             </TextBox.InputBindings>
                         </TextBox>
-                        <ComboBox
-                            MinWidth="250"
-                            Margin="4,1,4,0"
+                        <ComboBox x:Name="SearchResults"
+                            MinWidth="0"
+                            Background="{DynamicResource BackgroundDark}"
+                            BorderThickness="0"
+                            Height="23"
+                            Margin="1,-1,4,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             DisplayMemberPath="FieldName"
@@ -59,81 +202,80 @@
                             ItemsSource="{Binding SearchResults.Results, Mode=OneWay}"
                             SelectedIndex="{Binding SearchResults.CurrentIndex, Mode=TwoWay}" />
                     </StackPanel>
-
                 </StackPanel>
 
                 <!--  Action Pane  -->
-                <StackPanel
+                <StackPanel x:Name="ToolbarActionPane"
                     Grid.Column="1"
                     VerticalAlignment="Stretch"
                     Orientation="Horizontal">
-
                     <ComboBox
-                        MinWidth="45"
-                        MaxHeight="22"
-                        Margin="3,0,3,0"
+                        MinWidth="30"
+                        MaxHeight="20"
+                        Margin="0,-1,1,0"
                         DisplayMemberPath="DisplayName"
+                        BorderThickness="0"
                         IsEnabled="{Binding RteHasTargets, FallbackValue=False}"
                         ItemsSource="{Binding RteTargetList}"
                         SelectedItem="{Binding SelectedRteTargetItem, Mode=TwoWay}" />
-
-                    <Button
-                        Margin="4,0"
-                        VerticalAlignment="Center"
-                        Command="{Binding PokeCommand}"
+                    <Button Command="{Binding PokeCommand}"
+                        ToolTip="Poke the current changes."
                         Content="Poke"
-                        ToolTip="Poke the current changes" />
-                    <Separator Margin="4,0" />
-                    <Button
-                        Margin="4,0"
+                        Style="{StaticResource ToolbarButtonStyle}"
+                        Height="23"
+                        Margin="0,-1,0,0"
+                        Width="40"
                         VerticalAlignment="Center"
-                        Command="{Binding SaveCommand}"
-                        Content="Save"
-                        ToolTip="Save the current changes" />
-                    <Button
-                        Margin="4,0"
-                        VerticalAlignment="Center"
-                        Command="{Binding ReloadCommand}"
+                        VerticalContentAlignment="Center"
+                        BorderThickness="0" />
+                    <Button Command="{Binding ReloadCommand}"
+                        ToolTip="Reload this tag from disk." 
                         Content="Reload"
-                        ToolTip="Reload from disk" />
-                    <Separator Margin="4,0" />
+                        Style="{StaticResource ToolbarButtonStyle}"
+                        Height="23"
+                        Margin="1,-1,0,0"
+                        Width="48"
+                        VerticalAlignment="Center"
+                        BorderThickness="0" />
+                    <Button Command="{Binding SaveCommand}"
+                        ToolTip="Save tag changes."
+                        Content="Save"
+                        Style="{StaticResource ToolbarButtonStyle}"
+                        Height="23"
+                        Margin="1,-1,0,0"
+                        Width="38"
+                        VerticalAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        BorderThickness="0" />
                     <StackPanel
                         VerticalAlignment="Stretch"
                         Orientation="Horizontal">
-
                         <!--  Options menu  -->
-                        <Menu VerticalAlignment="Center">
-                            <MenuItem Header="Options">
-                                <MenuItem
-                                    Command="{Binding ExpandAllCommand}"
-                                    Header="Expand All" />
-                                <MenuItem
-                                    Command="{Binding CollapseAllCommand}"
-                                    Header="Collapse All" />
+                        <Menu VerticalAlignment="Center" Height="25" Margin="0">
+                            <MenuItem Header="☰">
+                                <MenuItem Command="{Binding ExpandAllCommand}"
+                                          Header="Expand All" />
+                                <MenuItem Command="{Binding CollapseAllCommand}"
+                                          Header="Collapse All" />
                                 <Separator />
-                                <MenuItem
-                                    Header="Block Outline"
+                                <MenuItem Header="Block Outline"
                                     IsCheckable="True"
                                     IsChecked="{Binding BlockOutlineVisible, Mode=TwoWay}"
                                     ToolTip="Show the block outline window" />
                                 <Separator />
-                                <MenuItem
-                                    Header="Auto Poke"
+                                <MenuItem Header="Auto Poke"
                                     IsCheckable="True"
                                     IsChecked="{Binding Preferences.AutoPokeEnabled, Mode=TwoWay}"
-                                    ToolTip="Auto poke changes" />
+                                    ToolTip="Poke tag changes automatically." />
                             </MenuItem>
                         </Menu>
-                        <Separator Margin="4,0,-3,0" />
                     </StackPanel>
-
                 </StackPanel>
             </Grid>
-
         </Border>
 
         <!--  Main Content  -->
-        <Grid>
+        <Grid x:Name="DefinitionContent" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
@@ -160,9 +302,8 @@
 
                     <ListBox.Resources>
                         <DataTemplate DataType="{x:Type local:BlockOutlineItem}">
-                            <TextBlock
-                                x:Name="label"
-                                Foreground="#F1F1F1"
+                            <TextBlock x:Name="label"
+                                Foreground="{DynamicResource Foreground}"
                                 Text="{Binding Header}" />
                         </DataTemplate>
                     </ListBox.Resources>
@@ -175,8 +316,7 @@
             </Grid>
 
             <!--  Template Display  -->
-            <TagStructEditor:StructEditorControl
-                x:Name="structContainer"
+            <TagStructEditor:StructEditorControl x:Name="structContainer"
                 Grid.Column="1"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"

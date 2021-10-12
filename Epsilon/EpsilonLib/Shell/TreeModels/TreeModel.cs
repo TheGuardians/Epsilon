@@ -72,5 +72,10 @@ namespace EpsilonLib.Shell.TreeModels
             SelectedNode = e.Node;
             NodeSelected?.Invoke(this, e);
         }
+
+        public void SimulateDoubleClick(TreeNodeEventArgs e)
+        {
+            NodeDoubleClicked?.Invoke(this, e);
+        }
     }
 }

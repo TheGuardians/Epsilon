@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace DefinitionEditor
 {
@@ -14,6 +15,20 @@ namespace DefinitionEditor
         public DefinitionEditorView()
         {
             InitializeComponent();
+        }
+
+        private void DefinitionContent_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                var poker = ((DefinitionEditorViewModel)DataContext).PokeCommand;
+
+                if (poker.CanExecute(null))
+                {
+                    poker.Execute(null);
+                }
+                e.Handled = true;
+            }
         }
     }
 }

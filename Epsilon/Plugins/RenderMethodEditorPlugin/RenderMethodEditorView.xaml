@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:fields="clr-namespace:TagStructEditor.Fields;assembly=TagStructEditor"
     xmlns:local="clr-namespace:RenderMethodEditorPlugin"
     xmlns:shader_parameters ="clr-namespace:RenderMethodEditorPlugin.ShaderParameters"
     xmlns:s="https://github.com/canton7/Stylet"
@@ -24,22 +25,21 @@
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type shader_parameters:SamplerShaderParameter}">
-            <StackPanel Orientation="Horizontal" ToolTip="{Binding Description}">
+            <StackPanel Orientation="Horizontal" ToolTip="{Binding Description}" Margin="0">
                 <TextBlock Text="{Binding Name}" Width="250" Padding="0,2,10,0"/>
-                <TextBlock Text="Bitmap name:" Padding="0,2,10,0"/>
                 <TextBox Text="{Binding Value}" Width="400" HorizontalAlignment="Right" Padding="1"/>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type shader_parameters:FloatShaderParameter}">
-            <StackPanel Orientation="Horizontal" ToolTip="{Binding Description}" Margin="1">
+            <StackPanel Orientation="Horizontal" ToolTip="{Binding Description}" Margin="0">
                 <TextBlock Text="{Binding Name}" Width="250" Padding="0,2,10,0"/>
                 <TextBox Text="{Binding Value}" Width="50" HorizontalAlignment="Right" Padding="1,1,1,1"/>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type shader_parameters:CategoryShaderParameter}">
-            <StackPanel Orientation="Horizontal" ToolTip="{Binding Description}" Margin="1">
+            <StackPanel Orientation="Horizontal" ToolTip="{Binding Description}" Margin="0">
                 <TextBlock Text="{Binding Name}" Width="250" Padding="0,2,10,0"/>
                 <TextBlock Text="category:" Padding="0,2,10,0"/>
                 <TextBox Text="{Binding Value}" Width="100" HorizontalAlignment="Right" Padding="1"/>
@@ -47,7 +47,7 @@
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type shader_parameters:Float2ShaderParameter}">
-            <StackPanel Orientation="Horizontal" ToolTip="{Binding Description}" Margin="1">
+            <StackPanel Orientation="Horizontal" ToolTip="{Binding Description}" Margin="0">
                 <TextBlock Text="{Binding Name}" Width="250" Padding="0,2,10,0"/>
                 <TextBlock Text="X:" Padding="0,2,10,0"/>
                 <TextBox Text="{Binding Value1}"  Width="100" HorizontalAlignment="Right" Padding="1"/>
@@ -57,7 +57,7 @@
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type shader_parameters:Float3ShaderParameter}">
-            <StackPanel Orientation="Horizontal" ToolTip="{Binding Description}" Margin="1">
+            <StackPanel Orientation="Horizontal" ToolTip="{Binding Description}" Margin="0">
                 <TextBlock Text="{Binding Name}" Width="250" Padding="0,2,10,0"/>
                 <TextBlock Text="X:"  Padding="0,2,10,0"/>
                 <TextBox Text="{Binding Value1}"  Width="100" HorizontalAlignment="Right" Padding="1"/>
@@ -69,7 +69,7 @@
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type shader_parameters:Color3ShaderParameter}">
-            <StackPanel Orientation="Horizontal" ToolTip="{Binding Description}" Margin="1">
+            <StackPanel Orientation="Horizontal" ToolTip="{Binding Description}" Margin="0">
                 <TextBlock Text="{Binding Name}" Width="250" Padding="0,2,10,0"/>
                 <TextBlock Text="R:" Padding="0,3,7,0"/>
                 <TextBox Text="{Binding Value1}"  Width="70" HorizontalAlignment="Right" Padding="1"/>
@@ -81,7 +81,7 @@
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type shader_parameters:Float4ShaderParameter}">
-            <StackPanel Orientation="Horizontal" ToolTip="{Binding Description}" Margin="1">
+            <StackPanel Orientation="Horizontal" ToolTip="{Binding Description}" Margin="0">
                 <TextBlock Text="{Binding Name}" Width="250" Padding="0,2,10,0"/>
                 <TextBlock Text="X:" Padding="0,3,5,0"/>
                 <TextBox Text="{Binding Value1}"  Width="70" HorizontalAlignment="Right" Padding="1"/>
@@ -95,7 +95,7 @@
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type shader_parameters:Color4ShaderParameter}">
-            <StackPanel Orientation="Horizontal" ToolTip="{Binding Description}" Margin="1">
+            <StackPanel Orientation="Horizontal" ToolTip="{Binding Description}" Margin="0">
                 <TextBlock Text="{Binding Name}" Width="250" Padding="0,2,10,0"/>
                 <TextBlock Text="R:" Padding="0,3,9,0"/>
                 <TextBox Text="{Binding Value1}"  Width="65" HorizontalAlignment="Right" Padding="1"/>
@@ -110,7 +110,7 @@
 
         <DataTemplate DataType="{x:Type shader_parameters:TransformShaderParameter}">
             <StackPanel Orientation="Horizontal" ToolTip="{Binding Description}">
-                <TextBlock Text="" Width="250" Padding="0,2,10,0"/>
+                <TextBlock Text="" Width="250" Padding="0,0,10,0"/>
                 <TextBlock Text="Scale X:" Padding="0,3,5,0"/>
                 <TextBox Text="{Binding Value1}"  Width="40" HorizontalAlignment="Right" Padding="1"/>
                 <TextBlock Text="Scale Y:" Padding="10,3,5,0"/>
@@ -135,51 +135,240 @@
                 <TextBox Text="{Binding Value4}"  Width="100" HorizontalAlignment="Right" Padding="1"/>
             </StackPanel>
         </DataTemplate>
-        
+
+        <!--  CachedTag  -->
+        <DataTemplate DataType="{x:Type fields:CachedTagField}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock
+                    TextTrimming="CharacterEllipsis"
+                    Width="180"
+                    Padding="0,0,2,0"
+                    VerticalAlignment="Center"
+                    Text="{Binding Name, Mode=OneTime}" />
+                <ComboBox
+                    Width="60"
+                    VerticalAlignment="Center"
+                    DisplayMemberPath="TagAscii"
+                    ItemsSource="{Binding Groups, Mode=OneTime}"
+                    SelectedItem="{Binding SelectedGroup}" />
+                <ComboBox
+                    Width="320"
+                    Margin="4,0,0,0"
+                    VerticalAlignment="Center"
+                    ContextMenuService.ShowOnDisabled="True"
+                    DisplayMemberPath="Name"
+                    IsEnabled="{Binding SelectedGroupValid}"
+                    ItemsSource="{Binding SelectedGroup.Instances}"
+                    SelectedItem="{Binding SelectedInstance}"
+                    VirtualizingPanel.IsVirtualizing="True"
+                    VirtualizingPanel.ScrollUnit="Item"
+                    VirtualizingPanel.VirtualizationMode="Standard">
+                    <ComboBox.Resources>
+                        <Style TargetType="ScrollViewer">
+                            <Setter Property="Width" Value="auto" />
+                            <Setter Property="MinWidth" Value="320" />
+                            <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
+                        </Style>
+                    </ComboBox.Resources>
+                    <ComboBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ComboBox.ItemsPanel>
+                    <ComboBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem
+                            Command="{Binding CopyTagNameCommand}"
+                            Header="Copy Tag Name" />
+                            <MenuItem
+                            Command="{Binding CopyTagIndexCommand}"
+                            Header="Copy Tag Index" />
+                            <MenuItem
+                            Command="{Binding PasteTagNameCommand}"
+                            Header="Paste Tag Name" />
+                            <Separator />
+                            <MenuItem
+                            Command="{Binding GotoCommand}"
+                            Header="Open in a new tab" />
+                            <Separator />
+                            <MenuItem
+                            Command="{Binding BrowseCommand}"
+                            Header="Browse"
+                            ToolTip="Select a tag" />
+                            <Separator />
+                            <MenuItem
+                            Command="{Binding NullCommand}"
+                            Header="Null"
+                            ToolTip="Null this tag reference" />
+                        </ContextMenu>
+                    </ComboBox.ContextMenu>
+                </ComboBox>
+                <Button
+                Width="24"
+                Height="24"
+                Margin="4,0,0,0"
+                Padding="4,4"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Command="{Binding BrowseCommand}"
+                Content="..."
+                ToolTip="Select a tag" />
+                <Button
+                Width="24"
+                Height="24"
+                Margin="4,0,0,0"
+                Padding="4,4"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Command="{Binding NullCommand}"
+                Content="Ø"
+                ToolTip="Null the tag reference" />
+                <Button
+                Height="24"
+                Margin="4,0,0,0"
+                Padding="4,4"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Command="{Binding GotoCommand}"
+                FontSize="18"
+                ToolTip="Open the tag in a new tab">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                            Margin="0,-5,0,0"
+                            Text="➝" />
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+
+                </Button>
+            </StackPanel>
+        </DataTemplate>
+
     </UserControl.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <DockPanel>
 
-        <TextBlock Text="Shader Methods" Grid.Row="0" FontWeight="Bold" Padding="3,10,0,0"/>
-        <ListView Margin="10" Name="shaderMethods" ItemsSource="{Binding ShaderMethods}" Grid.Row="1" Background="#FF2D2D30" Foreground="#f1f1f1">
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="Focusable" Value="false"/>
-                    <Style.Triggers>
-                        <Trigger Property="Control.IsMouseOver" Value="True">
-                            <Setter Property="Control.Background" Value="#000000" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.View>
-                <GridView>
-                    <GridView.ColumnHeaderContainerStyle>
-                        <Style TargetType="{x:Type GridViewColumnHeader}">
-                            <!-- Set any properties you want to set -->
-                            <Setter Property="Background" Value="LightGray" />
-                            <Setter Property="Foreground" Value="Black" />
-                        </Style>
-                    </GridView.ColumnHeaderContainerStyle>
+        <!--  Action Pane  -->
+        <Border
+            Padding="4,6,4,2"
+            Background="Transparent"
+            BorderBrush="#333337"
+            DockPanel.Dock="Top"
+            Style="{StaticResource ToolBarStyle}">
+            <Grid DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-                    <GridViewColumn Header="Index" Width="auto" DisplayMemberBinding="{Binding MethodIndex}"/>
-                    <GridViewColumn Header="Method Name" Width="200" DisplayMemberBinding="{Binding MethodName}" />
-                    <GridViewColumn Header="Index" Width="auto" DisplayMemberBinding="{Binding OptionIndex}" />
-                    <GridViewColumn Header="Method Option" Width="200" DisplayMemberBinding="{Binding MethodOption}" />
-                    <GridViewColumn Header="Method Description" DisplayMemberBinding="{Binding MethodDescription}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
+                <!--  Search  -->
+                <StackPanel
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock 
+                            Width="200"
+                            Text="Shader Methods"
+                            FontWeight="Bold"
+                            Padding="3,6,0,0"/>
+                        <ComboBox
+                            MinWidth="250"
+                            Margin="4,1,4,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            DisplayMemberPath="FieldName"
+                            IsEnabled="False"/>
+                    </StackPanel>
+                </StackPanel>
+                <!--  Action Pane  -->
+                <StackPanel
+                    Grid.Column="1"
+                    VerticalAlignment="Stretch"
+                    Orientation="Horizontal">
+                    
+                    <ComboBox
+                        MinWidth="45"
+                        MaxHeight="22"
+                        Margin="3,0,3,0"
+                        DisplayMemberPath="DisplayName"
+                        IsEnabled="{Binding RteHasTargets, FallbackValue=False}"
+                        ItemsSource="{Binding RteTargetList}"
+                        SelectedItem="{Binding SelectedRteTargetItem, Mode=TwoWay}" />
+                    <Button
+                        Margin="4,0"
+                        VerticalAlignment="Center"
+                        Command="{Binding PokeCommand}"
+                        Content="Poke"
+                        ToolTip="Poke the current changes" />
+                    <Separator Margin="4,0" />
+                    <Button
+                        Margin="4,0"
+                        VerticalAlignment="Center"
+                        Command="{Binding SaveCommand}"
+                        Content="Save"
+                        ToolTip="Save the current changes" />
+                    <Separator Margin="4,0" />
+                    <StackPanel
+                        VerticalAlignment="Stretch"
+                        Orientation="Horizontal">
+                        <!--  Options menu  -->
+                        <Menu VerticalAlignment="Center" HorizontalAlignment="Right">
+                            <MenuItem Header="Options">
+                                <MenuItem
+                                    Header="Auto Poke"
+                                    IsCheckable="True"
+                                    IsChecked="{Binding Preferences.AutoPokeEnabled, Mode=TwoWay}"
+                                    ToolTip="Auto poke changes" />
+                            </MenuItem>
+                        </Menu>
+                        <Separator Margin="4,0,-3,0" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
 
-        <TextBlock Text="Shader Parameters" Grid.Row="2" FontWeight="Bold" Padding="3,10,0,7"/>
-        <ListBox ItemsSource="{Binding ShaderParameters}" Grid.Row="3"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <!-- <Button Click="{s:Action Test}" Content="Sync" /> -->
-    </Grid>
+            <ListView Name="shaderMethods" Margin="10" Grid.Row="0" ItemsSource="{Binding ShaderMethods}" Background="{DynamicResource Background}" Foreground="{DynamicResource Foreground}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Focusable" Value="false"/>
+                        <Style.Triggers>
+                            <Trigger Property="Control.IsMouseOver" Value="True">
+                                <Setter Property="Control.Background" Value="#000000" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridView.ColumnHeaderContainerStyle>
+                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                <!-- Set any properties you want to set -->
+                                <Setter Property="Background" Value="LightGray" />
+                                <Setter Property="Foreground" Value="Black" />
+                            </Style>
+                        </GridView.ColumnHeaderContainerStyle>
+
+                        <GridViewColumn Header="Index" Width="auto" DisplayMemberBinding="{Binding MethodIndex}"/>
+                        <GridViewColumn Header="Method Name" Width="200" DisplayMemberBinding="{Binding MethodName}" />
+                        <GridViewColumn Header="Index" Width="auto" DisplayMemberBinding="{Binding OptionIndex}" />
+                        <GridViewColumn Header="Method Option" Width="auto" DisplayMemberBinding="{Binding MethodOption}" />
+                        <GridViewColumn Header="Method Description" DisplayMemberBinding="{Binding MethodDescription}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <TextBlock Text="Shader Parameters" Grid.Row="1" FontWeight="Bold" Padding="3,10,0,7"/>
+            <ListBox ItemsSource="{Binding ShaderParameters}" Grid.Row="3" Margin="10,0,0,10" Padding="15,15,15,0"/>
+
+        </Grid>
+                <!-- <Button Click="{s:Action Test}" Content="Sync" /> -->
+    </DockPanel>
 </UserControl>

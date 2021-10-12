@@ -117,7 +117,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ForegroundDisabled}" />
                         </Trigger>
                         <DataTrigger
                             Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Model.ChildrenCount}"
@@ -174,7 +174,7 @@
                                         <Setter Property="Panel.ZIndex" Value="0" />
                                     </MultiTrigger>
                                     <Trigger Property="IsEnabled" Value="false">
-                                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                                        <Setter Property="Foreground" Value="{DynamicResource ForegroundDisabled}" />
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
@@ -196,8 +196,7 @@
     </Style>
 
     <!--  AnchorablePaneControlStyle  -->
-    <Style
-        x:Key="AnchorablePaneControlStyle"
+    <Style x:Key="AnchorablePaneControlStyle"
         TargetType="{x:Type avalonDockControls:LayoutAnchorablePaneControl}">
         <Setter Property="Foreground" Value="{Binding Model.Root.Manager.Foreground, RelativeSource={RelativeSource Self}}" />
         <Setter Property="Background" Value="{Binding Model.Root.Manager.Background, RelativeSource={RelativeSource Self}}" />
@@ -243,7 +242,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ForegroundDisabled}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -291,7 +290,7 @@
                                         <Setter Property="Panel.ZIndex" Value="0" />
                                     </MultiTrigger>
                                     <Trigger Property="IsEnabled" Value="false">
-                                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                                        <Setter Property="Foreground" Value="{DynamicResource ForegroundDisabled}" />
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
@@ -988,8 +987,7 @@
         </Setter>
     </Style>
 
-    <Style
-        x:Key="{x:Type avalonDockControls:LayoutDocumentFloatingWindowControl}"
+    <Style x:Key="{x:Type avalonDockControls:LayoutDocumentFloatingWindowControl}"
         TargetType="{x:Type avalonDockControls:LayoutDocumentFloatingWindowControl}">
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
         <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
@@ -1218,14 +1216,12 @@
         </Setter>
     </Style>
 
-    <Style
-        x:Key="{x:Type avalonDockControls:LayoutAutoHideWindowControl}"
+    <Style x:Key="{x:Type avalonDockControls:LayoutAutoHideWindowControl}"
         TargetType="{x:Type avalonDockControls:LayoutAutoHideWindowControl}">
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
     </Style>
 
-    <Style
-        x:Key="{x:Type avalonDockControls:NavigatorWindow}"
+    <Style x:Key="{x:Type avalonDockControls:NavigatorWindow}"
         TargetType="{x:Type avalonDockControls:NavigatorWindow}">
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
         <Setter Property="SizeToContent" Value="WidthAndHeight" />

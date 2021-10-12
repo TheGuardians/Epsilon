@@ -1,9 +1,11 @@
 ﻿using EpsilonLib.Shell.TreeModels;
+using System;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using CacheEditor;
 
 namespace CacheEditor.Components.TagTree
 {
@@ -17,6 +19,13 @@ namespace CacheEditor.Components.TagTree
         public TagTreeView()
         {
             InitializeComponent();
+            Loaded += TagTreeView_Loaded;
+        }
+
+        private void TagTreeView_Loaded(object sender, RoutedEventArgs e)
+        {
+            SearchBox.Focus();
+            Keyboard.Focus(SearchBox);
         }
 
         private void TreeView_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -30,12 +39,44 @@ namespace CacheEditor.Components.TagTree
             {
                 ((TreeView)sender).Focus();
             }
-           
         }
 
         private void TreeViewItem_RequestBringIntoView(object sender, RequestBringIntoViewEventArgs e)
         {
             e.Handled = true;
         }
+
+        private void TreeViewItem_Selected(object sender, RoutedEventArgs e)
+        {
+            TreeViewItem tvi = e.OriginalSource as TreeViewItem;
+
+            if (tvi == null || e.Handled) return;
+
+            tvi.IsExpanded = !tvi.IsExpanded;
+            //tvi.IsSelected = false;
+            e.Handled = true;
+        }
+
+        private void TreeViewItem_KeyDown(object sender, KeyEventArgs e)
+        {
+            TreeViewItem item = e.OriginalSource as TreeViewItem;
+            //TagEditorContext context = new TagEditorContext();
+            //TagEditorViewModel tagEditorViewModel = new TagEditorViewModel();
+
+            if (e.Key == Key.Return)
+            {
+                if (item.HasItems == true)
+                {
+                    item.IsExpanded = true;
+                }
+                else
+                {
+                    var currentTree = TagTree.DataContext as TreeModel;
+                    currentTree.SimulateDoubleClick(new TreeNodeEventArgs((ITreeNode)item.DataContext));
+                }
+            }
+            e.Handled = true;
+        }
+
     }
 }

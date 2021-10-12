@@ -1,9 +1,24 @@
 ﻿<UserControl
     x:Class="Epsilon.Options.GeneralOptionsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:general="clr-namespace:Epsilon.Options">
+    
     <UserControl.Resources>
+
+        <ObjectDataProvider x:Key="enumTheme" ObjectType="{x:Type sys:Enum}" MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="general:Theme"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="enumAccent" ObjectType="{x:Type sys:Enum}" MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="general:Accent"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
         <Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="True">
@@ -12,28 +27,70 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        
         <ControlTemplate x:Key="validationTemplate">
             <DockPanel>
                 <TextBlock Foreground="Red" FontSize="11">This is not a valid path to a tag cache.</TextBlock>
                 <AdornedElementPlaceholder/>
             </DockPanel>
         </ControlTemplate>
+        
     </UserControl.Resources>
-    
+
     <StackPanel Orientation="Vertical">
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <TextBlock
+                Margin="4"
+                Width="200"
+                VerticalAlignment="Center"
+                Text="Theme: "
+                ToolTip="Choose your general color scheme and appearance." />
+            <ComboBox x:Name="ThemeComboBox"
+                Width="180" Margin="4" VerticalAlignment="Center"
+                ItemsSource="{Binding Source={StaticResource enumTheme}}" 
+                SelectedItem="{Binding Path=EpsilonTheme, Mode=TwoWay}"
+                SelectionChanged="AppearanceSelectionChanged"/>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <TextBlock
+                Margin="4"
+                Width="200"
+                VerticalAlignment="Center"
+                Text="Accent Color: "
+                ToolTip="Choose your accent color. This may be overridden by some themes." />
+            <ComboBox x:Name="AccentComboBox"
+                Width="180" Margin="4" VerticalAlignment="Center"
+                ItemsSource="{Binding Source={StaticResource enumAccent}}"
+                SelectedItem="{Binding Path=AccentColor, Mode=TwoWay, NotifyOnSourceUpdated=True}"
+                SelectionChanged="AppearanceSelectionChanged"/>
+        </StackPanel>
+        
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
             <TextBlock
                 Margin="4,4,10,4"
-                Width="auto"
+                Width="102"
                 VerticalAlignment="Center"
                 Text="Default Tag Cache: "
                 ToolTip="The cache file at this path will always open on Epsilon startup." />
-            <TextBox Validation.ErrorTemplate="{StaticResource validationTemplate}"
-                Style="{StaticResource textBoxInError}" Width="270" Background="#3e3e40" Foreground="#c8c8c8"
+            <TextBox Validation.ErrorTemplate="{StaticResource ComboBoxTemplate}"
+                Style="{StaticResource textBoxInError}" Width="270" Background="{DynamicResource BorderDark}" Foreground="{DynamicResource Foreground}"
                 Text="{Binding DefaultCachePath, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
                 Margin="5" Padding="1,1,2,2"
                 VerticalAlignment="Center"
                 TextWrapping="NoWrap"/>
         </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <CheckBox Name="AlwaysOnTopCheckbox"
+                Margin="4,9,4,5"
+                Content="Always On Top"
+                ToolTip="Keep Epsilon on top of all other windows."
+                IsChecked="{Binding AlwaysOnTop, Mode=TwoWay}"
+                Checked="AlwaysOnTopCheckbox_Checked"
+                Unchecked="AlwaysOnTopCheckbox_Unchecked" />
+        </StackPanel>
+
     </StackPanel>
 </UserControl>

@@ -84,8 +84,8 @@
                         <DataTrigger
                             Binding="{Binding IsHighlighted}"
                             Value="True">
-                            <Setter Property="ListBoxItem.Background" Value="#3D007ACC" />
-                            <Setter Property="ListBoxItem.BorderBrush" Value="#007ACC" />
+                            <Setter Property="ListBoxItem.Background" Value="{DynamicResource MouseOver}" />
+                            <Setter Property="ListBoxItem.BorderBrush" Value="{DynamicResource Accent}" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>

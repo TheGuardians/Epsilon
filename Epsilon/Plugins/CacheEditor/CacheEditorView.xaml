@@ -8,26 +8,23 @@
     xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
     Margin="2">
     <UserControl.Resources>
-
         <xcad:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-        <Style
-            x:Key="DockingManagerStyle"
+        <Style x:Key="DockingManagerStyle"
             BasedOn="{StaticResource {x:Type xcad:DockingManager}}"
             TargetType="{x:Type xcad:DockingManager}">
             <Setter Property="AnchorableHeaderTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Title}" />
+                        <TextBlock Text="{Binding Title}"
+                                   FontSize="14" />
                     </DataTemplate>
                 </Setter.Value>
-
             </Setter>
             <Setter Property="LayoutUpdateStrategy">
                 <Setter.Value>
                     <local:LayoutInitializer />
                 </Setter.Value>
             </Setter>
-
             <Setter Property="LayoutItemContainerStyleSelector">
                 <Setter.Value>
                     <local:PanesStyleSelector>
@@ -62,9 +59,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-
     </UserControl.Resources>
+    
     <Grid>
         <xcad:DockingManager ActiveContentChanged="DockingManager_ActiveContentChanged"
             ActiveContent="{Binding ActiveLayoutItem, Mode=TwoWay}"
@@ -96,7 +92,8 @@
                         Header="Float" />
                     <MenuItem
                         Command="{Binding Path=DockAsDocumentCommand}"
-                        Header="Dock as Tabbed Document" />
+                        Header="Dock as Tabbed Document"
+                        Visibility="{Binding Path=IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
                     <MenuItem
                         Command="{Binding Path=NewHorizontalTabGroupCommand}"
                         Header="New Horizontal Tab Group"
@@ -118,12 +115,8 @@
             </xcad:DockingManager.DocumentContextMenu>
 
             <xcad:LayoutRoot>
-                <xcad:LayoutPanel
-                    x:Name="VerticalPanel"
-                    Orientation="Vertical">
-                    <xcad:LayoutPanel
-                        x:Name="HorizontalPanel"
-                        Orientation="Horizontal">
+                <xcad:LayoutPanel x:Name="VerticalPanel" Orientation="Vertical">
+                    <xcad:LayoutPanel x:Name="HorizontalPanel" Orientation="Horizontal">
                         <xcad:LayoutDocumentPane />
                     </xcad:LayoutPanel>
                 </xcad:LayoutPanel>

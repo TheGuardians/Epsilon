@@ -16,7 +16,7 @@
             </Grid.ColumnDefinitions>
             <TextBlock
                 VerticalAlignment="Center"
-                Foreground="#d0d0d0"
+                Foreground="{DynamicResource Foreground}"
                 Text="WARNING: Tagtool support for scripts is very limited currently. Expect crashes and corruptions to occur." />
             <StackPanel
                 Grid.Column="1"

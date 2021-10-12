@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+//using TagStructEditor;
 
 namespace DefinitionEditor.Options
 {
@@ -26,6 +27,26 @@ namespace DefinitionEditor.Options
         public OptionsPageView()
         {
             InitializeComponent();
+
+            DisplayTypesCheckbox.Click += new RoutedEventHandler(DisplayTypesCheckbox_Click);
+            DisplayOffsetsCheckbox.Click += new RoutedEventHandler(DisplayOffsetsCheckbox_Click);
+            CollapseBlocksCheckbox.Click += new RoutedEventHandler(CollapseBlocksCheckbox_Click);
+
+        }
+
+        private void DisplayTypesCheckbox_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DisplayOffsetsCheckbox_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CollapseBlocksCheckbox_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

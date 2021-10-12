@@ -3,18 +3,25 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:CacheEditor"
-    xmlns:s="https://github.com/canton7/Stylet"
-    xmlns:shared="clr-namespace:EpsilonLib;assembly=EpsilonLib">
+    xmlns:s="https://github.com/canton7/Stylet">
     <TabControl
         ItemsSource="{Binding Items}"
         SelectedItem="{Binding ActiveItem}"
         TabStripPlacement="Bottom">
         <TabControl.ItemTemplate>
             <DataTemplate>
-                <TextBlock
+                <TextBlock x:Name="TabName"
                     Text="{Binding DisplayName}"
                     FontSize="14"
                     Padding="2,0,2,1"/>
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding IsActive}" Value="False">
+                        <Setter TargetName="TabName" Property="Foreground" Value="{DynamicResource Border}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding IsMouseOver}" Value="True">
+                        <Setter TargetName="TabName" Property="Foreground" Value="{DynamicResource ForegroundDark}" />
+                    </DataTrigger>
+                </DataTemplate.Triggers>
             </DataTemplate>
         </TabControl.ItemTemplate>
         <TabControl.ContentTemplate>
@@ -31,9 +38,7 @@
                 </Grid>
 
                 <DataTemplate.Triggers>
-                    <DataTrigger
-                        Binding="{Binding Content}"
-                        Value="{x:Null}">
+                    <DataTrigger Binding="{Binding Content}" Value="{x:Null}">
                         <Setter TargetName="Content" Property="Visibility" Value="Collapsed" />
                         <Setter TargetName="LoadingIndicator" Property="Visibility" Value="Visible" />
                     </DataTrigger>

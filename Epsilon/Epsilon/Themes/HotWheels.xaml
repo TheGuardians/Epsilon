@@ -1,0 +1,51 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:System="clr-namespace:System;assembly=mscorlib">
+
+    <SolidColorBrush x:Key="TitleColor" Color="#FFFF00" />
+    <SolidColorBrush x:Key="Accent" Color="#FF0000" />
+    <SolidColorBrush x:Key="Border" Color="#FFFF00" />
+    <SolidColorBrush x:Key="BorderDark" Color="#0088FF" />
+    <SolidColorBrush x:Key="BorderDarker" Color="#00FFFF" />
+    <SolidColorBrush x:Key="BackgroundLight" Color="#0000FF" />
+    <SolidColorBrush x:Key="Background" Color="#203390" />
+    <SolidColorBrush x:Key="BackgroundDark" Color="#000080" />
+    <SolidColorBrush x:Key="CachedTagBackground" Color="{DynamicResource AccentColor}" Opacity="0.45"/>
+    <SolidColorBrush x:Key="ExpanderClosedBackground" Color="{DynamicResource AccentColor}" Opacity="0.3"/>
+    <SolidColorBrush x:Key="ExpanderClosedBorder" Color="{DynamicResource AccentColor}" Opacity="0.3"/>
+    <SolidColorBrush x:Key="ExpanderOpenBackground" Color="{DynamicResource AccentColor}" Opacity="0.3"/>
+    <SolidColorBrush x:Key="ExpanderOpenBorder" Color="{DynamicResource AccentColor}" Opacity="0.3"/>
+    <SolidColorBrush x:Key="Foreground" Color="#FFFF00" />
+    <SolidColorBrush x:Key="ForegroundMedium" Color="#C0C0C8" />
+    <SolidColorBrush x:Key="ForegroundDark" Color="#DDAA00" />
+    <SolidColorBrush x:Key="Inset" Color="#0055AA" />
+    <SolidColorBrush x:Key="MouseOver" Color="#9966FF" Opacity="0.3"/>
+    <SolidColorBrush x:Key="Scrollbar" Color="#880088" />
+    <SolidColorBrush x:Key="SearchBoxBackground" Color="#000000" Opacity="0.2"/>
+    <SolidColorBrush x:Key="StringBackground" Color="{DynamicResource AccentColor}" Opacity="0.25"/>
+    <SolidColorBrush x:Key="StringBorder" Color="#DDDDFF" Opacity="0.25"/>
+    <SolidColorBrush x:Key="Struct" Color="#000000" Opacity="0.2"/>
+    <SolidColorBrush x:Key="SubMenu" Color="#999900"/>
+    <SolidColorBrush x:Key="TextBoxBackground" Color="#AAAACC" Opacity="0.3"/>
+    <SolidColorBrush x:Key="TextBoxBorder" Color="#AAAACC" Opacity="0.3"/>
+    <SolidColorBrush x:Key="TreeViewBackground" Color="#000080"/>
+    
+    <SolidColorBrush x:Key="Disabled" Color="#AAAACC" Opacity="0.2"/>
+    <SolidColorBrush x:Key="ForegroundDisabled" Color="#AAAACC" Opacity="0.2"/>
+
+    <Color x:Key="StatusUpdate" A="255" R="100" G="255" B="135" />
+    
+    <Color x:Key="Shadow" A="#71" R="#00" G="#00" B="#00" />
+    <SolidColorBrush x:Key="ShadowBrush" Color="#000000" Opacity="0.27"/>
+
+    <LinearGradientBrush x:Key="Relief" Opacity="0.34" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="#DDDDFF" Offset="0"/>
+        <GradientStop Color="#AAAACC" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="InsetGradient" Opacity="0.7" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="#B0B0D0" Offset="0"/>
+        <GradientStop Color="#CCCCF0" Offset="1"/>
+    </LinearGradientBrush>
+    
+</ResourceDictionary>

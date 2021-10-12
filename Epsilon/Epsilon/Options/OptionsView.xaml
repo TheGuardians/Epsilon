@@ -4,10 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Epsilon.Pages"
     xmlns:s="https://github.com/canton7/Stylet"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
     Width="640"
     Height="480"
-    Background="#2d2d30"
-    TextElement.Foreground="#f1f1f1"
+    BorderBrush="{DynamicResource Accent}"
+    Background="{DynamicResource Background}"
+    TextElement.Foreground="{DynamicResource Foreground}"
     WindowStyle="SingleBorderWindow">
 
     <Grid Margin="4">
@@ -30,7 +32,7 @@
         <Border
             Grid.Column="2"
             Margin="4"
-            Background="#2d2d30">
+            Background="Transparent">
             <ContentControl s:View.Model="{Binding CategoryTree.SelectedNode.Page}" />
         </Border>
 
@@ -39,7 +41,8 @@
             Grid.ColumnSpan="3"
             Margin="0,4"
             Padding="0,8,0,0"
-            BorderBrush="#3F3F46"
+            Background="Transparent"
+            BorderBrush="{DynamicResource Accent}"
             BorderThickness="0,1,0,0">
             <StackPanel
                 Margin="4"

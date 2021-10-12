@@ -35,10 +35,7 @@ namespace CacheEditor
 
         public int Counter => _counter;
 
-        public CacheEditorViewModel(
-            IShell shell,
-            ICacheEditingService cacheEditingService,
-            ICacheFile cacheFile)
+        public CacheEditorViewModel(IShell shell, ICacheEditingService cacheEditingService, ICacheFile cacheFile)
         {
             _counter++;
             _shell = shell;
@@ -138,7 +135,10 @@ namespace CacheEditor
 
                 var tool = toolFactory.CreateTool(this);
                 Tools.Add(tool);
-                if (tool.IsVisible)
+
+                if (tool.Name == "CacheEditor.TagExplorer")
+                    ShowTool(tool, true);
+                else if (tool.IsVisible)
                     ShowTool(tool, false);
             }
         }

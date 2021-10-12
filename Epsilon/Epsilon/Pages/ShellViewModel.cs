@@ -18,7 +18,7 @@ namespace Epsilon.Pages
     {
         private readonly IWindowManager _windowManager;
         private readonly IMenuFactory _menuFactory;
-        private readonly Lazy<IEditorService> _editorService;
+        public readonly Lazy<IEditorService> _editorService;
 
         [ImportingConstructor]
         public ShellViewModel(
@@ -40,6 +40,11 @@ namespace Epsilon.Pages
         }
 
         public string Title { get;  }
+
+        public bool AlwaysOnTop {
+            get;
+            set;
+        }
 
         public IObservableCollection<MenuItemViewModel> MainMenu { get; }
 
@@ -106,6 +111,11 @@ namespace Epsilon.Pages
             {
                 Logger.Error($"Failed to open file from command line '{args[1]}'\n{ex}");
             }
+        }
+
+        private void AlwaysOnTopClicked(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }
