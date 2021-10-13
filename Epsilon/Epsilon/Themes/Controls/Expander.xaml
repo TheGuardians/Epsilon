@@ -331,8 +331,6 @@
                                 ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
                                 DockPanel.Dock="Top"
                                 FocusVisualStyle="{StaticResource ExpanderHeaderFocusVisual}"
-                                FontFamily="Consolas"
-                                FontSize="13"
                                 FontStretch="{TemplateBinding FontStretch}"
                                 FontStyle="{TemplateBinding FontStyle}"
                                 FontWeight="Regular"

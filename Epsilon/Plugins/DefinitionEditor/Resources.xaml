@@ -2088,8 +2088,8 @@
                     <ComboBox x:Name="PART_Combo"
                         Style="{DynamicResource BlockHeaderDropdownComboboxStyle}"
                         Width="Auto"
-                        MinWidth="60"
-                        Margin="2,0"
+                        MinWidth="58"
+                        Margin="2,-2,1,0"
                         Padding="6,2,0,2"
                         SelectedValue="{Binding Path=CurrentIndex, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                         SelectedValuePath=""
@@ -2103,7 +2103,7 @@
                             <DataTemplate>
                                 <TextBlock>
                                     <Run Text="{Binding Mode=OneWay}"/>
-                                    <Run Text="("/><Run Text="{Binding Path=Tag, ElementName=PART_Combo, Mode=OneWay}"/><Run Text=")"/>
+                                    <Run Text=" ("/><Run Text="{Binding Path=Tag, ElementName=PART_Combo, Mode=OneWay}"/><Run Text=")"/>
                                 </TextBlock>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
