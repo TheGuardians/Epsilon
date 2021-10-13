@@ -130,7 +130,7 @@ namespace WpfApp20
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Path to default cache is invalid: \n\"{path}\"", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Path to default cache is invalid: \n\"{path}\"", "File Not Found", MessageBoxButton.OK, MessageBoxImage.Error);
                 Logger.Error(ex.ToString());
             }
         }

@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TagTool.Cache;
 
 namespace ModPackagePlugin
@@ -35,7 +36,7 @@ namespace ModPackagePlugin
 
         public async Task OpenFileAsync(IShell shell, string fileName)
         {
-            var file = new FileInfo(fileName);
+            FileInfo file = new FileInfo(fileName);
             FileInfo baseCacheFile = new FileInfo(Path.Combine(file.Directory.FullName, "..\\..\\maps\\tags.dat"));
             if (!baseCacheFile.Exists)
             {
@@ -43,8 +44,13 @@ namespace ModPackagePlugin
                     return;
             }
 
-            var cache = await Task.Run(() => new GameCacheModPackage((GameCacheHaloOnlineBase)GameCache.Open(baseCacheFile), new FileInfo(fileName)));
-            shell.ActiveDocument = (IScreen)_editingService.CreateEditor(new ModPackageCacheFile(file, cache));
+            if (file.Exists)
+            {
+                var cache = await Task.Run(() => new GameCacheModPackage((GameCacheHaloOnlineBase)GameCache.Open(baseCacheFile), new FileInfo(fileName)));
+                shell.ActiveDocument = (IScreen)_editingService.CreateEditor(new ModPackageCacheFile(file, cache));
+            }
+            else
+                MessageBox.Show($"Mod Package no longer exists at this location: \n\"{fileName}\"", "File Not Found", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

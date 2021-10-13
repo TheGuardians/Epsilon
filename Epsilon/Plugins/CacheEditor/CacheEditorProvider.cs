@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
 using System.Threading.Tasks;
+using System.Windows;
 using TagTool.Cache;
 
 namespace CacheEditor
@@ -28,9 +29,15 @@ namespace CacheEditor
 
         async Task IEditorProvider.OpenFileAsync(IShell shell, string fileName)
         {
-            var file = new FileInfo(fileName);
-            var cache = await Task.Run(() => GameCache.Open(file));
-            shell.ActiveDocument = new CacheEditorViewModel(shell, _editingService, CreateCacheFileDocument(file, cache));
+            FileInfo file = new FileInfo(fileName);
+
+            if (file.Exists)
+            {
+                var cache = await Task.Run(() => GameCache.Open(file));
+                shell.ActiveDocument = new CacheEditorViewModel(shell, _editingService, CreateCacheFileDocument(file, cache));
+            }
+            else
+                MessageBox.Show($"Cache file no longer exists at this location: \n\"{fileName}\"", "File Not Found", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         ICacheFile CreateCacheFileDocument(FileInfo file, GameCache cache)
