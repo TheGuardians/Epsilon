@@ -102,7 +102,7 @@
         <Setter Property="Background" Value="{DynamicResource Background}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="WindowChrome.WindowChrome">
+        <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
                 <WindowChrome
                     CaptionHeight="32"

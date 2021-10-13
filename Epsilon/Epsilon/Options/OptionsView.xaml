@@ -7,10 +7,12 @@
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
     Width="640"
     Height="480"
+    BorderThickness="2"
     BorderBrush="{DynamicResource Accent}"
     Background="{DynamicResource Background}"
     TextElement.Foreground="{DynamicResource Foreground}"
-    WindowStyle="SingleBorderWindow">
+    WindowStyle="None"
+    AllowsTransparency="True">
 
     <Grid Margin="4">
         <Grid.ColumnDefinitions>
