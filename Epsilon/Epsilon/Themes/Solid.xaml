@@ -13,8 +13,8 @@
     <SolidColorBrush x:Key="CachedTagBackground" Color="{DynamicResource AccentColor}" Opacity="0.4"/>
     <SolidColorBrush x:Key="ExpanderClosedBackground" Color="{DynamicResource AccentColor}" Opacity="0.7"/>
     <SolidColorBrush x:Key="ExpanderClosedBorder" Color="{DynamicResource AccentColor}" Opacity="0.82"/>
-    <SolidColorBrush x:Key="ExpanderOpenBackground" Color="{DynamicResource AccentColor}" Opacity="0.7"/>
-    <SolidColorBrush x:Key="ExpanderOpenBorder" Color="{DynamicResource AccentColor}" Opacity="0.7"/>
+    <SolidColorBrush x:Key="ExpanderOpenBackground" Color="{DynamicResource AccentColor}"/>
+    <SolidColorBrush x:Key="ExpanderOpenBorder" Color="{DynamicResource AccentColor}"/>
     <SolidColorBrush x:Key="Foreground" Color="#F1F1F3"/>
     <SolidColorBrush x:Key="ForegroundMedium" Color="#D1D1D6"/>
     <SolidColorBrush x:Key="ForegroundDark" Color="#A0A0A3"/>

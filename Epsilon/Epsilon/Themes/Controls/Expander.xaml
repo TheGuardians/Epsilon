@@ -381,6 +381,14 @@
                             <Setter TargetName="ExpanderBorder" Property="BorderThickness" Value="1" />
                             <Setter TargetName="HeaderSite" Property="FontWeight" Value="Regular" />
                         </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsExpanded" Value="false"/>
+                                <Condition Property="IsMouseOver" Value="true"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ExpanderBorder" Property="BorderBrush" Value="{DynamicResource MouseOver}" />
+                            <Setter TargetName="ExpanderBorder" Property="Background" Value="{DynamicResource Accent}" />
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
