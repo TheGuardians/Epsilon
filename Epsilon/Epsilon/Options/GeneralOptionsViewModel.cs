@@ -15,7 +15,10 @@ namespace Epsilon.Options
         Frosted,
         Transparent,
         ClownWorld,
-        HotWheels
+        HotWheels,
+        Dark1,
+        Dark2,
+        Dark3
     }
 
     enum Accent
