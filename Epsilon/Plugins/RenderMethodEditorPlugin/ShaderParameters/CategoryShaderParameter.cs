@@ -21,7 +21,7 @@ namespace RenderMethodEditorPlugin.ShaderParameters
             } 
         }
 
-        public CategoryShaderParameter(RenderMethod.ShaderProperty property, string name, string desc, int templateIndex) : base(property, name, desc, templateIndex)
+        public CategoryShaderParameter(RenderMethod.RenderMethodPostprocessBlock property, string name, string desc, int templateIndex) : base(property, name, desc, templateIndex)
         {
         }
     }

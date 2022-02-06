@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using TagStructEditor.Helpers;
+using TagTool.Cache;
+using TagTool.Tags;
 
 namespace TagStructEditor.Fields
 {
@@ -11,18 +13,16 @@ namespace TagStructEditor.Fields
         public EnumMember Value { get; set; }
         public ObservableCollection<EnumMember> Values { get; }
 
-        public EnumField(ValueFieldInfo info) : base(info)
+        public EnumField(ValueFieldInfo info, TagEnumInfo enumInfo) : base(info)
         {
-            Values = new ObservableCollection<EnumMember>(GenerateMemberList(info.FieldType));
+            Values = new ObservableCollection<EnumMember>(GenerateMemberList(enumInfo));
         }
 
-        public static IEnumerable<EnumMember> GenerateMemberList(Type enumType)
+        public static IEnumerable<EnumMember> GenerateMemberList(TagEnumInfo info)
         {
-            var values = Enum.GetValues(enumType);
-            var names = Enum.GetNames(enumType);
-
-            for (int i = 0; i < values.Length; i++)
-                yield return new EnumMember(Utils.DemangleName(names[i]), (Enum)values.GetValue(i));
+            var members = TagEnum.GetMemberEnumerable(info).Members;
+            for (int i = 0; i < members.Count; i++)
+                yield return new EnumMember(Utils.DemangleName(members[i].Name), (Enum)members[i].Value);
         }
 
         public override void Accept(IFieldVisitor visitor)

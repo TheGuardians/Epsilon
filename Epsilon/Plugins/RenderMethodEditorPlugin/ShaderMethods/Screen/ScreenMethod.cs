@@ -100,7 +100,7 @@ namespace RenderMethodEditorPlugin.ShaderMethods.Screen
             return "No description available.";
         }
 
-        public override IShaderGenerator BuildShaderGenerator(List<RenderMethodDefinitionOptionIndex> shaderOptions)
+        public override IShaderGenerator BuildShaderGenerator(List<RenderMethodOptionIndex> shaderOptions)
         {
             var warp = (Warp)shaderOptions[0].OptionIndex;
             var _base = (Base)shaderOptions[1].OptionIndex;

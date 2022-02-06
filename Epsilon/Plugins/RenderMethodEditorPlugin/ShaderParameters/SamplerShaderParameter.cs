@@ -18,7 +18,7 @@ namespace RenderMethodEditorPlugin.ShaderParameters
             set => temp = value;
         }
 
-        public SamplerShaderParameter(RenderMethod.ShaderProperty property, string name, string desc, int templateIndex) : base(property, name, desc, templateIndex)
+        public SamplerShaderParameter(RenderMethod.RenderMethodPostprocessBlock property, string name, string desc, int templateIndex) : base(property, name, desc, templateIndex)
         {
         }
     }

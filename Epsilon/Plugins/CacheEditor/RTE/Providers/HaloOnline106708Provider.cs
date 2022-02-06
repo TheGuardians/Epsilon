@@ -46,7 +46,7 @@ namespace CacheEditor.RTE.Providers
             {
                 int tagindex = hoInstance.Index;
                 bool isModPackage = false;
-                bool isModPackageTag = false;
+                //bool isModPackageTag = false;
                 GameCacheModPackage modpak = null;
                 if (cache is GameCacheModPackage)
                 {
@@ -64,7 +64,7 @@ namespace CacheEditor.RTE.Providers
                             if (modpak.TagCache.TryGetCachedTag(i, out var taginstance) && !((CachedTagHaloOnline)taginstance).IsEmpty())
                                 paktagcount++;
                         tagindex = 0xFFFE - paktagcount;
-                        isModPackageTag = true;
+                        //isModPackageTag = true;
                     }
                 }
                 #endif

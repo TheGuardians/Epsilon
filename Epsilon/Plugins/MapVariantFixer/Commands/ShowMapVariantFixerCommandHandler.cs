@@ -31,7 +31,7 @@ namespace MapVariantFixer
         public void UpdateCommand(Command command)
         {
             command.IsVisible = _cacheEditingService.ActiveCacheEditor != null && 
-                _cacheEditingService.ActiveCacheEditor.CacheFile.Cache.Version == TagTool.Cache.CacheVersion.HaloOnline106708;
+                _cacheEditingService.ActiveCacheEditor.CacheFile.Cache.Version == TagTool.Cache.CacheVersion.HaloOnlineED;
         }
     }
 }

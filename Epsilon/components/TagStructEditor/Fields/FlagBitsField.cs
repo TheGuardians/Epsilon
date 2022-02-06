@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using TagStructEditor.Common;
 using TagStructEditor.Helpers;
 using TagTool.Cache;
+using TagTool.Common;
 using TagTool.Tags;
 
 namespace TagStructEditor.Fields
 {
-    public class FlagsField : ValueField
+    public class FlagBitsField : ValueField
     {
-        public FlagsField(ValueFieldInfo info, CacheVersion version, CachePlatform platform) : base(info)
+        public FlagBitsField(ValueFieldInfo info, CacheVersion version, CachePlatform platform) : base(info)
         {
-            var enumInfo = TagEnum.GetInfo(info.FieldType, version, platform);
+            var enumType = info.FieldType.GenericTypeArguments[0];
+            var enumInfo = TagEnum.GetInfo(enumType, version, platform);
             EnumType = enumInfo.Type;
-
             Flags = new ObservableCollection<Flag>(GenerateFlagList(enumInfo));
         }
 
@@ -39,66 +39,36 @@ namespace TagStructEditor.Fields
 
         public override void Accept(IFieldVisitor visitor)
         {
-            visitor.Visit(this);
+            //visitor.Visit(this);
         }
 
         protected override void OnPopulate(object value)
         {
-            var valueEnum = (Enum)value;
+            var valueEnum = (IFlagBits)value;
 
             foreach (var member in Flags)
-                member.IsChecked = valueEnum.HasFlag(member.Value);
+                member.IsChecked = valueEnum.TestBit((Enum)member.Value);
         }
 
         private void OnFlagToggled()
         {
-            if(!IsPopulating)
+            if (!IsPopulating)
                 SetActualValue(ComputeValue());
         }
 
         private object ComputeValue()
         {
-            switch (Type.GetTypeCode(EnumType))
-            {
-                case TypeCode.SByte:
-                case TypeCode.Int16:
-                case TypeCode.Int32:
-                case TypeCode.Int64:
-                    return Enum.ToObject(EnumType, ComputeSignedValue());
-                case TypeCode.Byte:
-                case TypeCode.UInt16:
-                case TypeCode.UInt32:
-                case TypeCode.UInt64:
-                    return Enum.ToObject(EnumType, ComputeUnsignedValue());
-                default:
-                    throw new NotSupportedException();
-            }
-        }
-
-        private object ComputeSignedValue()
-        {
-            long value = 0;
+            var flagBits = (IFlagBits)Activator.CreateInstance(FieldInfo.FieldType.GetGenericTypeDefinition().MakeGenericType(EnumType));
             foreach (var flag in Flags)
             {
                 if (flag.IsChecked)
-                    value |= Convert.ToInt64(flag.Value);
+                    flagBits.SetBit(flag.Value, true);
             }
-            return value;
-        }
-
-        private ulong ComputeUnsignedValue()
-        {
-            ulong value = 0;
-            foreach (var flag in Flags)
-            {
-                if (flag.IsChecked)
-                    value |= Convert.ToUInt64(flag.Value);
-            }
-            return value;
+            return flagBits;
         }
 
         public class Flag : PropertyChangedNotifier
-        { 
+        {
             public Flag(string name, Enum value, Action checkedCallback)
             {
                 Name = name;

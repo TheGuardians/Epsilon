@@ -27,7 +27,7 @@ namespace RenderMethodEditorPlugin.ShaderParameters
             set => Property.RealConstants[TemplateIndex].Arg2 = value;
         }
 
-        public Color3ShaderParameter(RenderMethod.ShaderProperty property, string name, string desc, int templateIndex) : base(property, name, desc, templateIndex)
+        public Color3ShaderParameter(RenderMethod.RenderMethodPostprocessBlock property, string name, string desc, int templateIndex) : base(property, name, desc, templateIndex)
         {
         }
     }

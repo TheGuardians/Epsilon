@@ -27,7 +27,7 @@ namespace RenderMethodEditorPlugin
         private RenderMethod _renderMethod;
         private GameCache _cache;
         private RenderMethodTemplate _renderMethodTemplate;
-        private RenderMethod.ShaderProperty _shaderProperty;
+        private RenderMethod.RenderMethodPostprocessBlock _shaderProperty;
 
         public ObservableCollection<BooleanConstant> BooleanConstants { get; private set;  } = new ObservableCollection<BooleanConstant>();
         public ObservableCollection<Method> ShaderMethods { get; private set; } = new ObservableCollection<Method>();
@@ -83,12 +83,12 @@ namespace RenderMethodEditorPlugin
                     return;
             }
 
-            generator = methodParser.BuildShaderGenerator(_renderMethod.RenderMethodDefinitionOptionIndices);
+            generator = methodParser.BuildShaderGenerator(_renderMethod.Options);
 
             ShaderMethods = new ObservableCollection<Method>();
-            for (int i = 0; i < _renderMethod.RenderMethodDefinitionOptionIndices.Count; i++)
+            for (int i = 0; i < _renderMethod.Options.Count; i++)
             {
-                var optionIndex = _renderMethod.RenderMethodDefinitionOptionIndices[i].OptionIndex;
+                var optionIndex = _renderMethod.Options[i].OptionIndex;
 
                 var methodInfo = methodParser.ParseMethod(i, optionIndex, generator);
                 if (methodInfo != null)
@@ -96,7 +96,7 @@ namespace RenderMethodEditorPlugin
             }
 
             bool useRotation = false;
-            if (generator is HaloShaderGenerator.Shader.ShaderGenerator && _renderMethod.RenderMethodDefinitionOptionIndices[9].OptionIndex == 3)
+            if (generator is HaloShaderGenerator.Shader.ShaderGenerator && _renderMethod.Options[9].OptionIndex == 3)
                 useRotation = true;
             var parameters = generator.GetPixelShaderParameters().Parameters;
             parameters.AddRange(generator.GetVertexShaderParameters().Parameters);
@@ -141,11 +141,11 @@ namespace RenderMethodEditorPlugin
 
     class ShaderConstant
     {
-        public RenderMethod.ShaderProperty Property;
+        public RenderMethod.RenderMethodPostprocessBlock Property;
         public string Name { get; set; }
         public string Description { get; set; }
         public int TemplateIndex;
-        public ShaderConstant(RenderMethod.ShaderProperty property, string name, string desc, int templateIndex)
+        public ShaderConstant(RenderMethod.RenderMethodPostprocessBlock property, string name, string desc, int templateIndex)
         {
             Name = ShaderStringConverter.ToPrettyFormat(name);
             TemplateIndex = templateIndex;
@@ -168,7 +168,7 @@ namespace RenderMethodEditorPlugin
             }
         }
 
-        public BooleanConstant(RenderMethod.ShaderProperty property, string name, string desc, int templateIndex) : base(property, name, desc, templateIndex)
+        public BooleanConstant(RenderMethod.RenderMethodPostprocessBlock property, string name, string desc, int templateIndex) : base(property, name, desc, templateIndex)
         {
         }
     }

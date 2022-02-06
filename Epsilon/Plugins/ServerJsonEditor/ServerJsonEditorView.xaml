@@ -1,0 +1,278 @@
+﻿<UserControl
+    x:Class="ServerJsonEditor.ServerJsonEditorView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:ServerJsonEditor" xmlns:vm1="clr-namespace:System.Runtime.Remoting;assembly=mscorlib"
+    Foreground="#f1f1f1"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
+    <Grid Width="auto" x:Name="mainGrid" Loaded="mainGrid_Loaded">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="1" />
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="44" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Margin="15,15,15,10"
+                   VerticalAlignment="Center" HorizontalAlignment="Left"
+                   FontSize="14" Text="Choose a mod to edit its gametype entries." />
+
+        <!-- #region ====================== Mod List Region ====================== -->
+
+        <ListBox x:Name="ModsListBox" Grid.Row="1" Grid.Column="0" Padding="5"
+                 Height="auto" Margin="5,0,0,0" Focusable="True"
+                 ItemsSource="{Binding CurrentModList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 SelectionChanged="ModsListBox_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding FileName}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Remove" Click="ClickedRemoveMod"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+            
+        </ListBox>
+
+        <ComboBox x:Name="ModsCombobox" Grid.Column="0" Grid.Row="2" Margin="5,0,0,0" Width="265"
+                  HorizontalAlignment="left" SelectionChanged="ModsComboBox_SelectionChanged" VerticalContentAlignment="Center"
+                  ItemsSource="{Binding LocalModList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  IsEnabled="{Binding HasItems, RelativeSource={RelativeSource Self}, FallbackValue=False}">
+        </ComboBox>
+
+        <Button x:Name="AddModButton" Grid.Column="0" Grid.Row="2" Click="ClickedAddMod" FontFamily="Consolas"
+                VerticalAlignment="Stretch" HorizontalAlignment="Right" Margin="0,0,0,0" Width="30"
+                Content="+" ToolTip="Add Mod" FontSize="18" VerticalContentAlignment="Center" IsEnabled="True">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                    <Setter Property="Button.Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=ModsComboBox, Path=SelectedIndex}" Value="-1"/>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <!-- #endregion -->
+
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" Background="Transparent" />
+
+        <!-- #region ====================== Gametype List Region ====================== -->
+
+        <ListBox x:Name="TypesListBox" Grid.Row="1" Grid.Column="2"
+                 Height="auto" Margin="0,0,0,0" Focusable="True"
+                 SelectionChanged="TypesListBox_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding TypeName}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Remove" Click="ClickedRemoveGametype"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+        </ListBox>
+
+        <ComboBox x:Name="TypesCombobox" Grid.Column="2" Grid.Row="2" Margin="0" Width="270"
+                  HorizontalAlignment="Left" SelectionChanged="TypeComboBox_SelectionChanged" VerticalContentAlignment="Center"
+                  ItemsSource="{Binding LocalGametypeList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                  IsEnabled="{Binding HasItems, RelativeSource={RelativeSource Self}, FallbackValue=False}" />
+
+        <Button x:Name="AddTypeButton" Grid.Column="2" Grid.Row="2" Click="ClickedAddGametype"
+                VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="30" FontFamily="Consolas"
+                Content="+" ToolTip="Add Gametype" FontSize="18" VerticalContentAlignment="Center">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                    <Setter Property="Button.Visibility" Value="Visible"></Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=ModsListBox, Path=SelectedIndex}" Value="-1">
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+        <StackPanel Grid.Row="3" Grid.Column ="0" Margin="20,10,10,12"
+                    VerticalAlignment="Bottom" Orientation="Horizontal">
+            <Button Content="Save Voting JSONs" Width="130" Margin="14,0" Padding="10,4"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Left" IsDefault="True"
+                    Click="SaveButtonClicked"/>
+            <Button Content="Reload" Width="70" Margin="4,0" Padding="10,4" Click="ReloadAllClicked"
+                    VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Margin="0,10"
+                    VerticalAlignment="Bottom" Orientation="Horizontal">
+            <TextBlock Margin="0,6" Foreground="#808488" Text="{Binding CacheFilePath, StringFormat={}Base Cache: {0}}" />
+        </StackPanel>
+        <!-- #endregion -->
+
+        <!-- #region ====================== Gametype Properties Region ====================== -->
+
+        <Border BorderBrush="#3F3F46" BorderThickness="1" Width="400" Grid.Column="3" Grid.Row="1" VerticalAlignment="Stretch"
+                Background="#222222" HorizontalAlignment="Left" Padding="15,5,10,0">
+            <ItemsControl>
+                <Grid Name="TypeDataGrid" VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="34" />
+                        <RowDefinition Height="34" />
+                        <RowDefinition Height="34" />
+                        <RowDefinition Height="34" />
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="30" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel x:Name="TypeStack" Grid.Row="0" Margin="0" VerticalAlignment="Bottom" Orientation="Horizontal">
+                        <TextBlock Width="150" Text="Gametype Name" Padding="0,5" TextAlignment="Left"/>
+                        <TextBox x:Name="TypeNameTextBox" Text="{Binding TypeName}" Padding="1,0"
+                                 ToolTip="This is the filename of this gametype. It is immutable from here."
+                                 Width="215" Height="25" VerticalContentAlignment="Center" Focusable="False"/>
+                    </StackPanel>
+
+                    <StackPanel x:Name="TypeDisplayStack" Grid.Row="1" Margin="0" VerticalAlignment="Bottom" Orientation="Horizontal">
+                        <TextBlock Width="150" Text="Display Name" Padding="0,5" TextAlignment="Left"/>
+                        <TextBox x:Name="TypeDisplayNameTextBox" Text="{Binding TypeDisplayName}" Padding="1,0"
+                                 ToolTip="This is an optional replacement name for the voting menu."
+                                 Width="215" Height="25" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel x:Name="ModDisplayStack" Grid.Row="2" Margin="0" VerticalAlignment="Bottom" Orientation="Horizontal">
+                        <TextBlock Width="150" Text="Mod Display Name" Padding="0,5" TextAlignment="Left"/>
+                        <TextBox x:Name="ModPackageDisplayNameTextBox" Text="{Binding ModPackage.DisplayName}" Padding="1,0"
+                                 Width="215" Height="25" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                    
+                    <StackPanel x:Name="DupeAmountStack" Grid.Row="3" Margin="0" VerticalAlignment="Bottom" Orientation="Horizontal">
+                        <TextBlock Width="150" Text="Duplicate Amount" Padding="0,5" TextAlignment="Left"/>
+                        <TextBox x:Name="DuplicateAmountTextBox" Text="" HorizontalContentAlignment="Center"
+                                 Width="50" Height="25" VerticalContentAlignment="Center"/>
+                        <Slider x:Name="DupeSlider" Maximum="15" Width="150" Margin="10,0,0,0" VerticalAlignment="Center"
+                                TickPlacement="BottomRight" IsSnapToTickEnabled="True"
+                                Value="{Binding DuplicateAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                ValueChanged="DupeSlider_ValueChanged"/>
+                    </StackPanel>
+
+                    <StackPanel x:Name="CommandStack" Grid.Row="4" Height="auto" Margin="0" VerticalAlignment="Top" Orientation="Horizontal">
+                        <TextBlock Width="150" Text="Commands" Padding="0,16,0,0" TextAlignment="Left"/>
+                        <ListBox x:Name="CommandListBox" Height="90" Width="215" Margin="0,10,0,0"
+                                 ItemsSource="{Binding Commands, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 SnapsToDevicePixels="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Focusable" Value="False" />
+                                    <Setter Property="Padding" Value="0" />
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox Content="{Binding Alias, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                              IsChecked="{Binding Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                    
+                    <StackPanel x:Name="CharOverStack" Grid.Row="5" Margin="0,4,0,0" VerticalAlignment="Bottom" Orientation="Horizontal">
+                        <TextBlock Width="150" Text="Character Overrides" Padding="0,5" TextAlignment="Left"/>
+                        <ListBox x:Name="CharacterListBox" MinHeight="0" Width="215"
+                                 ItemsSource="{Binding CharacterOverrides, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 ScrollViewer.VerticalScrollBarVisibility="Auto" SnapsToDevicePixels="True">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Padding" Value="0" />
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBox Grid.Column="0" Text="{Binding Team, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+                                        <TextBlock Grid.Column="1" Text="=" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        <TextBox Grid.Column="2" Text="{Binding Character, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 VerticalContentAlignment="Center" HorizontalAlignment="Stretch"
+                                                 VerticalAlignment="Center"  HorizontalContentAlignment="Stretch"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <ListBox.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Add" Click="ClickedAddCharOverride"/>
+                                    <MenuItem Header="Remove" Click="ClickedRemoveCharOverride"/>
+                                </ContextMenu>
+                            </ListBox.ContextMenu>
+                        </ListBox>
+                    </StackPanel>
+                    
+                    <StackPanel x:Name="SpecificMapStack" Grid.Row="6" Margin="0" VerticalAlignment="Bottom" Orientation="Horizontal">
+                        <TextBlock Width="150" Text="Specific Maps" Padding="0,10" TextAlignment="Left"/>
+                        <ListBox x:Name="MapsListBox" MinHeight="130" Margin="0,5,0,0" VerticalAlignment="Stretch" Width="215"
+                                 ItemsSource="{Binding SpecificMaps, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 ScrollViewer.VerticalScrollBarVisibility="Auto" SnapsToDevicePixels="True">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Background="Transparent">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBox Grid.Column="0" Text="{Binding DisplayName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch"/>
+                                        <TextBlock Grid.Column="1" Text=" | " FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                                        <TextBox Grid.Column="2" Text="{Binding MapFileName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <ListBox.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Remove" Click="ClickedRemoveMap"/>
+                                </ContextMenu>
+                            </ListBox.ContextMenu>
+                        </ListBox>
+                    </StackPanel>
+
+                    <StackPanel x:Name="AddMapStack" Grid.Row="7" Margin="0"
+                                VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
+                        <ComboBox x:Name="MapsComboBox" Grid.Column="2" Grid.Row="2" Margin="0" Width="187"
+                                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                        <Button x:Name="AddMapVarButton" Grid.Column="2" Grid.Row="2" Click="ClickedAddMap" Height="auto"
+                                VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="28" Margin="0,0,8,0"
+                                Content="+" ToolTip="Click to add the selected map." FontSize="18" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                    
+                </Grid>
+            </ItemsControl>
+
+        </Border>
+        <!-- #endregion -->
+        
+    </Grid>
+</UserControl>

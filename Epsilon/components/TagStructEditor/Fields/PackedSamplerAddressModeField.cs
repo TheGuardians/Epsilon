@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using TagTool.Cache;
+using TagTool.Tags;
 using static TagStructEditor.Fields.EnumField;
-using static TagTool.Tags.Definitions.RenderMethod.ShaderProperty.TextureConstant;
+using static TagTool.Tags.Definitions.RenderMethod.RenderMethodPostprocessBlock.TextureConstant;
 
 namespace TagStructEditor.Fields
 {
@@ -13,9 +15,10 @@ namespace TagStructEditor.Fields
         public EnumMember ValueV { get; set; }
         public ObservableCollection<EnumMember> Values { get; }
 
-        public PackedSamplerAddressModeField(ValueFieldInfo info) : base(info)
+        public PackedSamplerAddressModeField(ValueFieldInfo info, CacheVersion version, CachePlatform platform) : base(info)
         {
-            Values = new ObservableCollection<EnumMember>(GenerateMemberList(typeof(SamplerAddressModeEnum)));
+            var enumInfo = TagEnum.GetInfo(typeof(SamplerAddressModeEnum), version, platform);
+            Values = new ObservableCollection<EnumMember>(GenerateMemberList(enumInfo));
         }
 
         public override void Accept(IFieldVisitor visitor)

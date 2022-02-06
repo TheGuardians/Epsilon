@@ -12,7 +12,7 @@ namespace RenderMethodEditorPlugin.ShaderParameters
 {
     static class ShaderParameterFactory
     {
-        public static ObservableCollection<GenericShaderParameter> BuildShaderParameters(GameCache cache, List<ShaderParameter> parameters, RenderMethod.ShaderProperty property, RenderMethodTemplate template, bool useRotation=false)
+        public static ObservableCollection<GenericShaderParameter> BuildShaderParameters(GameCache cache, List<ShaderParameter> parameters, RenderMethod.RenderMethodPostprocessBlock property, RenderMethodTemplate template, bool useRotation=false)
         {
             var result = new ObservableCollection<GenericShaderParameter>();
             foreach(var parameter in parameters)

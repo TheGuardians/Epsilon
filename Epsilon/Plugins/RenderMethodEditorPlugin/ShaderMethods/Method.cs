@@ -45,6 +45,6 @@ namespace RenderMethodEditorPlugin.ShaderMethods
         public abstract string GetMethodName(int methodIndex);
         public abstract string GetOptionName(int methodIndex, int optionIndex);
         public abstract string GetOptionDescription(int methodIndex, int optionIndex);
-        public abstract IShaderGenerator BuildShaderGenerator(List<RenderMethodDefinitionOptionIndex> shaderOptions);
+        public abstract IShaderGenerator BuildShaderGenerator(List<RenderMethodOptionIndex> shaderOptions);
     }
 }

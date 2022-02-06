@@ -33,7 +33,7 @@ namespace RenderMethodEditorPlugin.ShaderParameters
             set => Property.RealConstants[TemplateIndex].Arg3 = value;
         }
 
-        public TransformRotationShaderParameter(RenderMethod.ShaderProperty property, string name, string desc, int templateIndex) : base(property, name + " transform", desc, templateIndex)
+        public TransformRotationShaderParameter(RenderMethod.RenderMethodPostprocessBlock property, string name, string desc, int templateIndex) : base(property, name + " transform", desc, templateIndex)
         {
         }
     }

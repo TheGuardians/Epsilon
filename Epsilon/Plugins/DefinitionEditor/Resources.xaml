@@ -1490,6 +1490,40 @@
         </StackPanel>
     </DataTemplate>
 
+    <!--  FlagBits  -->
+    <DataTemplate DataType="{x:Type fields:FlagBitsField}">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock
+                VerticalAlignment="Top"
+                Style="{StaticResource FieldLabelStyle}"
+                Text="{Binding Name, Mode=OneTime}" />
+            <ListBox
+                Width="300"
+                MaxHeight="150"
+                ItemsSource="{Binding Flags, Mode=OneTime}"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                SnapsToDevicePixels="True">
+                <ListBox.ItemContainerStyle>
+                    <Style
+                        BasedOn="{StaticResource {x:Type ListBoxItem}}"
+                        TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Focusable" Value="False" />
+                        <Setter Property="Padding" Value="0" />
+
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox
+                            HorizontalAlignment="Stretch"
+                            Content="{Binding Name, Mode=OneTime}"
+                            IsChecked="{Binding IsChecked}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </DataTemplate>
+
     <!--  CachedTag  -->
     <DataTemplate DataType="{x:Type fields:CachedTagField}">
         <StackPanel x:Name="CachedTagField" Orientation="Horizontal">

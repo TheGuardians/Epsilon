@@ -15,7 +15,7 @@ namespace RenderMethodEditorPlugin.ShaderParameters
             set => Property.RealConstants[TemplateIndex].Arg0 = value;
         }
 
-        public FloatShaderParameter(RenderMethod.ShaderProperty property, string name, string desc, int templateIndex) : base(property, name, desc, templateIndex)
+        public FloatShaderParameter(RenderMethod.RenderMethodPostprocessBlock property, string name, string desc, int templateIndex) : base(property, name, desc, templateIndex)
         {
         }
     }

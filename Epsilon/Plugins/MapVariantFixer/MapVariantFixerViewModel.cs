@@ -130,10 +130,10 @@ namespace MapVariantFixer
                     Convert061MapVariant(blf);
                 }
 
-                var palette = blf.MapVariant.MapVariant.Palette;
+                var palette = blf.MapVariant.MapVariant.Quotas;
                 for (int i = 0; i < palette.Length; i++)
                 {
-                    if (palette[i].TagIndex == -1)
+                    if (palette[i].ObjectDefinitionIndex == -1)
                         continue;
 
                     var name = blf.MapVariantTagNames.Names[i].Name;
@@ -188,8 +188,8 @@ namespace MapVariantFixer
 
         private void Fix061Endianess(Stream stream)
         {
-            var deserializer = new TagDeserializer(CacheVersion.HaloOnline106708, CachePlatform.Original);
-            var serializer = new TagSerializer(CacheVersion.HaloOnline106708, CachePlatform.Original);
+            var deserializer = new TagDeserializer(CacheVersion.HaloOnlineED, CachePlatform.Original);
+            var serializer = new TagSerializer(CacheVersion.HaloOnlineED, CachePlatform.Original);
 
             var reader = new EndianReader(stream, EndianFormat.BigEndian);
             var writer = new EndianWriter(stream, EndianFormat.LittleEndian);
@@ -250,9 +250,9 @@ namespace MapVariantFixer
             blf.ContentFlags |= BlfFileContentFlags.MapVariantTagNames;
 
             var mapVariant = blf.MapVariant.MapVariant;
-            for(int i = 0; i < mapVariant.Palette.Length; i++)
+            for(int i = 0; i < mapVariant.Quotas.Length; i++)
             {
-                var tagIndex = mapVariant.Palette[i].TagIndex;
+                var tagIndex = mapVariant.Quotas[i].ObjectDefinitionIndex;
                 if (tagIndex == -1)
                     continue;
                 if(_061_TagRemapping.TryGetValue(tagIndex, out string name))

@@ -185,7 +185,7 @@ namespace RenderMethodEditorPlugin.ShaderMethods.Particle
             return "No description available.";
         }
 
-        public override IShaderGenerator BuildShaderGenerator(List<RenderMethodDefinitionOptionIndex> shaderOptions)
+        public override IShaderGenerator BuildShaderGenerator(List<RenderMethodOptionIndex> shaderOptions)
         {
             var albedo = (Albedo)shaderOptions[0].OptionIndex;
             var blend_mode = (Blend_Mode)shaderOptions[1].OptionIndex;

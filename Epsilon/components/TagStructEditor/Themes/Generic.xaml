@@ -634,7 +634,7 @@
             <TextBlock
                 Width="Auto"
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="Right:" />
+                Text="Top:" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Top, UpdateSourceTrigger=PropertyChanged}" />
@@ -642,7 +642,7 @@
             <TextBlock
                 Width="Auto"
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="Bottom:" />
+                Text="Left:" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Left, UpdateSourceTrigger=PropertyChanged}" />
@@ -650,7 +650,7 @@
             <TextBlock
                 Width="Auto"
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="Left:" />
+                Text="Bottom:" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Bottom, UpdateSourceTrigger=PropertyChanged}" />
@@ -658,7 +658,7 @@
             <TextBlock
                 Width="Auto"
                 Style="{StaticResource InlineFieldLabelStyle}"
-                Text="Top:" />
+                Text="Right:" />
             <TextBox
                 Style="{StaticResource InlineFieldTextBoxStyle}"
                 Text="{Binding Right, UpdateSourceTrigger=PropertyChanged}" />

@@ -21,7 +21,7 @@ namespace RenderMethodEditorPlugin.ShaderParameters
             }
         }
 
-        public BooleanShaderParameter(RenderMethod.ShaderProperty property, string name, string desc, int templateIndex) : base(property, name, desc, templateIndex)
+        public BooleanShaderParameter(RenderMethod.RenderMethodPostprocessBlock property, string name, string desc, int templateIndex) : base(property, name, desc, templateIndex)
         {
         }
     }

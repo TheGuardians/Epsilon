@@ -24,7 +24,7 @@ namespace TagStructEditor.Fields
 
         protected override void OnPopulate(object value)
         {
-            var planeRef = (PlaneReference)value;
+            var planeRef = (StructureSurfaceToTriangleMapping)value;
             TriangleIndex = planeRef.TriangleIndex;
             ClusterIndex = planeRef.ClusterIndex;
         }
@@ -32,6 +32,6 @@ namespace TagStructEditor.Fields
         protected void OnTriangleIndexChanged() => UpdateValue();
         protected void OnClusterIndexChanged() => UpdateValue();
 
-        void UpdateValue() => SetActualValue(new PlaneReference(TriangleIndex, ClusterIndex));
+        void UpdateValue() => SetActualValue(new StructureSurfaceToTriangleMapping(TriangleIndex, ClusterIndex));
     }
 }

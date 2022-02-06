@@ -68,7 +68,7 @@ namespace ModPackagePlugin.Commands
             var modCache = new GameCacheModPackage(baseCache);
 
             modCache.BaseModPackage.CacheNames = new List<string>();
-            modCache.BaseModPackage.TagCachesStreams = new List<ModPackageStream>();
+            modCache.BaseModPackage.TagCachesStreams = new List<ExtantStream>();
             modCache.BaseModPackage.TagCacheNames = new List<Dictionary<int, string>>();
 
             var referenceStream = new MemoryStream(); // will be reused by all base caches
@@ -110,7 +110,7 @@ namespace ModPackagePlugin.Commands
             foreach (var tag in baseCache.TagCache.NonNull())
                 tagNames[tag.Index] = tag.Name;
 
-            modCache.BaseModPackage.TagCachesStreams.Add(new ModPackageStream(referenceStream));
+            modCache.BaseModPackage.TagCachesStreams.Add(new ExtantStream(referenceStream));
             modCache.BaseModPackage.CacheNames.Add("default");
             modCache.BaseModPackage.TagCacheNames.Add(tagNames);
 

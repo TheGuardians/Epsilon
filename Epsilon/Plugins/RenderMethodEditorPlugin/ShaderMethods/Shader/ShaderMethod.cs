@@ -229,7 +229,7 @@ namespace RenderMethodEditorPlugin.ShaderMethods.Shader
             return "No description available.";
         }
 
-        public override IShaderGenerator BuildShaderGenerator(List<RenderMethodDefinitionOptionIndex> shaderOptions)
+        public override IShaderGenerator BuildShaderGenerator(List<RenderMethodOptionIndex> shaderOptions)
         {
             var albedo = (Albedo)shaderOptions[0].OptionIndex;
             var bump_mapping = (Bump_Mapping)shaderOptions[1].OptionIndex;
