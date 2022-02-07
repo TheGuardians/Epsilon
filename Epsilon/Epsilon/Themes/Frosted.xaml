@@ -49,5 +49,7 @@
     </LinearGradientBrush>
 
     <System:Boolean x:Key="BlurBehind">true</System:Boolean>
-    
+
+    <System:Double x:Key="CachedTagButtonSpacing">0</System:Double>
+
 </ResourceDictionary>

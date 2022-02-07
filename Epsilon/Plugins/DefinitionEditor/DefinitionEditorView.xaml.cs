@@ -19,8 +19,9 @@ namespace DefinitionEditor
 
         private void DefinitionContent_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Return)
+            if (e.Key == Key.Return && e.OriginalSource is TextBox box)
             {
+                //box.IsSelectionActive = false;
                 var poker = ((DefinitionEditorViewModel)DataContext).PokeCommand;
 
                 if (poker.CanExecute(null))

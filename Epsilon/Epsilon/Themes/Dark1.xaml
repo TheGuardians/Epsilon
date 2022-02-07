@@ -56,5 +56,7 @@
         <GradientStop Color="#f0f" Offset="0"/>
         <GradientStop Color="#f0f" Offset="1"/>
     </LinearGradientBrush>
+    
+    <System:Double x:Key="CachedTagButtonSpacing">0</System:Double>
 
 </ResourceDictionary>

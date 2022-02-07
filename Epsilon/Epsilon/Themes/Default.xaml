@@ -8,40 +8,41 @@
     <SolidColorBrush x:Key="BorderDark" Color="#E4E4FF" Opacity="0.27"/>
     <SolidColorBrush x:Key="BorderDarker" Color="#3F3F46"/>
     <SolidColorBrush x:Key="BackgroundLight" Color="#29292F"/>
-    <SolidColorBrush x:Key="Background" Color="#2B2B33"/>
-    <SolidColorBrush x:Key="BackgroundDark" Color="#0E0E0F"/>
-    <SolidColorBrush x:Key="CachedTagBackground" Color="{DynamicResource AccentColor}" Opacity="0.4"/>
-    <SolidColorBrush x:Key="ExpanderClosedBackground" Color="{DynamicResource AccentColor}" Opacity="0.7"/>
-    <SolidColorBrush x:Key="ExpanderClosedBorder" Color="{DynamicResource AccentColor}" Opacity="0.82"/>
-    <SolidColorBrush x:Key="ExpanderOpenBackground" Color="{DynamicResource AccentColor}"/>
-    <SolidColorBrush x:Key="ExpanderOpenBorder" Color="{DynamicResource AccentColor}"/>
+    <SolidColorBrush x:Key="Background" Color="#2D2D30"/>
+    <SolidColorBrush x:Key="BackgroundDark" Color="#252526"/>
     <SolidColorBrush x:Key="Foreground" Color="#F1F1F3"/>
     <SolidColorBrush x:Key="ForegroundMedium" Color="#D1D1D6"/>
     <SolidColorBrush x:Key="ForegroundDark" Color="#A0A0A3"/>
     <SolidColorBrush x:Key="Inset" Color="{DynamicResource AccentColor}" Opacity="0.45"/>
     <SolidColorBrush x:Key="MouseOver" Color="#D8D8FF" Opacity="0.4"/>
     <SolidColorBrush x:Key="ReliefORIGINAL" Color="#DDDDFF" Opacity="0.2"/>
-    <SolidColorBrush x:Key="Scrollbar" Color="#707078" />
-    <SolidColorBrush x:Key="SearchBoxBackground" Color="#000000" Opacity="0.45"/>
+    <SolidColorBrush x:Key="Scrollbar" Color="#686868" />
+    <SolidColorBrush x:Key="SearchBoxBackground" Color="#333337" Opacity="1"/>
+    <SolidColorBrush x:Key="TreeViewBackground" Color="#252526"/>
+
+    <SolidColorBrush x:Key="CachedTagBackground" Color="{DynamicResource AccentColor}" Opacity="0.4"/>
+    <SolidColorBrush x:Key="ExpanderClosedBackground" Color="{DynamicResource AccentColor}" Opacity="0.7"/>
+    <SolidColorBrush x:Key="ExpanderClosedBorder" Color="{DynamicResource AccentColor}" Opacity="0.82"/>
+    <SolidColorBrush x:Key="ExpanderOpenBackground" Color="{DynamicResource AccentColor}"/>
+    <SolidColorBrush x:Key="ExpanderOpenBorder" Color="{DynamicResource AccentColor}"/>
     <SolidColorBrush x:Key="StringBackground" Color="{DynamicResource AccentColor}" Opacity="0.38"/>
     <SolidColorBrush x:Key="StringBorder" Color="{DynamicResource AccentColor}" Opacity="0.38"/>
     <SolidColorBrush x:Key="Struct" Color="#000000" Opacity="0.85"/>
     <SolidColorBrush x:Key="SubMenu" Color="#000000" Opacity="0.88"/>
-    <SolidColorBrush x:Key="TextBoxBackground" Color="#34343E"/>
-    <SolidColorBrush x:Key="TextBoxBorder" Color="#363640"/>
-    <SolidColorBrush x:Key="TreeViewBackground" Color="#0E0E0F"/>
+    <SolidColorBrush x:Key="TextBoxBackground" Color="#333337"/>
+    <SolidColorBrush x:Key="TextBoxBorder" Color="#434346"/>
 
-    <SolidColorBrush x:Key="Disabled" Color="#202026"/>
-    <SolidColorBrush x:Key="ForegroundDisabled" Color="#3A3A40"/>
+    <SolidColorBrush x:Key="Disabled" Color="#434346"/>
+    <SolidColorBrush x:Key="ForegroundDisabled" Color="#434346"/>
     
     <Color x:Key="StatusUpdate" A="255" R="100" G="255" B="135" />
 
     <Color x:Key="Shadow" A="#71" R="#00" G="#00" B="#00" />
     <SolidColorBrush x:Key="ShadowBrush" Color="#000000" Opacity="0.27"/>
 
-    <LinearGradientBrush x:Key="Relief" Opacity="0.34" StartPoint="0.5,0" EndPoint="0.5,1">
-        <GradientStop Color="#DDDDFF" Offset="0"/>
-        <GradientStop Color="#AAAACC" Offset="1"/>
+    <LinearGradientBrush x:Key="Relief" Opacity="1" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="#3F3F46" Offset="0"/>
+        <GradientStop Color="#3F3F46" Offset="1"/>
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="InsetGradient" Opacity="0.18" StartPoint="0.5,0" EndPoint="0.5,1">
@@ -49,6 +50,6 @@
         <GradientStop Color="#CCCCF0" Offset="1"/>
     </LinearGradientBrush>
 
-    <System:Double x:Key="CachedTagButtonSpacing">0</System:Double>
+    <System:Double x:Key="CachedTagButtonSpacing">4</System:Double>
     
 </ResourceDictionary>

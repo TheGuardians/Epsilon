@@ -77,10 +77,9 @@
 
     <Style x:Key="FieldTypeLabelStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="Width" Value="Auto" />
-        <Setter Property="Margin" Value="3,1,0,0" />
+        <Setter Property="Margin" Value="5,1,0,0" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontSize" Value="11" />
-        <Setter Property="FontFamily" Value="Bahnschrift" />
         <Setter Property="Foreground" Value="{DynamicResource ForegroundDark}" />
         <Setter Property="Visibility" Value="{Binding TypeNameIsVisible, Converter={x:Static converters:BoolToVisbilityConverter.Instance}}" />
     </Style>
@@ -234,8 +233,8 @@
                                 <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
                                 <Condition Binding="{Binding Path=IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="false" />
                             </MultiDataTrigger.Conditions>
-                            <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource BorderDark}" />
-                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                            <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource MouseOver}" />
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource MouseOver}" />
                         </MultiDataTrigger>
 
                         <MultiDataTrigger>
@@ -243,8 +242,8 @@
                                 <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
                                 <Condition Binding="{Binding Path=IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="true" />
                             </MultiDataTrigger.Conditions>
-                            <Setter TargetName="templateRoot" Property="Background" Value="{StaticResource ComboBox.MouseOver.Editable.Background}" />
-                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                            <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource MouseOver}" />
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource MouseOver}" />
                             <Setter TargetName="splitBorder" Property="Background" Value="{StaticResource ComboBox.MouseOver.Editable.Button.Background}" />
                             <Setter TargetName="splitBorder" Property="BorderBrush" Value="{DynamicResource Accent}" />
                         </MultiDataTrigger>
@@ -457,8 +456,8 @@
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Panel.ZIndex" Value="2"/>
-                            <Setter TargetName="border" Property="Background" Value="{DynamicResource BorderDark}" />
-                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource MouseOver}" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource MouseOver}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter TargetName="border" Property="Background" Value="{DynamicResource Accent}" />
@@ -510,7 +509,7 @@
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Panel.ZIndex" Value="10"/>
                             <Setter TargetName="border" Property="Background" Value="{DynamicResource MouseOver}" />
-                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource MouseOver}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="Panel.ZIndex" Value="10"/>
@@ -1542,6 +1541,7 @@
                 ItemsSource="{Binding Groups, Mode=OneTime}"
                 SelectedItem="{Binding SelectedGroup}" 
                 Template="{StaticResource CachedTagGroupComboBoxTemplate}" />
+            <Separator Opacity="0" Width="{DynamicResource CachedTagButtonSpacing}"/>
             <ComboBox x:Name="Tag"
                 Width="330"
                 Height="24"
@@ -1583,6 +1583,7 @@
                     </ContextMenu>
                 </ComboBox.ContextMenu>
             </ComboBox>
+            <Separator Opacity="0" Width="{DynamicResource CachedTagButtonSpacing}"/>
             <Button x:Name="BrowseButton" Style="{StaticResource CachedTagButton}"
                 Panel.ZIndex="3"
                 Width="24" Height="24"
@@ -1593,6 +1594,7 @@
                 FontSize="14" FontFamily="Segoe UI"
                 Content="⋯" ToolTip="Select a tag from the Tag Browser.">
             </Button>
+            <Separator Opacity="0" Width="{DynamicResource CachedTagButtonSpacing}"/>
             <Button x:Name="NullButton" Style="{StaticResource CachedTagButton}"
                 Panel.ZIndex="2"
                 Width="24" Height="24"
@@ -1602,6 +1604,7 @@
                 Command="{Binding NullCommand}"
                 FontSize="12" FontFamily="Segoe UI"
                 Content="Ø" ToolTip="Null this tag reference." />
+            <Separator Opacity="0" Width="{DynamicResource CachedTagButtonSpacing}"/>
             <Button x:Name="GoToButton" Style="{StaticResource CachedTagButtonRight}"
                 Panel.ZIndex="1"
                 Height="24"

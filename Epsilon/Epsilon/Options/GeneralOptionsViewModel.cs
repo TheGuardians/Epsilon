@@ -11,6 +11,7 @@ namespace Epsilon.Options
 {
     enum Theme
     {
+        Default,
         Solid,
         Frosted,
         Transparent,
@@ -23,6 +24,7 @@ namespace Epsilon.Options
 
     enum Accent
     {
+        Lochmara,
         Steel,
         Silver,
         White,
@@ -124,8 +126,8 @@ namespace Epsilon.Options
 
         public override void Load()
         {
-            EpsilonTheme = _settings.Get(GeneralSettings.ThemeSetting.Key, Theme.Solid);
-            AccentColor = _settings.Get(GeneralSettings.AccentColorSetting.Key, Accent.Cobalt);
+            EpsilonTheme = _settings.Get(GeneralSettings.ThemeSetting.Key, Theme.Default);
+            AccentColor = _settings.Get(GeneralSettings.AccentColorSetting.Key, Accent.Lochmara);
             DefaultCachePath = _settings.Get(GeneralSettings.DefaultTagCacheSetting.Key, "");
             AlwaysOnTop = _settings.Get(GeneralSettings.AlwaysOnTopSetting.Key, false);
         }

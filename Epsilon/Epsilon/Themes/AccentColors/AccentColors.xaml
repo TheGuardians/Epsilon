@@ -4,6 +4,8 @@
 
     <Color x:Key="AccentColor"/>
 
+    <Color x:Key="Lochmara" R="0" G="122" B="204" A="255"/>
+    
     <Color x:Key="Steel" R="110" G="110" B="110" A="255"/>
     <Color x:Key="Silver" R="185" G="185" B="185" A="255"/>
     <Color x:Key="White" R="227" G="227" B="227" A="255"/>

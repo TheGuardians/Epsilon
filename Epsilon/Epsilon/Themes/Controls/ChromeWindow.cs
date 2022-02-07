@@ -1,10 +1,5 @@
 ﻿using EpsilonLib.Commands;
-using Shared;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -39,15 +34,9 @@ namespace WpfApp20
         public static readonly DependencyProperty CloseCommandProperty =
             DependencyProperty.Register("CloseCommand", typeof(ICommand), typeof(ChromeWindow), new PropertyMetadata(null));
 
-
-
-
-
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty AccentColorProperty =
             DependencyProperty.Register("AccentColor", typeof(int), typeof(ChromeWindow), new PropertyMetadata(0));
-
-
 
         public bool IsMaximized
         {
@@ -58,8 +47,6 @@ namespace WpfApp20
         // Using a DependencyProperty as the backing store for IsMaximized.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsMaximizedProperty =
             DependencyProperty.Register("IsMaximized", typeof(bool), typeof(ChromeWindow), new PropertyMetadata(false));
-
-
 
         public bool CanMinimize
         {

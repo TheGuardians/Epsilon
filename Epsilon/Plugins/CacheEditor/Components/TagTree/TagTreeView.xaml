@@ -155,7 +155,7 @@
             Height="25"
             DockPanel.Dock="Top"
             FontSize="13"
-            Tag="Search..."
+            Tag="Search tags..."
             Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
         
         <TreeView x:Name="TagTree"
