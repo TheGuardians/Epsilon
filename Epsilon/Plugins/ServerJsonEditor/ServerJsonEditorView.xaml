@@ -18,12 +18,15 @@
             <RowDefinition Height="44" />
             <RowDefinition Height="*" />
             <RowDefinition Height="30" />
-            <RowDefinition Height="50" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Margin="15,15,15,10"
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin="15,15,15,10"
                    VerticalAlignment="Center" HorizontalAlignment="Left"
                    FontSize="14" Text="Choose a mod to edit its gametype entries." />
+        <TextBlock Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Margin="0,15,15,10"
+                   VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#808488"
+                   FontSize="14" Text="{Binding ServerFolder, StringFormat={}Location: {0}}" />
 
         <!-- #region ====================== Mod List Region ====================== -->
 
@@ -33,12 +36,34 @@
                  SelectionChanged="ModsListBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding FileName}"/>
+                    <StackPanel>
+                        <TextBlock Text="{Binding FileName}"/>
+                        <TextBox x:Name="ModLinkTextBox" Text="{Binding Link}" Width="250" Margin="10,0,0,0"
+                                 Foreground="#808488" Background="Transparent">
+                            <TextBox.Style>
+                                <Style>
+                                    <Setter Property="TextBox.Background" Value="Transparent" />
+                                    <Setter Property="TextBox.BorderBrush" Value="Transparent" />
+                                    <Style.Triggers>
+                                        <DataTrigger Value="True" Binding="{Binding Path=IsSelected,
+                                            RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem }}}">
+                                            <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Value="False" Binding="{Binding Path=IsSelected,
+                                            RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem }}}">
+                                            <Setter Property="TextBlock.Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
             
             <ListBox.ContextMenu>
                 <ContextMenu>
+                    <MenuItem Header="Edit Link..."/>
                     <MenuItem Header="Remove" Click="ClickedRemoveMod"/>
                 </ContextMenu>
             </ListBox.ContextMenu>
@@ -63,6 +88,16 @@
                 </Style>
             </Button.Style>
         </Button>
+
+        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="10,4"
+                    VerticalAlignment="Bottom" Orientation="Horizontal">
+            <TextBlock x:Name="LinkPrefixTextBlock" Visibility="Collapsed"
+                       FontSize="14" Text="{Binding ServerFolder, StringFormat={}{0} Link: }"
+                       VerticalAlignment="Center" Foreground="#808488" />
+            <TextBox Grid.ColumnSpan="3" x:Name="LinkTextBox" Visibility="Collapsed"
+                     FontSize="14" Text="{Binding Link}"
+                     VerticalAlignment="Center" Foreground="#808488" />
+        </StackPanel>
         <!-- #endregion -->
 
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" Background="Transparent" />
@@ -103,19 +138,15 @@
             </Button.Style>
         </Button>
 
-        <StackPanel Grid.Row="3" Grid.Column ="0" Margin="20,10,10,12"
+        <StackPanel Grid.Row="2" Grid.Column ="4" Margin="77,0,0,0"
                     VerticalAlignment="Bottom" Orientation="Horizontal">
+            <Separator HorizontalContentAlignment="Stretch"/>
             <Button Content="Save Voting JSONs" Width="130" Margin="14,0" Padding="10,4"
-                    VerticalAlignment="Bottom" HorizontalAlignment="Left" IsDefault="True"
-                    Click="SaveButtonClicked"/>
+                    VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="SaveButtonClicked"/>
             <Button Content="Reload" Width="70" Margin="4,0" Padding="10,4" Click="ReloadAllClicked"
                     VerticalAlignment="Center" HorizontalAlignment="Right"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Margin="0,10"
-                    VerticalAlignment="Bottom" Orientation="Horizontal">
-            <TextBlock Margin="0,6" Foreground="#808488" Text="{Binding CacheFilePath, StringFormat={}Base Cache: {0}}" />
-        </StackPanel>
         <!-- #endregion -->
 
         <!-- #region ====================== Gametype Properties Region ====================== -->

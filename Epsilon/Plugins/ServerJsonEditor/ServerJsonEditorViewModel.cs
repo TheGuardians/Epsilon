@@ -703,7 +703,7 @@ namespace ServerJsonEditor
 				typeValues.Add("typeName", type.TypeName);
 
 				if (!string.IsNullOrEmpty(type.TypeDisplayName))
-					typeValues.Add("typeDisplayName", type.TypeDisplayName);
+					typeValues.Add("displayName", type.TypeDisplayName);
 
                 if (type.DuplicateAmount > 1)
 				{

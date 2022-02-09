@@ -96,11 +96,21 @@ namespace ServerJsonEditor
         }
         private void ClickedRemoveMod(object sender, RoutedEventArgs e)
         {
-            ModEntry modToRemove = (ModEntry)ModsListBox.SelectedItem;
-            ((ServerJsonEditorViewModel)DataContext).RemoveMod(modToRemove);
-            ModsListBox.SelectedIndex = -1;
+            if (MessageBox.Show($"Are you sure you want to remove this mod entry?"
+                + "\nIts associated gametype entries will also be removed.",
+                "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                ModEntry modToRemove = (ModEntry)ModsListBox.SelectedItem;
 
-            ModsListBox.Items.SortDescriptions.Remove(new SortDescription("FileName", ListSortDirection.Ascending));
+                TypeDataGrid.Visibility = Visibility.Collapsed;
+                selectedTypeEntry = null;
+                TypesListBox.ItemsSource = null;
+                ModsListBox.SelectedIndex = -1;
+
+                ((ServerJsonEditorViewModel)DataContext).RemoveMod(modToRemove);
+
+                ModsListBox.Items.SortDescriptions.Remove(new SortDescription("FileName", ListSortDirection.Ascending));
+            }
         }
 
         private void ClickedAddGametype(object sender, RoutedEventArgs e)
