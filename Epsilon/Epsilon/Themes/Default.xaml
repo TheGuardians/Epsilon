@@ -20,15 +20,19 @@
     <SolidColorBrush x:Key="SearchBoxBackground" Color="#333337" Opacity="1"/>
     <SolidColorBrush x:Key="TreeViewBackground" Color="#252526"/>
 
-    <SolidColorBrush x:Key="CachedTagBackground" Color="{DynamicResource AccentColor}" Opacity="0.4"/>
-    <SolidColorBrush x:Key="ExpanderClosedBackground" Color="{DynamicResource AccentColor}" Opacity="0.7"/>
-    <SolidColorBrush x:Key="ExpanderClosedBorder" Color="{DynamicResource AccentColor}" Opacity="0.82"/>
-    <SolidColorBrush x:Key="ExpanderOpenBackground" Color="{DynamicResource AccentColor}"/>
-    <SolidColorBrush x:Key="ExpanderOpenBorder" Color="{DynamicResource AccentColor}"/>
-    <SolidColorBrush x:Key="StringBackground" Color="{DynamicResource AccentColor}" Opacity="0.38"/>
-    <SolidColorBrush x:Key="StringBorder" Color="{DynamicResource AccentColor}" Opacity="0.38"/>
-    <SolidColorBrush x:Key="Struct" Color="#000000" Opacity="0.85"/>
+    <SolidColorBrush x:Key="CachedTagBackground" Color="#333337" Opacity="1"/>
+    
+    <SolidColorBrush x:Key="ExpanderClosedBackground" Color="#2D2D30" Opacity="0.7"/>
+    <SolidColorBrush x:Key="ExpanderClosedBorder" Color="#3F3F46" Opacity="0.82"/>
+    <SolidColorBrush x:Key="ExpanderOpenBackground" Color="#2D2D30"/>
+    <SolidColorBrush x:Key="ExpanderOpenBorder" Color="#3F3F46"/>
+
+    <SolidColorBrush x:Key="StringBackground" Color="#333337" Opacity="1"/>
+    <SolidColorBrush x:Key="StringBorder" Color="#434346" Opacity="1"/>
+    
+    <SolidColorBrush x:Key="Struct" Color="#252526" Opacity="0.97"/>
     <SolidColorBrush x:Key="SubMenu" Color="#000000" Opacity="0.88"/>
+    
     <SolidColorBrush x:Key="TextBoxBackground" Color="#333337"/>
     <SolidColorBrush x:Key="TextBoxBorder" Color="#434346"/>
 

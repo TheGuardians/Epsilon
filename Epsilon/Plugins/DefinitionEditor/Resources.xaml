@@ -557,7 +557,7 @@
         TargetType="{x:Type ListBox}">
         <Border
             Padding="{TemplateBinding Padding}"
-            Background="{TemplateBinding Background}"
+            Background="Transparent"
             BorderBrush="{TemplateBinding BorderBrush}"
             BorderThickness="{TemplateBinding BorderThickness}"
             Focusable="False">
