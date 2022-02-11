@@ -38,8 +38,8 @@
                 <DataTemplate>
                     <StackPanel>
                         <TextBlock Text="{Binding FileName}"/>
-                        <TextBox x:Name="ModLinkTextBox" Text="{Binding Link}" Width="250" Margin="10,0,0,0"
-                                 Foreground="#808488" Background="Transparent">
+                        <TextBox x:Name="ModLinkTextBox" Text="{Binding Link}" Width="260" Margin="5,0,0,0"
+                                 Foreground="#808488" Background="Transparent" Tag="Paste link here...">
                             <TextBox.Style>
                                 <Style>
                                     <Setter Property="TextBox.Background" Value="Transparent" />
@@ -63,7 +63,6 @@
             
             <ListBox.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Edit Link..."/>
                     <MenuItem Header="Remove" Click="ClickedRemoveMod"/>
                 </ContextMenu>
             </ListBox.ContextMenu>
@@ -233,14 +232,18 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBox Grid.Column="0" Text="{Binding Team, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                 VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
-                                        <TextBlock Grid.Column="1" Text="=" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                        <TextBox Grid.Column="2" Text="{Binding Character, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                 VerticalContentAlignment="Center" HorizontalAlignment="Stretch"
+                                        <TextBlock Grid.Column="0" Text="{Binding Team, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 Padding="3,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        <TextBlock Grid.Column="1" Text=" =" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        <TextBox Grid.Column="2" Text="{Binding CharacterSet, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 VerticalContentAlignment="Center" HorizontalAlignment="Stretch" Tag="Character Set"
+                                                 VerticalAlignment="Center"  HorizontalContentAlignment="Stretch"/>
+                                        <TextBox Grid.Column="3" Text="{Binding Character, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 VerticalContentAlignment="Center" HorizontalAlignment="Stretch" Tag="Character"
                                                  VerticalAlignment="Center"  HorizontalContentAlignment="Stretch"/>
                                     </Grid>
                                 </DataTemplate>
@@ -275,10 +278,10 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBox Grid.Column="0" Text="{Binding DisplayName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                 VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch"/>
+                                                 VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" Tag="Display Name"/>
                                         <TextBlock Grid.Column="1" Text=" | " FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                                         <TextBox Grid.Column="2" Text="{Binding MapFileName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                 VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
+                                                 VerticalContentAlignment="Center" HorizontalAlignment="Right" MinWidth="22" Tag="File Name "/>
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>

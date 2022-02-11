@@ -91,6 +91,7 @@ namespace ServerJsonEditor
 			{
                 ((ServerJsonEditorViewModel)DataContext).AddMod(modNameToAdd);
                 ModsCombobox.SelectedIndex = -1;
+                ModsListBox.SelectedItem = ModsListBox.Items.GetItemAt(ModsListBox.Items.Count -  1);
                 ModsListBox.Items.SortDescriptions.Add(new SortDescription("FileName", ListSortDirection.Ascending));
             }
         }
@@ -122,7 +123,8 @@ namespace ServerJsonEditor
 			{
                 ((ServerJsonEditorViewModel)DataContext).AddGametype(gametypeNameToAdd, modSelection);
                 TypesCombobox.SelectedIndex = -1;
-                ModsListBox.Items.SortDescriptions.Add(new SortDescription("TypeName", ListSortDirection.Ascending));
+                TypesListBox.SelectedItem = TypesListBox.Items.GetItemAt(TypesListBox.Items.Count - 1);
+                TypesListBox.Items.SortDescriptions.Add(new SortDescription("TypeName", ListSortDirection.Ascending));
             }
         }
         private void ClickedRemoveGametype(object sender, RoutedEventArgs e)
@@ -131,25 +133,22 @@ namespace ServerJsonEditor
             ((ServerJsonEditorViewModel)DataContext).RemoveGametype(gametypeToRemove);
             TypesListBox.SelectedIndex = -1;
 
-            ModsListBox.Items.SortDescriptions.Remove(new SortDescription("TypeName", ListSortDirection.Ascending));
+            TypesListBox.Items.SortDescriptions.Remove(new SortDescription("TypeName", ListSortDirection.Ascending));
         }
 
         private void ClickedAddMap(object sender, RoutedEventArgs e)
         {
             string mapNameToAdd = (string)(MapsComboBox.SelectedItem);
 
-            if (mapNameToAdd != null)
+            MapEntry newEntry = new MapEntry()
             {
-                MapEntry newEntry = new MapEntry()
-                {
-                    MapFileName = mapNameToAdd,
-                    DisplayName = mapNameToAdd
-                };
+                MapFileName = mapNameToAdd ?? "",
+                DisplayName = mapNameToAdd ?? ""
+            };
 
-                ((TypeEntry)TypeDataGrid.DataContext).SpecificMaps.Add(newEntry);
-                MapsComboBox.SelectedIndex = -1;
-                MapsListBox.Items.SortDescriptions.Add(new SortDescription("TypeName", ListSortDirection.Ascending));
-            }
+            ((TypeEntry)TypeDataGrid.DataContext).SpecificMaps.Add(newEntry);
+            MapsComboBox.SelectedIndex = -1;
+            MapsListBox.Items.SortDescriptions.Add(new SortDescription("TypeName", ListSortDirection.Ascending));
         }
         private void ClickedRemoveMap(object sender, RoutedEventArgs e)
         {
@@ -170,6 +169,7 @@ namespace ServerJsonEditor
             CharacterOverride charToAdd = new CharacterOverride()
             {
                 Team = "team" + count,
+                CharacterSet = "",
                 Character = ""
             };
 
