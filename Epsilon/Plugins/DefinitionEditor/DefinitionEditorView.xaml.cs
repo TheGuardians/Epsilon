@@ -41,7 +41,7 @@ namespace DefinitionEditor
             else if ((e.Key == Key.S && e.KeyboardDevice.IsKeyDown(Key.LeftCtrl)) || (e.Key == Key.LeftCtrl && e.KeyboardDevice.IsKeyDown(Key.S)))
             {
                 DefinitionEditorViewModel definitionViewModel = (DefinitionEditorViewModel)DataContext;
-                if (definitionViewModel != null && definitionViewModel.View.IsVisible)
+                if (definitionViewModel != null && IsVisible)
                 {
                     definitionViewModel.SaveCommand.Execute(null);
                     e.Handled = true;
