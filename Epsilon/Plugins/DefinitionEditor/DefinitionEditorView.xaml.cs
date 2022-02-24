@@ -28,7 +28,7 @@ namespace DefinitionEditor
             if ((e.Key == Key.F && e.KeyboardDevice.IsKeyDown(Key.LeftCtrl)) || (e.Key == Key.LeftCtrl && e.KeyboardDevice.IsKeyDown(Key.F)))
             {
                 DefinitionEditorViewModel definitionViewModel = (DefinitionEditorViewModel)DataContext;
-                if (definitionViewModel != null && definitionViewModel.View.IsVisible)
+                if (definitionViewModel != null && IsVisible)
                 {
                     SearchBox.Focus();
                     Keyboard.Focus(SearchBox);

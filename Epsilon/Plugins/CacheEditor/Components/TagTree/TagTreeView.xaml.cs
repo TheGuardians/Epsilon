@@ -20,6 +20,8 @@ namespace CacheEditor.Components.TagTree
         {
             InitializeComponent();
             Loaded += TagTreeView_Loaded;
+
+            EventManager.RegisterClassHandler(typeof(Window), Window.PreviewKeyUpEvent, new KeyEventHandler(TagTreeWindowKeyUp));
         }
 
         private void TagTreeView_Loaded(object sender, RoutedEventArgs e)
@@ -78,5 +80,20 @@ namespace CacheEditor.Components.TagTree
             e.Handled = true;
         }
 
+        private void TagTreeWindowKeyUp(object sender, KeyEventArgs e)
+        {
+            // ctrl-T to focus Tag Tree Search
+
+            if ((e.Key == Key.T && e.KeyboardDevice.IsKeyDown(Key.LeftCtrl)) || (e.Key == Key.LeftCtrl && e.KeyboardDevice.IsKeyDown(Key.T)))
+            {
+                TagTreeViewModel tagTreeViewModel = (TagTreeViewModel)DataContext;
+                if (tagTreeViewModel != null && IsVisible)
+                {
+                    SearchBox.Focus();
+                    Keyboard.Focus(SearchBox);
+                    e.Handled = true;
+                }
+            }
+        }
     }
 }
