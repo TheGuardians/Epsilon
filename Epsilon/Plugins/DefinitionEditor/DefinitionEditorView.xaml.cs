@@ -32,6 +32,7 @@ namespace DefinitionEditor
                 {
                     SearchBox.Focus();
                     Keyboard.Focus(SearchBox);
+                    SearchBox.Select(0, SearchBox.Text.Length);
                     e.Handled = true;
                 }
             }
@@ -51,16 +52,24 @@ namespace DefinitionEditor
 
         private void DefinitionContent_KeyDown(object sender, KeyEventArgs e)
         {
+            // enter to poke
+
             if (e.Key == Key.Return)    // && e.OriginalSource is TextBox box
             {
-                //box.IsSelectionActive = false;
-                var poker = ((DefinitionEditorViewModel)DataContext).PokeCommand;
+                DefinitionEditorViewModel definitionViewModel = (DefinitionEditorViewModel)DataContext;
 
-                if (poker.CanExecute(null))
+                if (definitionViewModel != null && IsVisible)
                 {
-                    poker.Execute(null);
+                    switch (e.OriginalSource)
+                    {
+                        case TextBox box:
+                            box.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                            break;
+                    }
+
+                    definitionViewModel.PokeCommand.Execute(null);
+                    e.Handled = true;
                 }
-                e.Handled = true;
             }
         }
     }
