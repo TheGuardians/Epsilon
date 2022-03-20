@@ -82,15 +82,17 @@ namespace CacheEditor.Components.TagTree
 
         private void TagTreeWindowKeyUp(object sender, KeyEventArgs e)
         {
-            // ctrl-T to focus Tag Tree Search
+            // ctrl-T/L to focus Tag Tree Search
 
-            if ((e.Key == Key.T && e.KeyboardDevice.IsKeyDown(Key.LeftCtrl)) || (e.Key == Key.LeftCtrl && e.KeyboardDevice.IsKeyDown(Key.T)))
+            if ((e.Key == Key.T && e.KeyboardDevice.IsKeyDown(Key.LeftCtrl)) || (e.Key == Key.LeftCtrl && e.KeyboardDevice.IsKeyDown(Key.T))
+                || (e.Key == Key.L && e.KeyboardDevice.IsKeyDown(Key.LeftCtrl)) || (e.Key == Key.LeftCtrl && e.KeyboardDevice.IsKeyDown(Key.L)))
             {
                 TagTreeViewModel tagTreeViewModel = (TagTreeViewModel)DataContext;
                 if (tagTreeViewModel != null && IsVisible)
                 {
                     SearchBox.Focus();
                     Keyboard.Focus(SearchBox);
+                    SearchBox.Select(0, SearchBox.Text.Length);
                     e.Handled = true;
                 }
             }

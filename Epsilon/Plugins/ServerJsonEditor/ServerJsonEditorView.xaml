@@ -9,8 +9,9 @@
     <Grid Width="auto" x:Name="mainGrid" Loaded="mainGrid_Loaded">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300" />
-            <ColumnDefinition Width="1" />
+            <ColumnDefinition Width="6" />
             <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="6" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -31,6 +32,7 @@
         <!-- #region ====================== Mod List Region ====================== -->
 
         <ListBox x:Name="ModsListBox" Grid.Row="1" Grid.Column="0" Padding="5"
+                 BorderBrush="{DynamicResource InnerBorderColor}"
                  Height="auto" Margin="5,0,0,0" Focusable="True"
                  ItemsSource="{Binding CurrentModList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  SelectionChanged="ModsListBox_SelectionChanged">
@@ -38,8 +40,8 @@
                 <DataTemplate>
                     <StackPanel>
                         <TextBlock Text="{Binding FileName}"/>
-                        <TextBox x:Name="ModLinkTextBox" Text="{Binding Link}" Width="260" Margin="5,0,0,0"
-                                 Foreground="#808488" Background="Transparent" Tag="Paste link here...">
+                        <TextBox x:Name="ModLinkTextBox" Text="{Binding Link}" Width="270" Margin="0,0,0,0" FontSize="11"
+                                 Foreground="{DynamicResource ForegroundMedium}" Background="Transparent" Tag="Paste link here...">
                             <TextBox.Style>
                                 <Style>
                                     <Setter Property="TextBox.Background" Value="Transparent" />
@@ -99,11 +101,12 @@
         </StackPanel>
         <!-- #endregion -->
 
-        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" Background="Transparent" />
+        <GridSplitter Grid.Column="1" Grid.RowSpan="4" HorizontalAlignment="Stretch" Background="Transparent" />
 
         <!-- #region ====================== Gametype List Region ====================== -->
 
         <ListBox x:Name="TypesListBox" Grid.Row="1" Grid.Column="2"
+                 BorderBrush="{DynamicResource InnerBorderColor}"
                  Height="auto" Margin="0,0,0,0" Focusable="True"
                  SelectionChanged="TypesListBox_SelectionChanged">
                 <ListBox.ItemTemplate>
@@ -150,8 +153,8 @@
 
         <!-- #region ====================== Gametype Properties Region ====================== -->
 
-        <Border BorderBrush="#3F3F46" BorderThickness="1" Width="400" Grid.Column="3" Grid.Row="1" VerticalAlignment="Stretch"
-                Background="#222222" HorizontalAlignment="Left" Padding="15,5,10,0">
+        <Border BorderBrush="{DynamicResource InnerBorderColor}" CornerRadius="2" BorderThickness="1" Width="400" Grid.Column="4" Grid.Row="1"
+                Background="{DynamicResource BackgroundDark}" HorizontalAlignment="Left" VerticalAlignment="Stretch" Padding="15,5,10,0">
             <ItemsControl>
                 <Grid Name="TypeDataGrid" VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>

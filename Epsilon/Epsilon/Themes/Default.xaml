@@ -14,7 +14,7 @@
     <SolidColorBrush x:Key="ForegroundMedium" Color="#D1D1D6"/>
     <SolidColorBrush x:Key="ForegroundDark" Color="#A0A0A3"/>
     <SolidColorBrush x:Key="Inset" Color="{DynamicResource AccentColor}" Opacity="0.45"/>
-    <SolidColorBrush x:Key="MouseOver" Color="#D8D8FF" Opacity="0.4"/>
+    <SolidColorBrush x:Key="MouseOver" Color="#D8D8FF" Opacity="0.25"/>
     <SolidColorBrush x:Key="ReliefORIGINAL" Color="#DDDDFF" Opacity="0.2"/>
     <SolidColorBrush x:Key="Scrollbar" Color="#686868" />
     <SolidColorBrush x:Key="SearchBoxBackground" Color="#333337" Opacity="1"/>
@@ -43,6 +43,7 @@
 
     <Color x:Key="Shadow" A="#71" R="#00" G="#00" B="#00" />
     <SolidColorBrush x:Key="ShadowBrush" Color="#000000" Opacity="0.27"/>
+    <SolidColorBrush x:Key="InnerBorderColor" Color="#000000"/>
 
     <LinearGradientBrush x:Key="Relief" Opacity="1" StartPoint="0.5,0" EndPoint="0.5,1">
         <GradientStop Color="#3F3F46" Offset="0"/>

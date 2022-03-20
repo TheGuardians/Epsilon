@@ -5,14 +5,14 @@
     xmlns:local="clr-namespace:DefinitionEditor.Options">
     <StackPanel>
         <CheckBox Name="DisplayTypesCheckbox"
-            Margin="4,9,4,5"
+            Margin="4,9,4,4"
             Content="Display Field Types"
             ToolTip="Data type labels will be shown to the right of each value."
             IsChecked="{Binding DisplayFieldTypes, Mode=TwoWay}" />
         <CheckBox Name="DisplayOffsetsCheckbox"
-            Margin="4,9,4,5"
+            Margin="4,9,4,4"
             Content="Display Field Offsets"
-            ToolTip="Displays the offset of the field."
+            ToolTip="Shows the byte offset from the start of the struct for each field."
             IsChecked="{Binding DisplayFieldOffsets, Mode=TwoWay}" />
         <CheckBox Name="CollapseBlocksCheckbox"
             Margin="4,9,4,5"

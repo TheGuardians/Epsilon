@@ -179,6 +179,7 @@
                             Margin="0,0,0,0"
                             Height="23"
                             VerticalContentAlignment="Center"
+                            ToolTip="Search the current tag. (Ctrl+F)"
                             Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}">
                             <TextBox.InputBindings>
                                 <KeyBinding Key="Up" Command="{Binding SearchResults.PreviousCommand}" />
@@ -216,7 +217,7 @@
                         ItemsSource="{Binding RteTargetList}"
                         SelectedItem="{Binding SelectedRteTargetItem, Mode=TwoWay}" />
                     <Button Command="{Binding PokeCommand}"
-                        ToolTip="Poke the current changes."
+                        ToolTip="Poke the current changes. (Enter)"
                         Content="Poke"
                         Style="{StaticResource ToolbarButtonStyle}"
                         Height="23"
@@ -235,7 +236,7 @@
                         VerticalAlignment="Center"
                         BorderThickness="0" />
                     <Button Command="{Binding SaveCommand}"
-                        ToolTip="Save tag changes."
+                        ToolTip="Save tag changes. (Ctrl+S)"
                         Content="Save"
                         Style="{StaticResource ToolbarButtonStyle}"
                         Height="23"

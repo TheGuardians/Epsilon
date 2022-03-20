@@ -52,7 +52,7 @@
                                 CornerRadius="0,3,3,0"
                                 Padding="0"
                                 Margin="2,0,0,-2"
-                                BorderThickness="1,2,2,2"
+                                BorderThickness="0,2,2,2"
                                 KeyboardNavigation.DirectionalNavigation="Contained"
                                 KeyboardNavigation.TabIndex="2"
                                 KeyboardNavigation.TabNavigation="Local">

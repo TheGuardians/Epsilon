@@ -128,7 +128,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
                     <Border x:Name="ScrollThumbVert"
-                            Width="8" 
+                            Width="6" 
                             Height="{TemplateBinding Height}"
                             MinHeight="30"
                             Margin="0,2,0,6" BorderThickness="0" 
@@ -139,6 +139,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="ScrollThumbVert" Property="Width" Value="6" />
                             <Setter TargetName="ScrollThumbVert" Property="Background" Value="{DynamicResource ForegroundMedium}" />
                         </Trigger>
                         <Trigger Property="IsDragging" Value="true">
@@ -159,8 +160,8 @@
                 <ControlTemplate TargetType="{x:Type Thumb}">
                     <Border x:Name="ScrollThumbHoriz"
                             Width="{TemplateBinding Width}" 
-                            Height="8" 
-                            Margin="5,0,2,-2" BorderThickness="0"
+                            Height="6" 
+                            Margin="6,0,0,-2" BorderThickness="0"
                             CornerRadius="0"
                             SnapsToDevicePixels="True"
                             BorderBrush="Transparent" 
