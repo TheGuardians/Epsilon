@@ -129,7 +129,7 @@ namespace ServerJsonEditor
 
         private ObservableCollection<ServerCommand> CommandDefaults = new ObservableCollection<ServerCommand>()
         {
-            new ServerCommand{ Name = "Server.SprintEnabled", Alias="Sprint Allowed", Enabled = true },
+            new ServerCommand{ Name = "Server.SprintState", Alias="Sprint Allowed", Enabled = true },
             new ServerCommand{ Name = "Server.UnlimitedSprint", Alias="Unlimited Sprint", Enabled = false },
             new ServerCommand{ Name = "Server.EmotesEnabled", Alias="Emotes Allowed", Enabled = true },
             new ServerCommand{ Name = "Server.AssassinationEnabled", Alias="Assassinations", Enabled = true },
