@@ -13,9 +13,9 @@
 
         <Style x:Key="ToolbarSearchBoxStyle" TargetType="{x:Type TextBoxBase}">
             <Setter Property="Background" Value="{DynamicResource SearchBoxBackground}" />
-            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource InnerBorderColor}" />
             <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
-            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderThickness" Value="1" />
             <Setter Property="FontSize" Value="13" />
             <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
             <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -55,7 +55,7 @@
                                     HorizontalScrollBarVisibility="Hidden"
                                     VerticalScrollBarVisibility="Hidden" />
                                 <TextBlock x:Name="PlaceholderText"
-                                    Margin="7,2,2,2"
+                                    Margin="6,2,2,2"
                                     VerticalAlignment="Center"
                                     FontSize="{TemplateBinding FontSize}"
                                     Foreground="{DynamicResource ForegroundDark}"
@@ -138,7 +138,7 @@
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter TargetName="border" Property="Background" Value="{DynamicResource ShadowBrush}" />
-                                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ForegroundDark}" />
+                                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ForegroundDisabled}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -153,7 +153,7 @@
         <Border x:Name="Toolbar"
             Height="25"
             Padding="0,0,0,0"
-            CornerRadius="0,1,0,0"
+            CornerRadius="0,0,0,0"
             Background="{DynamicResource Inset}"
             BorderBrush="{DynamicResource StringBackground}"
             BorderThickness="0,0,0,0"
@@ -174,8 +174,8 @@
                             Style="{StaticResource ToolbarSearchBoxStyle}"
                             MinWidth="205"
                             VerticalAlignment="Center"
-                            Tag="Search definition ..."
-                            Padding="3,0,0,0"
+                            Tag="Search definition (Ctrl+F)"
+                            Padding="1,0,0,0"
                             Margin="0,0,0,0"
                             Height="23"
                             VerticalContentAlignment="Center"
@@ -236,7 +236,7 @@
                         VerticalAlignment="Center"
                         BorderThickness="0" />
                     <Button Command="{Binding SaveCommand}"
-                        ToolTip="Save tag changes. (Ctrl+S)"
+                        ToolTip="Save all changes. (Ctrl+S)"
                         Content="Save"
                         Style="{StaticResource ToolbarButtonStyle}"
                         Height="23"

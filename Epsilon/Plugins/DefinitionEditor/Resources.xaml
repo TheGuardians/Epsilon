@@ -71,7 +71,7 @@
     <Style x:Key="FieldLabelStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
         <Setter Property="MinWidth" Value="220" />
-        <Setter Property="Padding" Value="10,0,10,0" />
+        <Setter Property="Padding" Value="0,0,10,0" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
@@ -131,7 +131,7 @@
     <Style x:Key="StructListBoxStyle" BasedOn="{StaticResource {x:Type ListBox}}" TargetType="{x:Type ListBox}">
         <Setter Property="VirtualizingPanel.ScrollUnit" Value="Pixel" />
         <Setter Property="BorderBrush" Value="{x:Null}" />
-        <Setter Property="Padding" Value="4,4" />
+        <Setter Property="Padding" Value="4" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
@@ -144,7 +144,7 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListBoxItem}">
                                 <Border
-                                    CornerRadius="3"
+                                    CornerRadius="{DynamicResource FieldCornerRadius}"
                                     Padding="{TemplateBinding Padding}"
                                     Background="Transparent"
                                     BorderBrush="{TemplateBinding BorderBrush}"
@@ -174,7 +174,7 @@
         <Setter Property="Margin" Value="0,0" />
         <Setter Property="Width" Value="Auto" />
         <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="Margin" Value="7,0,0,0" />
+        <Setter Property="Margin" Value="0,0,0,0" />
     </Style>
 
     <Style x:Key="CachedTagGroupComboBoxToggle" TargetType="{x:Type ToggleButton}">
@@ -187,11 +187,11 @@
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border x:Name="templateRoot"
                         Width="50"
-                        Background="{DynamicResource Relief}"
-                        BorderBrush="{DynamicResource Relief}"
-                        BorderThickness="1,1,1,1"
+                        Background="{DynamicResource CachedTagButtonBackground}"
+                        BorderBrush="{DynamicResource CachedTagButtonBorder}"
+                        BorderThickness="{DynamicResource CachedTagLeftBorderThickness}"
                         SnapsToDevicePixels="true"
-                        CornerRadius="1,0,0,1"
+                        CornerRadius="{DynamicResource CachedTagLeftCornerRadius}"
                         Margin="0,0,0,0"
                         Padding="2">
                         <Border x:Name="splitBorder"
@@ -234,7 +234,7 @@
                                 <Condition Binding="{Binding Path=IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="false" />
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource MouseOver}" />
-                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource MouseOver}" />
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource Accent}" />
                         </MultiDataTrigger>
 
                         <MultiDataTrigger>
@@ -243,7 +243,7 @@
                                 <Condition Binding="{Binding Path=IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="true" />
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource MouseOver}" />
-                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource MouseOver}" />
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource Accent}" />
                             <Setter TargetName="splitBorder" Property="Background" Value="{StaticResource ComboBox.MouseOver.Editable.Button.Background}" />
                             <Setter TargetName="splitBorder" Property="BorderBrush" Value="{DynamicResource Accent}" />
                         </MultiDataTrigger>
@@ -311,8 +311,8 @@
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border x:Name="templateRoot"
                         Background="{DynamicResource CachedTagBackground}"
-                        BorderBrush="{DynamicResource Relief}"
-                        BorderThickness="0,1"
+                        BorderBrush="{DynamicResource CachedTagButtonBorder}"
+                        BorderThickness="{DynamicResource CachedTagMiddleBorderThickness}"
                         SnapsToDevicePixels="true"
                         CornerRadius="0"
                         Margin="0,0,0,0"
@@ -397,7 +397,7 @@
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter TargetName="templateRoot" Property="Background" Value="Transparent" />
                             <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource Disabled}" />
-                            <Setter TargetName="templateRoot" Property="BorderThickness" Value="0,1,0,1" />
+                            <!-- <Setter TargetName="templateRoot" Property="BorderThickness" Value="0,1,0,1" /> -->
                             <Setter TargetName="arrow" Property="Fill" Value="{DynamicResource Disabled}" />
                         </Trigger>
 
@@ -426,10 +426,10 @@
 
     <Style x:Key="CachedTagButton" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
-        <Setter Property="Background" Value="{DynamicResource Relief}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Relief}" />
+        <Setter Property="Background" Value="{DynamicResource CachedTagButtonBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource CachedTagButtonBorder}" />
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="{DynamicResource CachedTagMiddleBorderThickness}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="1" />
@@ -457,7 +457,7 @@
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Panel.ZIndex" Value="2"/>
                             <Setter TargetName="border" Property="Background" Value="{DynamicResource MouseOver}" />
-                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource MouseOver}" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Accent}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter TargetName="border" Property="Background" Value="{DynamicResource Accent}" />
@@ -465,7 +465,7 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter TargetName="border" Property="Margin" Value="0,0,-1,0" />
-                            <Setter TargetName="border" Property="BorderThickness" Value="0,1,0,1" />
+                            <!-- <Setter TargetName="border" Property="BorderThickness" Value="0,1,0,1" /> -->
                             <Setter TargetName="border" Property="Background" Value="Transparent" />
                             <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Disabled}" />
                             <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{DynamicResource Disabled}" />
@@ -478,10 +478,10 @@
 
     <Style x:Key="CachedTagButtonRight" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
-        <Setter Property="Background" Value="{DynamicResource Relief}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Relief}" />
+        <Setter Property="Background" Value="{DynamicResource CachedTagButtonBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource CachedTagButtonBorder}" />
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="{DynamicResource CachedTagRightBorderThickness}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="1" />
@@ -493,7 +493,7 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         SnapsToDevicePixels="true"
-                        CornerRadius="0,1,1,0">
+                        CornerRadius="{DynamicResource CachedTagRightCornerRadius}">
                         <ContentPresenter x:Name="contentPresenter"
                             Margin="{TemplateBinding Padding}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -509,7 +509,7 @@
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Panel.ZIndex" Value="10"/>
                             <Setter TargetName="border" Property="Background" Value="{DynamicResource MouseOver}" />
-                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource MouseOver}" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Accent}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="Panel.ZIndex" Value="10"/>
@@ -518,10 +518,10 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter TargetName="border" Property="Margin" Value="0,0,0,0" />
-                            <Setter TargetName="border" Property="BorderThickness" Value="0,1,1,1" />
                             <Setter TargetName="border" Property="Background" Value="Transparent" />
                             <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Disabled}" />
                             <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{DynamicResource Disabled}" />
+                            <!-- <Setter TargetName="border" Property="BorderThickness" Value="0,1,1,1" /> -->
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -553,11 +553,27 @@
     </Style>
     
     <!--  Control Templates  -->
+
+    <ControlTemplate x:Key="RootStructListBoxTemplate"
+        TargetType="{x:Type ListBox}">
+        <Border
+            CornerRadius="0,0,3,0"
+            Padding="{TemplateBinding Padding}"
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            Focusable="False">
+            <ScrollViewer x:Name="ScrollViewer">
+                <ItemsPresenter />
+            </ScrollViewer>
+        </Border>
+    </ControlTemplate>
+    
     <ControlTemplate x:Key="NoScrollListBoxTemplate"
         TargetType="{x:Type ListBox}">
         <Border
-            Padding="{TemplateBinding Padding}"
-            Background="Transparent"
+            Padding="8"
+            Background="{TemplateBinding Background}"
             BorderBrush="{TemplateBinding BorderBrush}"
             BorderThickness="{TemplateBinding BorderThickness}"
             Focusable="False">
@@ -569,7 +585,7 @@
         TargetType="{x:Type ListBox}">
         <Border
             CornerRadius="3"
-            Padding="{TemplateBinding Padding}"
+            Padding="8"
             Background="{TemplateBinding Background}"
             BorderBrush="{TemplateBinding BorderBrush}"
             BorderThickness="{TemplateBinding BorderThickness}"
@@ -1464,7 +1480,8 @@
                 Padding="1,2,1,10"
                 MinWidth="200"
                 MaxHeight="160"
-                Background="Transparent"
+                Background="{DynamicResource FlagsBackground}"
+                BorderBrush="{DynamicResource FlagsBorder}"
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
                 SnapsToDevicePixels="True">
                 <ListBox.ItemContainerStyle>
@@ -1536,6 +1553,7 @@
                 Padding="4,0,1,1"
                 VerticalAlignment="Center"
                 VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
                 DisplayMemberPath="TagAscii"
                 ToolTip="{Binding SelectedGroupName}"
                 ItemsSource="{Binding Groups, Mode=OneTime}"
@@ -1924,7 +1942,7 @@
                         Text="{Binding Name, Mode=OneTime}" />
                 </DataTemplate>
             </Expander.HeaderTemplate>
-            <Border Padding="0,0,0,1">
+            <Border Padding="0,0,0,4">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
                         <TextBox x:Name="ValueTextBox"
@@ -1932,7 +1950,7 @@
                             FontFamily="Consolas"
                             TextOptions.TextRenderingMode="ClearType"
                             Width="325"
-                            MinHeight="60"
+                            MinHeight="70"
                             Padding="2"
                             Margin="0"
                             ScrollViewer.VerticalScrollBarVisibility="Visible"
@@ -1948,16 +1966,15 @@
                                 VerticalAlignment="Center"
                                 Style="{StaticResource InlineFieldLabelStyle}"
                                 Text="Size:" />
-                            <TextBox x:Name="DataTextBox"
+                            <TextBlock x:Name="DataTextBox"
                                 Width="Auto"
                                 MinWidth="10"
-                                Margin="2,-1"
+                                Margin="0,0,4,0"
                                 Padding="1,0,1,0"
                                 VerticalAlignment="Center"
                                 Focusable="False"
-                                VerticalContentAlignment="Center"
-                                IsReadOnly="True"
                                 Text="{Binding Path=Length, Mode=OneWay, StringFormat={}0x{0:X}}"
+                                FontFamily="Consolas"
                                 TextWrapping="Wrap"
                                 Background="{DynamicResource BackgroundDark}"/>
                             <Button Command="{Binding ImportCommand}"
@@ -1984,12 +2001,15 @@
         </DataTemplate.Triggers>
     </DataTemplate>
 
-    <!--  Struct  -->
+    <!--  Root Struct  -->
     <DataTemplate DataType="{x:Type fields:StructField}">
         <ListBox x:Name="StructListBox"
-            BorderThickness="0"
+            BorderThickness="1"
+            Padding="10,10,0,0"
+            BorderBrush="{DynamicResource InnerBorderColor}"
             ItemsSource="{Binding Fields}"
-            Style="{StaticResource StructListBoxStyle}" />
+            Style="{StaticResource StructListBoxStyle}"
+            Template="{StaticResource RootStructListBoxTemplate}" />
     </DataTemplate>
 
     <!--  Inline Struct  -->
@@ -2010,11 +2030,14 @@
                         Text="{Binding Name, Mode=OneTime}" />
                 </DataTemplate>
             </Expander.HeaderTemplate>
-            <Border Background="Transparent" x:Name="InlineStructBorder" CornerRadius="3" >
+            <Border x:Name="InlineStructBorder"
+                    BorderThickness="1"
+                    BorderBrush="{DynamicResource InnerBorderColor}"
+                    Background="Transparent"
+                    CornerRadius="3" >
                 <ListBox x:Name="InlineStructListBox"
+                    BorderThickness="0"
                     Background="{DynamicResource Struct}"
-                    Margin="-1,0,-1,-1"
-                    Padding="0,5,5,5"
                     ItemsSource="{Binding Fields}"
                     Style="{StaticResource StructListBoxStyle}"
                     Template="{StaticResource InlineNoScrollListBoxTemplate}" />
@@ -2028,8 +2051,6 @@
         <DataTemplate.Resources>
             <DataTemplate DataType="{x:Type fields:StructField}">
                 <ListBox
-                    Margin="0"
-                    Padding="0"
                     Background="{DynamicResource Struct}"
                     ItemsSource="{Binding Fields}"
                     Style="{StaticResource StructListBoxStyle}"
@@ -2103,7 +2124,8 @@
             </Expander.HeaderTemplate>
             <!--  Template  -->
             <Border
-                Padding="0,5,5,5"
+                BorderThickness="1"
+                BorderBrush="{DynamicResource InnerBorderColor}"
                 Background="{DynamicResource Struct}"
                 CornerRadius="3">
                 <ContentPresenter Content="{Binding Template, Mode=OneTime}" />

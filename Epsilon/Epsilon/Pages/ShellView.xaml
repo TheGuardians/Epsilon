@@ -54,7 +54,7 @@
         <StatusBar x:Name="EpsilonStatusBar"
             Height="22"
             VerticalContentAlignment="Stretch"
-            Background="{DynamicResource Accent}"
+            Background="{DynamicResource StatusBarBackground}"
             BorderThickness="0"
             DockPanel.Dock="Bottom">
             <StatusBarItem>

@@ -34,7 +34,7 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         SnapsToDevicePixels="true"
-                        CornerRadius="2">
+                        CornerRadius="{DynamicResource FieldCornerRadius}">
                         <ContentPresenter x:Name="contentPresenter"
                             Margin="{TemplateBinding Padding}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"

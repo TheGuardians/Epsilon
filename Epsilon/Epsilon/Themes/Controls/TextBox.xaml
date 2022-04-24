@@ -39,7 +39,7 @@
                     <Border x:Name="border"
                         Padding="{TemplateBinding Padding}"
                         Background="{TemplateBinding Background}"
-                        CornerRadius="1"
+                        CornerRadius="{DynamicResource FieldCornerRadius}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         SnapsToDevicePixels="True">

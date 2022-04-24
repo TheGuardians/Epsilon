@@ -315,13 +315,13 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="1"
+                        CornerRadius="3"
                         SnapsToDevicePixels="true"
                         Padding="0,1,0,0">
                         <DockPanel>
                             <ToggleButton x:Name="HeaderSite"
                                 MinWidth="0"
-                                Height="22"
+                                Height="24"
                                 Margin="0"
                                 Padding="0"
                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -352,7 +352,7 @@
                         </Trigger>
                         <Trigger Property="IsExpanded" Value="true">
                             <Setter TargetName="ExpandSite" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="ExpanderBorder" Property="BorderThickness" Value="2" />
+                            <Setter TargetName="ExpanderBorder" Property="BorderThickness" Value="1" />
                             <Setter TargetName="ExpanderBorder" Property="Padding" Value="0" />
                             <Setter TargetName="HeaderSite" Property="Padding" Value="0" />
                             <Setter Property="Padding" Value="0" />

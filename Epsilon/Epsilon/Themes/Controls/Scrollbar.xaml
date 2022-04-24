@@ -132,7 +132,7 @@
                             Height="{TemplateBinding Height}"
                             MinHeight="30"
                             Margin="0,2,0,6" BorderThickness="0" 
-                            CornerRadius="0"
+                            CornerRadius="{DynamicResource ScrollbarCornerRadius}"
                             SnapsToDevicePixels="True"
                             BorderBrush="Transparent" 
                             Background="{DynamicResource Scrollbar}">
@@ -161,8 +161,8 @@
                     <Border x:Name="ScrollThumbHoriz"
                             Width="{TemplateBinding Width}" 
                             Height="6" 
-                            Margin="6,0,0,-2" BorderThickness="0"
-                            CornerRadius="0"
+                            Margin="6,0,0,0" BorderThickness="0"
+                            CornerRadius="{DynamicResource ScrollbarCornerRadius}"
                             SnapsToDevicePixels="True"
                             BorderBrush="Transparent" 
                             Background="{DynamicResource Scrollbar}">
@@ -204,7 +204,7 @@
                             BorderThickness="{TemplateBinding BorderThickness}" />
                         <Track x:Name="PART_Track"
                             Grid.Row="1"
-                            Opacity="0.9"
+                            Opacity="1"
                             IsDirectionReversed="true"
                             IsEnabled="{TemplateBinding IsMouseOver}">
                             <Track.DecreaseRepeatButton>

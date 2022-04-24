@@ -38,8 +38,8 @@
         
         <Border x:Name="border"
             BorderBrush="{DynamicResource Accent}"
-            BorderThickness="0"
-            Padding="0,2,0,0"
+            BorderThickness="0,2,0,0"
+            Padding="0,0,0,0"
             Margin="-2,0,0,0">
             <avalonDockControls:LayoutDocumentControl Model="{Binding}" />
         </Border>
@@ -64,7 +64,7 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="3">
+                        CornerRadius="{DynamicResource ButtonCornerRadius}">
                         <ContentPresenter />
                     </Border>
                 </ControlTemplate>
@@ -86,7 +86,7 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="3">
+                        CornerRadius="{DynamicResource ButtonCornerRadius}">
                         <ContentPresenter />
                     </Border>
                 </ControlTemplate>
@@ -103,7 +103,7 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="3">
+                        CornerRadius="{DynamicResource ButtonCornerRadius}">
                         <ContentPresenter />
                     </Border>
                     <ControlTemplate.Triggers>
@@ -244,7 +244,7 @@
                                     Margin="0,0,0,0"
                                     SnapsToDevicePixels="true">
                                     <Border x:Name="Bd"
-                                        CornerRadius="2,2,0,0"
+                                        CornerRadius="{DynamicResource UpperTabCornerRadius}"
                                         Padding="{TemplateBinding Padding}"
                                         Background="{TemplateBinding Background}"
                                         BorderBrush="{DynamicResource Inset}"
@@ -324,12 +324,12 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <!--  Following border is required to catch mouse events  -->
-                        <Border CornerRadius="2" Grid.RowSpan="2" Background="Transparent" />
+                        <Border CornerRadius="0" Grid.RowSpan="2" Background="Transparent" />
                         <Border x:Name="ContentPanel"
                             Grid.Row="0"
                             Grid.Column="0"
                             Margin="0,1,0,0"
-                            CornerRadius="2,2,5,0"
+                            CornerRadius="{DynamicResource AnchorablePaneCornerRadius}"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="1"
@@ -385,7 +385,7 @@
                                         Background="{TemplateBinding Background}"
                                         BorderBrush="{DynamicResource Border}"
                                         BorderThickness="0"
-                                        CornerRadius="0,0,3,3">
+                                        CornerRadius="{DynamicResource LowerTabCornerRadius}">
                                         <ContentPresenter
                                             x:Name="Content"
                                             HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
@@ -619,9 +619,10 @@
         TargetType="{x:Type avalonDockControls:LayoutAnchorControl}">
         <Border x:Name="Bd"
             Margin="4,0"
-            Padding="4,3,4,3"
+            Padding="5,4,5,0"
             BorderBrush="{DynamicResource BorderDark}"
-            BorderThickness="0,0,0,4"
+            BorderThickness="0"
+            CornerRadius="2"
             SnapsToDevicePixels="True">
             <ContentPresenter
                 x:Name="Content"
@@ -633,10 +634,16 @@
                 TextOptions.TextFormattingMode="Display" />
         </Border>
         <ControlTemplate.Triggers>
+            
+            <Trigger Property="Side" Value="Left">
+                <Setter TargetName="Bd" Property="Padding" Value="2" />
+                <Setter TargetName="Bd" Property="Margin" Value="20,6,0,0" />
+            </Trigger>
+            
             <Trigger Property="Side" Value="Right">
-                <Setter TargetName="Bd" Property="BorderThickness" Value="0,3,0,0" />
+                <!-- <Setter TargetName="Bd" Property="BorderThickness" Value="0,3,0,0" /> -->
                 <Setter TargetName="Bd" Property="Padding" Value="0,3,0,3" />
-                <Setter TargetName="Bd" Property="Margin" Value="30,-3,0,3" />
+                <Setter TargetName="Bd" Property="Margin" Value="25,-3,0,5" />
             </Trigger>
 
             <Trigger Property="Side" Value="Top">
@@ -651,8 +658,8 @@
             </Trigger>
             
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource Background}" />
-                <Setter TargetName="Bd" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource MouseOver}" />
+                <!-- <Setter TargetName="Bd" Property="BorderBrush" Value="{DynamicResource Accent}" /> -->
                 <Setter TargetName="Bd" Property="TextElement.Foreground" Value="{DynamicResource Accent}" />
             </Trigger>
 
@@ -737,7 +744,7 @@
             <Border
                 Margin="0"
                 Background="{DynamicResource BackgroundDark}"
-                CornerRadius="4">
+                CornerRadius="{DynamicResource ButtonCornerRadius}">
                 <Grid>
                     <Rectangle Width="12" Height="24" Margin="4,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="{DynamicResource Accent}" />
                     <Rectangle Width="9" Height="22" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="{DynamicResource BackgroundDark}" />
@@ -758,7 +765,7 @@
             <Border
                 Margin="0"
                 Background="{DynamicResource BackgroundDark}"
-                CornerRadius="4">
+                CornerRadius="{DynamicResource ButtonCornerRadius}">
                 <Grid>
                     <Rectangle Width="12" Height="24" Margin="4,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="{DynamicResource Accent}" />
                     <Rectangle Width="10" Height="20" Margin="5,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="{DynamicResource BackgroundDark}" />
@@ -788,7 +795,7 @@
             <Border
                 Margin="0"
                 Background="{DynamicResource BackgroundDark}"
-                CornerRadius="4">
+                CornerRadius="{DynamicResource ButtonCornerRadius}">
                 <Grid>
                     <Rectangle Width="12" Height="24" Margin="4,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="{DynamicResource Accent}" />
                     <Rectangle Width="10" Height="20" Margin="5,0,0,2" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="{DynamicResource BackgroundDark}" />
@@ -1496,10 +1503,10 @@
             <Setter.Value>
                 <shell:WindowChrome
                     CaptionHeight="24"
-                    CornerRadius="3"
                     GlassFrameThickness="0"
                     ResizeBorderThickness="10"
                     ShowSystemMenu="False" />
+                <!-- CornerRadius="3" -->
             </Setter.Value>
         </Setter>
         <Setter Property="Template">
@@ -1509,8 +1516,8 @@
                         <Border x:Name="WindowBorder"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{DynamicResource Accent}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="3">
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <!-- CornerRadius="3" -->
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition
@@ -1524,10 +1531,10 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Border x:Name="bd"
-                                    CornerRadius="3"
                                     Width="0"
                                     VerticalAlignment="Stretch"
                                     Background="Transparent" />
+                                <!-- CornerRadius="3" -->
 
                                 <Border x:Name="Header"
                                     Grid.Column="1"
@@ -1657,7 +1664,7 @@
 
     <Style x:Key="{x:Type avalonDockControls:LayoutAnchorableFloatingWindowControl}"
         TargetType="{x:Type avalonDockControls:LayoutAnchorableFloatingWindowControl}">
-        <Setter Property="Background" Value="{DynamicResource Background}" />
+        <Setter Property="Background" Value="{DynamicResource Accent}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Topmost" Value="{DynamicResource AlwaysOnTop}" />
@@ -1665,7 +1672,7 @@
             <Setter.Value>
                 <shell:WindowChrome
                     CaptionHeight="24"
-                    CornerRadius="4"
+                    CornerRadius="{DynamicResource WindowCornerRadius}"
                     GlassFrameThickness="0"
                     ResizeBorderThickness="10" />
             </Setter.Value>
@@ -1677,8 +1684,8 @@
                         <Border x:Name="WindowBorder"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="2"
-                            CornerRadius="4">
+                            BorderThickness="1"
+                            CornerRadius="{DynamicResource WindowCornerRadius}">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition
@@ -1688,7 +1695,7 @@
                                 </Grid.RowDefinitions>
                                 <Border x:Name="Header"
                                     Padding="2,0,2,0"
-                                    CornerRadius="3,3,0,0"
+                                    CornerRadius="0"
                                     Background="{TemplateBinding Background}"
                                     TextElement.Foreground="{DynamicResource Foreground}">
                                     <Grid UseLayoutRounding="True">

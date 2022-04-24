@@ -353,6 +353,7 @@
                                 <!-- Set any properties you want to set -->
                                 <Setter Property="Background" Value="LightGray" />
                                 <Setter Property="Foreground" Value="Black" />
+                                <Setter Property="Margin" Value="0" />
                             </Style>
                         </GridView.ColumnHeaderContainerStyle>
 

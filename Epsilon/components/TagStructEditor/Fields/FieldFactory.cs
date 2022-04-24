@@ -42,6 +42,11 @@ namespace TagStructEditor.Fields
             foreach (var child in CreateStructChildren(info.FieldType))
                 newField.AddChild(child);
 
+            if (_config.CollapseBlocks)
+                newField.IsExpanded = false;
+            else
+                newField.IsExpanded = true;
+
             return newField;
         }
 
@@ -152,11 +157,17 @@ namespace TagStructEditor.Fields
             else if (info.FieldType == typeof(Bsp3dNode))
                 return new Bsp3dNodeField(info);
             else if (info.FieldType == typeof(TagFunction))
-                return new TagFunctionField(info);
+                return new TagFunctionField(info)
+                {
+                    IsExpanded = !_config.CollapseBlocks
+                };
             else if (typeof(TagStructure).IsAssignableFrom(info.FieldType))
                 return CreateInlineStruct(info);
             else if (typeof(IBounds).IsAssignableFrom(info.FieldType))
-                return new BoundsField(this, info);
+                return new BoundsField(this, info)
+                {
+                    IsExpanded = !_config.CollapseBlocks
+                };
             else if (info.FieldType.IsEnum && !info.FieldType.GetCustomAttributes(typeof(FlagsAttribute)).Any())
                 return new EnumField(info, TagEnum.GetInfo(info.FieldType, _cache.Version, _cache.Platform));
             else if (info.FieldType.IsEnum)

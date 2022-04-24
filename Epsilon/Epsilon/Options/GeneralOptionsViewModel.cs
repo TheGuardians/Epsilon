@@ -15,7 +15,7 @@ namespace Epsilon.Options
         Solid,
         Frosted,
         Transparent,
-        ClownWorld,
+        Steam,
         HotWheels,
         Dark1,
         Dark2,

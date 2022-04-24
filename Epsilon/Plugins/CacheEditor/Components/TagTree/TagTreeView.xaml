@@ -60,9 +60,9 @@
 
         <Style x:Key="TagTreeSearchBoxStyle" TargetType="{x:Type TextBoxBase}">
             <Setter Property="Background" Value="{DynamicResource SearchBoxBackground}" />
-            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource InnerBorderColor}" />
             <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
-            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderThickness" Value="1" />
             <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
             <Setter Property="HorizontalContentAlignment" Value="Left" />
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -101,7 +101,7 @@
                                     HorizontalScrollBarVisibility="Hidden"
                                     VerticalScrollBarVisibility="Hidden" />
                                 <TextBlock x:Name="PlaceholderText"
-                                    Margin="7,2,2,2"
+                                    Margin="6,2,2,2"
                                     VerticalAlignment="Center"
                                     FontSize="{TemplateBinding FontSize}"
                                     Foreground="{DynamicResource ForegroundDark}"
@@ -155,7 +155,7 @@
             Height="25"
             DockPanel.Dock="Top"
             FontSize="13"
-            Tag="Search tags..."
+            Tag="Search tags (Ctrl+T)"
             ToolTip="Search all tags. (Ctrl+T, Ctrl+L)"
             Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
         
@@ -192,7 +192,7 @@
                         <TextBlock
                             Text="{Binding Text}"
                             ToolTip="{Binding Text}"
-                            Margin="-1,-1,3,1"/>
+                            Margin="30,-1,3,1"/>
                     </StackPanel>
                 </DataTemplate>
 

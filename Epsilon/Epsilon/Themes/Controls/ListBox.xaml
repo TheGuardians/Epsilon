@@ -17,11 +17,11 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBox}">
                     <Border Name="Bd"
-                        Padding="2,2,0,0"
+                        Padding="2"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="3"
+                        CornerRadius="{DynamicResource FieldCornerRadius}"
                         SnapsToDevicePixels="true">
                         <ScrollViewer
                             Width="auto"

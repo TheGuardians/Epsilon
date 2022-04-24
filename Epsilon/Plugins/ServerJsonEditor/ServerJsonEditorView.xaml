@@ -153,7 +153,8 @@
 
         <!-- #region ====================== Gametype Properties Region ====================== -->
 
-        <Border BorderBrush="{DynamicResource InnerBorderColor}" CornerRadius="2" BorderThickness="1" Width="400" Grid.Column="4" Grid.Row="1"
+        <Border BorderBrush="{DynamicResource InnerBorderColor}" CornerRadius="{DynamicResource FieldCornerRadius}"
+                BorderThickness="1" Width="400" Grid.Column="4" Grid.Row="1"
                 Background="{DynamicResource BackgroundDark}" HorizontalAlignment="Left" VerticalAlignment="Stretch" Padding="15,5,10,0">
             <ItemsControl>
                 <Grid Name="TypeDataGrid" VerticalAlignment="Stretch">

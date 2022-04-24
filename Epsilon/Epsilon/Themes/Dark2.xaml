@@ -2,61 +2,91 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:System="clr-namespace:System;assembly=mscorlib">
 
-    
+    <!--   Window    -->
+
+    <CornerRadius x:Key="WindowCornerRadius" TopLeft="0" TopRight="0" BottomRight="0" BottomLeft="0" />
+    <Thickness x:Key="WindowBorderThickness" Left="1" Top="1" Right="1" Bottom="1"/>
+    <SolidColorBrush x:Key="WindowBorderColor" Color="#2c2c2c" />
+    <SolidColorBrush x:Key="Background" Color="#212121" /> <!-- Main window bg | Options window bg | Bitlist mouse over bg -->
+    <SolidColorBrush x:Key="StatusBarBackground" Color="#2c2c2c" />
+
+    <!--    General    -->
+
     <SolidColorBrush x:Key="TitleColor" Color="#77ffffff" /> <!-- Title 'espsilon' text -->
-    <SolidColorBrush x:Key="Foreground" Color="#77ffffff" />
     <SolidColorBrush x:Key="Accent" Color="#b71c1c" /> <!-- Window border colour | status bar | Treeview arrow mouse over | Treeview selected item bg | options panel horizontal line | tab colour | tag treeview header and border colour-->
     <SolidColorBrush x:Key="Border" Color="#8e9297" /> <!-- Checkbox border colour | Deactivated window buttons colour -->
     <SolidColorBrush x:Key="BorderDark" Color="#202225" /> <!-- Unfocused window border colour | Menu hovor colour -->
-    <SolidColorBrush x:Key="Background" Color="#212121" /> <!-- Main window bg | Options window bg | Bitlist mouse over bg -->
+    <SolidColorBrush x:Key="BackgroundLight" Color="#f0f" />
     <SolidColorBrush x:Key="BackgroundDark" Color="#2c2c2c" /> <!-- Tab contents bg | Horizontal dividers in menus -->
-    <SolidColorBrush x:Key="SubMenu" Color="#373737" /> <!-- submenu bg -->
-
+    <SolidColorBrush x:Key="Foreground" Color="#77ffffff" />
+    <SolidColorBrush x:Key="ForegroundMedium" Color="#77ffffff" /> <!-- Taglist inactive names-->
+    <SolidColorBrush x:Key="ForegroundDark" Color="#77ffffff" /> <!-- Searchbox placeholder text | labels for number inputs | drop down button arrow colour-->
+    <SolidColorBrush x:Key="InnerBorderColor" Color="#000000"/>
     <SolidColorBrush x:Key="Inset" Color="Transparent" /> <!-- bg of the strip with poke, reload, save in it -->
-    <SolidColorBrush x:Key="ShadowBrush" Color="Transparent"/> <!-- Poke button bg -->
-    <SolidColorBrush x:Key="TreeViewBackground" Color="#2c2c2c"/> <!-- as named -->
+    <SolidColorBrush x:Key="MouseOver" Color="#212121"/> <!-- Mouse over bg | active textbox bg -->
     <SolidColorBrush x:Key="Scrollbar" Color="#fff" Opacity="0.15" /> <!-- as named -->
     <SolidColorBrush x:Key="SearchBoxBackground" Color="#212121" /> <!-- as named -->
-    <SolidColorBrush x:Key="ForegroundMedium" Color="#77ffffff" /> <!-- Taglist inactive names-->
+    <SolidColorBrush x:Key="SubMenu" Color="#373737" /> <!-- submenu bg -->
+    <SolidColorBrush x:Key="TreeViewBackground" Color="#2c2c2c"/> <!-- as named -->
+    
+    <!--    Expander    -->
 
-
-    <SolidColorBrush x:Key="MouseOver" Color="#212121"/> <!-- Mouse over bg | active textbox bg -->
-    <SolidColorBrush x:Key="ForegroundDark" Color="#77ffffff" /> <!-- Searchbox placeholder text | labels for number inputs | drop down button arrow colour-->
-
-    <SolidColorBrush x:Key="Disabled" Color="#fff" Opacity="0.1"/> <!-- Disabled block header text border | Disabled cache tag path border-->
-    <SolidColorBrush x:Key="ForegroundDisabled" Color="#fff" Opacity="0.1"/> <!-- Disabled block header text colour -->
     <SolidColorBrush x:Key="ExpanderClosedBackground" Color="#000" Opacity="0.2"/> <!-- Data blocks header bg closed -->
     <SolidColorBrush x:Key="ExpanderClosedBorder" Color="#000" Opacity="0.25"/> <!-- Data blocks border closed -->
     <SolidColorBrush x:Key="ExpanderOpenBackground" Color="#000" Opacity="0.2"/> <!-- Data blocks header bg open -->
     <SolidColorBrush x:Key="ExpanderOpenBorder" Color="#000" Opacity="0.25"/> <!-- Data blocks border open -->
+
+    <!--    Combobox    -->
+
+    <SolidColorBrush x:Key="ComboBoxBackground" Color="#000" Opacity="0.25"/>
+    <SolidColorBrush x:Key="ComboBoxBorder" Color="#434346"/>
+
+    <!--    CachedTag    -->
+
+    <System:Double x:Key="CachedTagButtonSpacing">0</System:Double>
+    <SolidColorBrush x:Key="CachedTagBackground" Color="#000" Opacity="0.25"/> <!-- Cached tag paths box bg -->
+    <SolidColorBrush x:Key="CachedTagButtonBackground" Color="#000" Opacity="0.25"/>
+    <SolidColorBrush x:Key="CachedTagButtonBorder" Color="#434346"/>
+
+    <CornerRadius x:Key="CachedTagLeftCornerRadius" TopLeft="0" TopRight="0" BottomRight="0" BottomLeft="0" />
+    <Thickness x:Key="CachedTagLeftBorderThickness" Left="1" Right="1" Top="1" Bottom="1" />
+
+    <CornerRadius x:Key="CachedTagMiddleCornerRadius" TopLeft="0" TopRight="0" BottomRight="0" BottomLeft="0" />
+    <Thickness x:Key="CachedTagMiddleBorderThickness" Left="1" Right="1" Top="1" Bottom="1" />
+
+    <CornerRadius x:Key="CachedTagRightCornerRadius" TopLeft="0" TopRight="0" BottomRight="0" BottomLeft="0" />
+    <Thickness x:Key="CachedTagRightBorderThickness" Left="1" Right="1" Top="1" Bottom="1" />
+
+    <!--    Fields      -->
+
     <SolidColorBrush x:Key="Struct" Color="#2c2c2c"/> <!-- Data block inner bg -->
-
-    <SolidColorBrush x:Key="CachedTagBackground" Color="#fff" Opacity="0.075"/> <!-- Cached tag paths box bg -->
-
-    <SolidColorBrush x:Key="TextBoxBackground" Color="#000" Opacity="0.25"/> <!-- Number input box bg -->
-    <SolidColorBrush x:Key="TextBoxBorder" Color="Transparent"/> <!-- Number input box border -->
 
     <SolidColorBrush x:Key="StringBackground" Color="#000" Opacity="0.25"/> <!-- String input box bg -->
     <SolidColorBrush x:Key="StringBorder" Color="Transparent"/> <!-- String input box border -->
 
-    <!-- Drop down box bg-->
+    <SolidColorBrush x:Key="TextBoxBackground" Color="#000" Opacity="0.25"/> <!-- Number input box bg -->
+    <SolidColorBrush x:Key="TextBoxBorder" Color="#434346"/>
+
+    <SolidColorBrush x:Key="FlagsBackground" Color="#000" Opacity="0.25"/> <!-- Flags box bg -->
+    <SolidColorBrush x:Key="FlagsBorder" Color="#434346"/>
+
+    <SolidColorBrush x:Key="Disabled" Color="#fff" Opacity="0.1"/> <!-- Disabled block header text border | Disabled cache tag path border-->
+    <SolidColorBrush x:Key="ForegroundDisabled" Color="#fff" Opacity="0.1"/> <!-- Disabled block header text colour -->
+
+    <Color x:Key="StatusUpdate" A="255" R="255" G="0" B="255" />
+
+    <Color x:Key="Shadow" A="#ff" R="#ff" G="#00" B="#ff" />
+    <SolidColorBrush x:Key="ShadowBrush" Color="Transparent"/> <!-- Poke button bg -->
+
     <LinearGradientBrush x:Key="Relief" Opacity="0.1" StartPoint="0.5,0" EndPoint="0.5,1">
         <GradientStop Color="#fff" Offset="0"/>
         <GradientStop Color="#fff" Offset="1"/>
     </LinearGradientBrush>
 
-    
-    
-    <!-- Seem unused or unseen-->
-    <Color x:Key="StatusUpdate" A="255" R="255" G="0" B="255" />
-    <Color x:Key="Shadow" A="#ff" R="#ff" G="#00" B="#ff" />
-    <SolidColorBrush x:Key="BorderDarker" Color="#f0f" />
-    <SolidColorBrush x:Key="BackgroundLight" Color="#f0f" />
     <LinearGradientBrush x:Key="InsetGradient" Opacity="1.0" StartPoint="0.5,0" EndPoint="0.5,1">
         <GradientStop Color="#f0f" Offset="0"/>
         <GradientStop Color="#f0f" Offset="1"/>
     </LinearGradientBrush>
 
-    <System:Double x:Key="CachedTagButtonSpacing">0</System:Double>
 
 </ResourceDictionary>

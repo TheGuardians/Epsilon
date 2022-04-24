@@ -2,61 +2,93 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:System="clr-namespace:System;assembly=mscorlib">
 
-    
+    <!--   Window    -->
+
+    <CornerRadius x:Key="WindowCornerRadius" TopLeft="0" TopRight="0" BottomRight="0" BottomLeft="0" />
+    <Thickness x:Key="WindowBorderThickness" Left="1" Top="1" Right="1" Bottom="1"/>
+    <SolidColorBrush x:Key="WindowBorderColor" Color="#202225"/>
+    <SolidColorBrush x:Key="Background" Color="#2f3136" /> <!-- Main window bg | Options window bg | Bitlist mouse over bg -->
+    <SolidColorBrush x:Key="StatusBarBackground" Color="#202225" />
+
+    <!--    General    -->
+
     <SolidColorBrush x:Key="TitleColor" Color="#77ffffff" /> <!-- Title 'espsilon' text -->
-    <SolidColorBrush x:Key="Foreground" Color="#77ffffff" />
-    <SolidColorBrush x:Key="Accent" Color="#202225" /> <!-- Window border colour | status bar | Treeview arrow mouse over | Treeview selected item bg | options panel horizontal line | tab colour | tag treeview header and border colour-->
+    <SolidColorBrush x:Key="Accent" Color="#202225" />
+    <!-- Window border colour | status bar | Treeview arrow mouse over | Treeview selected item bg | options panel horizontal line | tab colour | tag treeview header and border colour-->
     <SolidColorBrush x:Key="Border" Color="#8e9297" /> <!-- Checkbox border colour | Deactivated window buttons colour -->
     <SolidColorBrush x:Key="BorderDark" Color="#202225" /> <!-- Unfocused window border colour | Menu hovor colour -->
-    <SolidColorBrush x:Key="Background" Color="#2f3136" /> <!-- Main window bg | Options window bg | Bitlist mouse over bg -->
+    <SolidColorBrush x:Key="BorderDarker" Color="#3F3F46"/>
+    <SolidColorBrush x:Key="BackgroundLight" Color="#29292F"/>
     <SolidColorBrush x:Key="BackgroundDark" Color="#42454a" /> <!-- Tab contents bg | Horizontal dividers in menus -->
+    <SolidColorBrush x:Key="Foreground" Color="#77ffffff" />
+    <SolidColorBrush x:Key="ForegroundMedium" Color="#D1D1D6"/>
+    <SolidColorBrush x:Key="ForegroundDark" Color="#A0A0A3"/>
+    <SolidColorBrush x:Key="InnerBorderColor" Color="#000000"/>
+    <SolidColorBrush x:Key="Inset" Color="#42454a" Opacity="0.45"/>
+    <SolidColorBrush x:Key="MouseOver" Color="#D8D8FF" Opacity="0.25"/>
+    <SolidColorBrush x:Key="Scrollbar" Color="#686868" />
+    <SolidColorBrush x:Key="SearchBoxBackground" Color="#333337" Opacity="1"/>
     <SolidColorBrush x:Key="SubMenu" Color="#36393f" /> <!-- submenu bg -->
+    <SolidColorBrush x:Key="TreeViewBackground" Color="#42454a"/>
 
-    <SolidColorBrush x:Key="Inset" Color="Transparent" /> <!-- bg of the strip with poke, reload, save in it -->
-    <SolidColorBrush x:Key="ShadowBrush" Color="Transparent"/> <!-- Poke button bg -->
-    <SolidColorBrush x:Key="TreeViewBackground" Color="#202225"/> <!-- as named -->
-    <SolidColorBrush x:Key="Scrollbar" Color="#000" Opacity="0.5" /> <!-- as named -->
-    <SolidColorBrush x:Key="SearchBoxBackground" Color="#36393f" /> <!-- as named -->
-    <SolidColorBrush x:Key="ForegroundMedium" Color="#77ffffff" /> <!-- Taglist inactive names-->
+    <!--    Expander    -->
 
+    <SolidColorBrush x:Key="ExpanderClosedBackground" Color="#2D2D30" Opacity="0.7"/>
+    <SolidColorBrush x:Key="ExpanderClosedBorder" Color="#202225" Opacity="0.82"/>
+    <SolidColorBrush x:Key="ExpanderOpenBackground" Color="#2D2D30"/>
+    <SolidColorBrush x:Key="ExpanderOpenBorder" Color="#202225"/>
 
-    <SolidColorBrush x:Key="MouseOver" Color="{DynamicResource AccentColor}"/>
-    <SolidColorBrush x:Key="ForegroundDark" Color="#77ffffff" /> <!-- Searchbox placeholder text | labels for number inputs | drop down button arrow colour-->
+    <!--    Combobox    -->
 
-    <SolidColorBrush x:Key="Disabled" Color="#fff" Opacity="0.1"/> <!-- Disabled block header text border | Disabled cache tag path border-->
-    <SolidColorBrush x:Key="ForegroundDisabled" Color="#fff" Opacity="0.1"/> <!-- Disabled block header text colour -->
-    <SolidColorBrush x:Key="ExpanderClosedBackground" Color="#202225"/> <!-- Data blocks header bg closed -->
-    <SolidColorBrush x:Key="ExpanderClosedBorder" Color="#202225"/> <!-- Data blocks border closed -->
-    <SolidColorBrush x:Key="ExpanderOpenBackground" Color="#202225"/> <!-- Data blocks header bg open -->
-    <SolidColorBrush x:Key="ExpanderOpenBorder" Color="#202225"/> <!-- Data blocks border open -->
-    <SolidColorBrush x:Key="Struct" Color="#2f3136"/> <!-- Data block inner bg -->
+    <SolidColorBrush x:Key="ComboBoxBackground" Color="#333337"/>
+    <SolidColorBrush x:Key="ComboBoxBorder" Color="#202225"/>
 
-    <SolidColorBrush x:Key="CachedTagBackground" Color="#fff" Opacity="0.1"/> <!-- Cached tag paths box bg -->
+    <!--    CachedTag    -->
 
-    <SolidColorBrush x:Key="TextBoxBackground" Color="#fff" Opacity="0.15"/> <!-- Number input box bg -->
-    <SolidColorBrush x:Key="TextBoxBorder" Color="Transparent"/> <!-- Number input box border -->
+    <System:Double x:Key="CachedTagButtonSpacing">4</System:Double>
+    <SolidColorBrush x:Key="CachedTagBackground" Color="#333337" />
+    <SolidColorBrush x:Key="CachedTagButtonBackground" Color="#333337"/>
+    <SolidColorBrush x:Key="CachedTagButtonBorder" Color="#202225"/>
 
-    <SolidColorBrush x:Key="StringBackground" Color="#fff" Opacity="0.15"/> <!-- String input box bg -->
-    <SolidColorBrush x:Key="StringBorder" Color="Transparent"/> <!-- String input box border -->
+    <CornerRadius x:Key="CachedTagLeftCornerRadius" TopLeft="0" TopRight="0" BottomRight="0" BottomLeft="0" />
+    <Thickness x:Key="CachedTagLeftBorderThickness" Left="1" Right="1" Top="1" Bottom="1" />
 
-    <!-- Drop down box bg-->
-    <LinearGradientBrush x:Key="Relief" Opacity="0.15" StartPoint="0.5,0" EndPoint="0.5,1">
-        <GradientStop Color="#fff" Offset="0"/>
-        <GradientStop Color="#fff" Offset="1"/>
+    <CornerRadius x:Key="CachedTagMiddleCornerRadius" TopLeft="0" TopRight="0" BottomRight="0" BottomLeft="0" />
+    <Thickness x:Key="CachedTagMiddleBorderThickness" Left="1" Right="1" Top="1" Bottom="1" />
+
+    <CornerRadius x:Key="CachedTagRightCornerRadius" TopLeft="0" TopRight="0" BottomRight="0" BottomLeft="0" />
+    <Thickness x:Key="CachedTagRightBorderThickness" Left="1" Right="1" Top="1" Bottom="1" />
+
+    <!--    Fields      -->
+
+    <SolidColorBrush x:Key="Struct" Color="#42454a" Opacity="0.97"/>
+
+    <SolidColorBrush x:Key="StringBackground" Color="#333337" Opacity="1"/>
+    <SolidColorBrush x:Key="StringBorder" Color="#202225" Opacity="1"/>
+
+    <SolidColorBrush x:Key="TextBoxBackground" Color="#333337"/>
+    <SolidColorBrush x:Key="TextBoxBorder" Color="#202225"/>
+
+    <SolidColorBrush x:Key="FlagsBackground" Color="#333337"/>
+    <SolidColorBrush x:Key="FlagsBorder" Color="#202225"/>
+    
+    <SolidColorBrush x:Key="Disabled" Color="#202225"/>
+    <SolidColorBrush x:Key="ForegroundDisabled" Color="#202225"/>
+
+    <Color x:Key="StatusUpdate" A="255" R="100" G="255" B="135" />
+
+    <Color x:Key="Shadow" A="#71" R="#00" G="#00" B="#00" />
+    <SolidColorBrush x:Key="ShadowBrush" Color="#000000" Opacity="0.27"/>
+
+    <LinearGradientBrush x:Key="Relief" Opacity="1" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="#3F3F46" Offset="0"/>
+        <GradientStop Color="#3F3F46" Offset="1"/>
     </LinearGradientBrush>
 
-    
-    
-    <!-- Seem unused or unseen-->
-    <Color x:Key="StatusUpdate" A="255" R="255" G="0" B="255" />
-    <Color x:Key="Shadow" A="#ff" R="#ff" G="#00" B="#ff" />
-    <SolidColorBrush x:Key="BorderDarker" Color="#f0f" />
-    <SolidColorBrush x:Key="BackgroundLight" Color="#f0f" />
-    <LinearGradientBrush x:Key="InsetGradient" Opacity="1.0" StartPoint="0.5,0" EndPoint="0.5,1">
-        <GradientStop Color="#f0f" Offset="0"/>
-        <GradientStop Color="#f0f" Offset="1"/>
+    <LinearGradientBrush x:Key="InsetGradient" Opacity="0.18" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="#B0B0D0" Offset="0"/>
+        <GradientStop Color="#CCCCF0" Offset="1"/>
     </LinearGradientBrush>
-    
-    <System:Double x:Key="CachedTagButtonSpacing">0</System:Double>
+
 
 </ResourceDictionary>

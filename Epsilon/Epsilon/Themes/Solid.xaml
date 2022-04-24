@@ -2,37 +2,98 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:System="clr-namespace:System;assembly=mscorlib">
 
+    <!--   Window    -->
+
+    <CornerRadius x:Key="WindowCornerRadius" TopLeft="13" TopRight="4" BottomRight="4" BottomLeft="4" />
+    <Thickness x:Key="WindowBorderThickness" Left="2" Top="2" Right="2" Bottom="2"/>
+    
+    <SolidColorBrush x:Key="WindowBorderColor" Color="{DynamicResource AccentColor}"/>
+    <SolidColorBrush x:Key="Background" Color="#2B2B33"/>
+    <SolidColorBrush x:Key="StatusBarBackground" Color="{DynamicResource AccentColor}" />
+
+    <CornerRadius x:Key="AnchorablePaneCornerRadius" TopLeft="3" TopRight="3" BottomRight="0" BottomLeft="0" />
+    <CornerRadius x:Key="UpperTabCornerRadius" TopLeft="2" TopRight="2" BottomRight="0" BottomLeft="0" />
+    <CornerRadius x:Key="LowerTabCornerRadius" TopLeft="0" TopRight="0" BottomRight="2" BottomLeft="2" />
+    <CornerRadius x:Key="ScrollbarCornerRadius" TopLeft="3" TopRight="3" BottomRight="3" BottomLeft="3" />
+    <CornerRadius x:Key="ButtonCornerRadius" TopLeft="4" TopRight="4" BottomRight="4" BottomLeft="4" />
+
+    <!--   General    -->
+
     <SolidColorBrush x:Key="TitleColor" Color="#FFFFFF"/>
     <SolidColorBrush x:Key="Accent" Color="{DynamicResource AccentColor}"/>
     <SolidColorBrush x:Key="Border" Color="#656570"/>
     <SolidColorBrush x:Key="BorderDark" Color="#E4E4FF" Opacity="0.27"/>
     <SolidColorBrush x:Key="BorderDarker" Color="#3F3F46"/>
     <SolidColorBrush x:Key="BackgroundLight" Color="#29292F"/>
-    <SolidColorBrush x:Key="Background" Color="#2B2B33"/>
     <SolidColorBrush x:Key="BackgroundDark" Color="#0E0E0F"/>
-    <SolidColorBrush x:Key="CachedTagBackground" Color="{DynamicResource AccentColor}" Opacity="0.4"/>
+    <SolidColorBrush x:Key="Disabled" Color="#202026"/>
+    <SolidColorBrush x:Key="Foreground" Color="#F1F1F3"/>
+    <SolidColorBrush x:Key="ForegroundMedium" Color="#D1D1D6"/>
+    <SolidColorBrush x:Key="ForegroundDark" Color="#A0A0A3"/>
+    <SolidColorBrush x:Key="ForegroundDisabled" Color="#3A3A40"/>
+    <SolidColorBrush x:Key="InnerBorderColor" Color="#000000" Opacity="0.75"/>
+    <SolidColorBrush x:Key="Inset" Color="{DynamicResource AccentColor}" Opacity="0.45"/>
+    <SolidColorBrush x:Key="MouseOver" Color="#D8D8FF" Opacity="0.4"/>
+    <SolidColorBrush x:Key="Scrollbar" Color="#707078" />
+    <SolidColorBrush x:Key="SearchBoxBackground" Color="#000000" Opacity="0.45"/>
+    <SolidColorBrush x:Key="SubMenu" Color="#000000" Opacity="0.88"/>
+    <SolidColorBrush x:Key="TreeViewBackground" Color="#0E0E0F"/>
+
+    <!--   Expander    -->
+
     <SolidColorBrush x:Key="ExpanderClosedBackground" Color="{DynamicResource AccentColor}" Opacity="0.7"/>
     <SolidColorBrush x:Key="ExpanderClosedBorder" Color="{DynamicResource AccentColor}" Opacity="0.82"/>
     <SolidColorBrush x:Key="ExpanderOpenBackground" Color="{DynamicResource AccentColor}"/>
     <SolidColorBrush x:Key="ExpanderOpenBorder" Color="{DynamicResource AccentColor}"/>
-    <SolidColorBrush x:Key="Foreground" Color="#F1F1F3"/>
-    <SolidColorBrush x:Key="ForegroundMedium" Color="#D1D1D6"/>
-    <SolidColorBrush x:Key="ForegroundDark" Color="#A0A0A3"/>
-    <SolidColorBrush x:Key="Inset" Color="{DynamicResource AccentColor}" Opacity="0.45"/>
-    <SolidColorBrush x:Key="MouseOver" Color="#D8D8FF" Opacity="0.4"/>
-    <SolidColorBrush x:Key="ReliefORIGINAL" Color="#DDDDFF" Opacity="0.2"/>
-    <SolidColorBrush x:Key="Scrollbar" Color="#707078" />
-    <SolidColorBrush x:Key="SearchBoxBackground" Color="#000000" Opacity="0.45"/>
+
+    <!--   Combobox    -->
+
+    <LinearGradientBrush x:Key="ComboBoxBackground" Opacity="1" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="#3F3F46" Offset="0"/>
+        <GradientStop Color="#3F3F46" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ComboBoxBorder" Opacity="1" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="#3F3F46" Offset="0"/>
+        <GradientStop Color="#3F3F46" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!--    CachedTag    -->
+
+    <System:Double x:Key="CachedTagButtonSpacing">0</System:Double>
+    <SolidColorBrush x:Key="CachedTagBackground" Color="{DynamicResource AccentColor}" Opacity="0.4"/>
+
+    <LinearGradientBrush x:Key="CachedTagButtonBackground" Opacity="0.34" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="#DDDDFF" Offset="0"/>
+        <GradientStop Color="#AAAACC" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="CachedTagButtonBorder" Opacity="0.34" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="#DDDDFF" Offset="0"/>
+        <GradientStop Color="#AAAACC" Offset="1"/>
+    </LinearGradientBrush>
+
+    <CornerRadius x:Key="CachedTagLeftCornerRadius" TopLeft="2" TopRight="0" BottomRight="0" BottomLeft="2" />
+    <Thickness x:Key="CachedTagLeftBorderThickness" Left="1" Right="0" Top="1" Bottom="1" />
+
+    <CornerRadius x:Key="CachedTagMiddleCornerRadius" TopLeft="0" TopRight="0" BottomRight="0" BottomLeft="0" />
+    <Thickness x:Key="CachedTagMiddleBorderThickness" Left="0" Right="0" Top="1" Bottom="1" />
+
+    <CornerRadius x:Key="CachedTagRightCornerRadius" TopLeft="0" TopRight="2" BottomRight="2" BottomLeft="0" />
+    <Thickness x:Key="CachedTagRightBorderThickness" Left="0" Right="1" Top="1" Bottom="1" />
+
+    <!--   Fields    -->
+
+    <CornerRadius x:Key="FieldCornerRadius" TopLeft="2" TopRight="2" BottomRight="2" BottomLeft="2" />
+
+    <SolidColorBrush x:Key="Struct" Color="#000000" Opacity="0.85"/>
+
     <SolidColorBrush x:Key="StringBackground" Color="{DynamicResource AccentColor}" Opacity="0.38"/>
     <SolidColorBrush x:Key="StringBorder" Color="{DynamicResource AccentColor}" Opacity="0.38"/>
-    <SolidColorBrush x:Key="Struct" Color="#000000" Opacity="0.85"/>
-    <SolidColorBrush x:Key="SubMenu" Color="#000000" Opacity="0.88"/>
     <SolidColorBrush x:Key="TextBoxBackground" Color="#34343E"/>
     <SolidColorBrush x:Key="TextBoxBorder" Color="#363640"/>
-    <SolidColorBrush x:Key="TreeViewBackground" Color="#0E0E0F"/>
-
-    <SolidColorBrush x:Key="Disabled" Color="#202026"/>
-    <SolidColorBrush x:Key="ForegroundDisabled" Color="#3A3A40"/>
+    <SolidColorBrush x:Key="FlagsBackground" Color="Transparent"/>
+    <SolidColorBrush x:Key="FlagsBorder" Color="#434346"/>
     
     <Color x:Key="StatusUpdate" A="255" R="100" G="255" B="135" />
 
@@ -49,6 +110,4 @@
         <GradientStop Color="#CCCCF0" Offset="1"/>
     </LinearGradientBrush>
 
-    <System:Double x:Key="CachedTagButtonSpacing">0</System:Double>
-    
 </ResourceDictionary>
