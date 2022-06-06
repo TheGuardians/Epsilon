@@ -15,7 +15,7 @@ namespace Epsilon.Pages
     /// Interaction logic for ShellView.xaml
     /// </summary>
     [Export]
-    
+
     public partial class ShellView : ChromeWindow
     {
         public ShellView()
@@ -46,6 +46,21 @@ namespace Epsilon.Pages
                 EpsilonStatusBar.Background.BeginAnimation(SolidColorBrush.ColorProperty, animation);
             }
             e.Handled = true;
+        }
+
+        private void Shell_Drop(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop))
+                return;
+
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (files.Length == 0)
+                return;
+
+            if (DataContext is ShellViewModel vm)
+            {
+                vm.OnDroppedFiles(files);
+            }
         }
 
         private void Grid_Drop(object sender, DragEventArgs e)

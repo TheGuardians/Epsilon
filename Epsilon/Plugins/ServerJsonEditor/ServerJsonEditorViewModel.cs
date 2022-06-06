@@ -192,6 +192,15 @@ namespace ServerJsonEditor
                 NotifyOfPropertyChange("CurrentEntryCommands");
             }
         }
+        public ObservableCollection<CharacterOverride> CurrentCharacterOverrides
+        {
+            get { return _CurrentCharacterOverrides; }
+            set
+            {
+                _CurrentCharacterOverrides = value;
+                NotifyOfPropertyChange("CurrentCharacterOverrides");
+            }
+        }
         public ObservableCollection<MapEntry> CurrentSpecificMaps
         {
             get { return _CurrentSpecificMaps; }
@@ -413,7 +422,7 @@ namespace ServerJsonEditor
                             ModPackage = mod,
                             Commands = GetCommands(typeElem["commands"]),
                             SpecificMaps = CreateMapEntryCollection(typeElem["SpecificMaps"].AsArray),
-                            CharacterOverrides = GetCharacterOverrides(typeElem["characterOverrides"].AsArray)
+                            CharacterOverrides = GetCharacterOverrides(typeElem["characterOverrides"] as JSONClass)
                         });
                     }
                 }
@@ -458,20 +467,23 @@ namespace ServerJsonEditor
             return commandList;
         }
 
-        public ObservableCollection<CharacterOverride> GetCharacterOverrides(JSONArray overrideNodes)
+        public ObservableCollection<CharacterOverride> GetCharacterOverrides(JSONClass overrideNodes)
         {
             ObservableCollection<CharacterOverride> overrides = new ObservableCollection<CharacterOverride>() { };
 
             if (overrideNodes != null)
 			{
-                foreach (JSONNode node in overrideNodes)
+                var overrideDict = overrideNodes.ToDictionary();
+
+                foreach (var key in overrideDict.Keys)
                 {
-                    var test = node.ToString();
+                    var charVal = overrideDict[key].AsArray;
 
                     overrides.Add(new CharacterOverride
                     {
-                        Team = node.ToString(),
-                        Character = node[node.ToString()]
+                        Team = key.ToString(),
+                        CharacterSet = charVal[0].ToString().Replace("\"", ""),
+                        Character = charVal[1].ToString().Replace("\"", "")
                     });
                 }
             }

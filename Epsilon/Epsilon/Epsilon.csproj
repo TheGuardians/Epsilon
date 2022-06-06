@@ -370,12 +370,23 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>cd $(ProjectDir)
-xcopy "$(SolutionDir)..\TagTool\Physics" "$(ProjectDir)$(OutDir)Physics" /e /i /h /Y
-xcopy "$(SolutionDir)..\TagTool\Tools" "$(ProjectDir)$(OutDir)Tools" /e /i /h /Y
+    <PostBuildEvent>cd $(SolutionDir)..\TagTool\TagTool\bin\x64
+
+IF $(ConfigurationName) == Debug (
+    xcopy "Debug\Physics" "$(ProjectDir)$(OutDir)Physics" /e /i /h /Y
+    xcopy "Debug\Tools" "$(ProjectDir)$(OutDir)Tools" /e /i /h /Y
+) ELSE (
+    xcopy "Release\Physics" "$(ProjectDir)$(OutDir)Physics" /e /i /h /Y
+    xcopy "Release\Tools" "$(ProjectDir)$(OutDir)Tools" /e /i /h /Y
+)
+
+cd $(ProjectDir)$(OutDir)\Tools
+move "fmod.dll" $(ProjectDir)$(OutDir)
+move "LZ4.dll" $(ProjectDir)$(OutDir)
+move "assimp.dll" $(ProjectDir)$(OutDir)
+move "AssimpNet.dll" $(ProjectDir)$(OutDir)
 
 if ERRORLEVEL == 0 (
-    xcopy "$(SolutionDir)Tools\HaloShaderGenerator.dll" "$(ProjectDir)$(OutDir)" /e /i /h /Y 2&gt;nul 1&gt;nul
     SET ERRORLEVEL=0
 )
 EXIT %25ERRORLEVEL%25</PostBuildEvent>

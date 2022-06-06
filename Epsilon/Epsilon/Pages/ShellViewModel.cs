@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Reflection;
+using System.Windows;
 
 namespace Epsilon.Pages
 {
@@ -110,6 +111,20 @@ namespace Epsilon.Pages
             catch(Exception ex)
             {
                 Logger.Error($"Failed to open file from command line '{args[1]}'\n{ex}");
+            }
+        }
+        public async void OnDroppedFiles(string[] files)
+        {
+            var file = files[0];
+
+            try
+            {
+                await _editorService.Value.OpenFileAsync(file);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occured while opening the file. Check the log for details", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Logger.Error(ex.ToString());
             }
         }
 
