@@ -76,7 +76,7 @@ namespace TagResourceEditorPlugin
                 catch (Exception ex)
                 {
                     Logger.Error(ex.ToString());
-                    MessageBox.Show("An eception occured while loading the resource:\n\n{ex}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"An exception occured while loading the resource:\n\n{ex}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

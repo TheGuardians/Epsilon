@@ -187,8 +187,15 @@ namespace RenderMethodEditorPlugin.ShaderMethods.Halogram
             var warp = (Warp)shaderOptions[4].OptionIndex;
             var overlay = (Overlay)shaderOptions[5].OptionIndex;
             var edge_fade = (Edge_Fade)shaderOptions[6].OptionIndex;
+            var distortion = HaloShaderGenerator.Shared.Distortion.Off;
+            var soft_fade = HaloShaderGenerator.Shared.Soft_Fade.Off;
 
-            return new HalogramGenerator(albedo, self_illumination, blend_mode, misc, warp, overlay, edge_fade);
+            if (shaderOptions.Count >= 8)
+                distortion = (HaloShaderGenerator.Shared.Distortion)shaderOptions[7].OptionIndex;
+            if (shaderOptions.Count >= 9)
+                soft_fade = (HaloShaderGenerator.Shared.Soft_Fade)shaderOptions[8].OptionIndex;
+
+            return new HalogramGenerator(albedo, self_illumination, blend_mode, misc, warp, overlay, edge_fade, distortion, soft_fade);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using static ServerJsonEditor.ServerJsonEditorViewModel;
@@ -97,20 +98,23 @@ namespace ServerJsonEditor
         }
         private void ClickedRemoveMod(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show($"Are you sure you want to remove this mod entry?"
-                + "\nIts associated gametype entries will also be removed.",
-                "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            ModEntry modToRemove = (ModEntry)ModsListBox.SelectedItem;
+
+            if (modToRemove.FileName != "<none>")
             {
-                ModEntry modToRemove = (ModEntry)ModsListBox.SelectedItem;
+                if (MessageBox.Show($"Are you sure you want to remove this mod entry?"
+                    + "\nIts associated gametype entries will also be removed.",
+                    "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    TypeDataGrid.Visibility = Visibility.Collapsed;
+                    selectedTypeEntry = null;
+                    TypesListBox.ItemsSource = null;
+                    ModsListBox.SelectedIndex = -1;
 
-                TypeDataGrid.Visibility = Visibility.Collapsed;
-                selectedTypeEntry = null;
-                TypesListBox.ItemsSource = null;
-                ModsListBox.SelectedIndex = -1;
+                    ((ServerJsonEditorViewModel)DataContext).RemoveMod(modToRemove);
 
-                ((ServerJsonEditorViewModel)DataContext).RemoveMod(modToRemove);
-
-                ModsListBox.Items.SortDescriptions.Remove(new SortDescription("FileName", ListSortDirection.Ascending));
+                    ModsListBox.Items.SortDescriptions.Remove(new SortDescription("FileName", ListSortDirection.Ascending));
+                }
             }
         }
 
@@ -130,6 +134,7 @@ namespace ServerJsonEditor
         private void ClickedRemoveGametype(object sender, RoutedEventArgs e)
         {
             TypeEntry gametypeToRemove = (TypeEntry)(TypesListBox.SelectedItem);
+            gametypeIndex = -1;
             ((ServerJsonEditorViewModel)DataContext).RemoveGametype(gametypeToRemove);
             TypesListBox.SelectedIndex = -1;
 
@@ -196,7 +201,9 @@ namespace ServerJsonEditor
             if (selectedTypeEntry != null)
 			{
                 DupeSlider.Value = selectedTypeEntry.DuplicateAmount;
-                ((ServerJsonEditorViewModel)DataContext).modGametypeMapping[selectedModEntry][gametypeIndex] = (TypeEntry)TypeDataGrid.DataContext;
+
+                if (gametypeIndex != -1)
+                    ((ServerJsonEditorViewModel)DataContext).modGametypeMapping[selectedModEntry][gametypeIndex] = (TypeEntry)TypeDataGrid.DataContext;
             }
         }
 
@@ -208,14 +215,14 @@ namespace ServerJsonEditor
 		private void SaveButtonClicked(object sender, RoutedEventArgs e)
 		{
             ReplaceTypeEntryOnSwitch();
-            ((ServerJsonEditorViewModel)DataContext).Save();
             TypeDataGrid.Visibility = Visibility.Collapsed;
+            ModsListBox.SelectedItem = null;
             TypesListBox.SelectedItem = -1;
-            ModsListBox.SelectedItem = -1;
+            ((ServerJsonEditorViewModel)DataContext).Save();
         }
 
-		private void ReloadAllClicked(object sender, RoutedEventArgs e)
-		{
+        private void ReloadAllClicked(object sender, RoutedEventArgs e)
+        {
             if(MessageBox.Show($"Are you sure you want to reload your Server JSONs?" + $"\nAny changes you've made will be lost.",
                 "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
 			{
@@ -231,5 +238,40 @@ namespace ServerJsonEditor
                 ModsListBox.SelectedItem = -1;
             }
         }
-	}
+
+        private void ClickedCopyMapToAllGametypes(object sender, RoutedEventArgs e)
+        {
+            MapEntry copiedMap = (MapEntry)MapsListBox.SelectedItem;
+
+            if (copiedMap != null)
+            {
+                foreach (TypeEntry entry in TypesListBox.Items)
+                {
+                    if (entry != TypesListBox.SelectedItem)
+                        entry.SpecificMaps.Add(copiedMap);
+                }
+            }
+        }
+
+        private void ClickedCopyMapListToAllGametypes(object sender, RoutedEventArgs e)
+        {
+            var copiedMaps = MapsListBox.Items;
+
+            if (copiedMaps != null)
+            {
+                foreach (TypeEntry entry in TypesListBox.Items)
+                {
+                    if (entry != TypesListBox.SelectedItem)
+                    {
+                        var tempList = entry.SpecificMaps.ToList();
+
+                        foreach (MapEntry map in copiedMaps)
+                            tempList.Add(map);
+
+                        entry.SpecificMaps = new ObservableCollection<MapEntry>(tempList);
+                    }
+                }
+            }
+        }
+    }
 }

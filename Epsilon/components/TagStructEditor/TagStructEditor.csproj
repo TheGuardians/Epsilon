@@ -115,6 +115,7 @@
     <Compile Include="Fields\TagBlockIndexField.cs" />
     <Compile Include="Fields\PackedSamplerAddressModeField.cs" />
     <Compile Include="Fields\PackedSamplerFilterModeField.cs" />
+    <Compile Include="Fields\TagDataField.cs" />
     <Compile Include="Fields\ValueChangedEventArgs.cs" />
     <Compile Include="Fields\ValueFieldInfo.cs" />
     <Compile Include="Common\IExpandable.cs" />

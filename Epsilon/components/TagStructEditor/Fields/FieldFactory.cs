@@ -146,8 +146,8 @@ namespace TagStructEditor.Fields
 
                 return CreateBlockField(info);
             }
-            //else if (info.FieldType == typeof(TagData))
-            //    return new DataField(info);
+            else if (info.FieldType == typeof(TagData))
+                return new TagDataField(info);
             else if (info.FieldType == typeof(TagBlockIndex))
                 return new TagBlockIndexField(info);
             else if (info.FieldType == typeof(PackedSamplerAddressMode))

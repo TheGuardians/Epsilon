@@ -242,10 +242,14 @@ namespace RenderMethodEditorPlugin.ShaderMethods.Shader
             var parallax = (Parallax)shaderOptions[8].OptionIndex;
             var misc = (Misc)shaderOptions[9].OptionIndex;
             var distortion = HaloShaderGenerator.Shared.Distortion.Off;
-            if(shaderOptions.Count >= 11)
+            var soft_fade = HaloShaderGenerator.Shared.Soft_Fade.Off;
+
+            if (shaderOptions.Count >= 11)
                 distortion = (HaloShaderGenerator.Shared.Distortion)shaderOptions[10].OptionIndex;
-             
-            return new ShaderGenerator(albedo, bump_mapping, alpha_test, specular_mask, material_model, environment_mapping, self_illumination, blend_mode, parallax, misc, distortion);
+            if (shaderOptions.Count >= 12)
+                soft_fade = (HaloShaderGenerator.Shared.Soft_Fade)shaderOptions[11].OptionIndex;
+
+            return new ShaderGenerator(albedo, bump_mapping, alpha_test, specular_mask, material_model, environment_mapping, self_illumination, blend_mode, parallax, misc, distortion, soft_fade);
         }
     }
 }

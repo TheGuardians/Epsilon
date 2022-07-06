@@ -6,12 +6,11 @@
     Foreground="#f1f1f1"
     DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
-    <Grid Width="auto" x:Name="mainGrid" Loaded="mainGrid_Loaded">
+    <Grid Width="auto" x:Name="mainGrid" Loaded="mainGrid_Loaded" HorizontalAlignment="Center">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350" />
+            <ColumnDefinition Width="1" />
             <ColumnDefinition Width="300" />
-            <ColumnDefinition Width="6" />
-            <ColumnDefinition Width="300" />
-            <ColumnDefinition Width="6" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -21,13 +20,13 @@
             <RowDefinition Height="30" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-
+        
         <TextBlock Grid.Row="0" Grid.Column="0" Margin="15,15,15,10"
                    VerticalAlignment="Center" HorizontalAlignment="Left"
                    FontSize="14" Text="Choose a mod to edit its gametype entries." />
         <TextBlock Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Margin="0,15,15,10"
                    VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#808488"
-                   FontSize="14" Text="{Binding ServerFolder, StringFormat={}Location: {0}}" />
+                   FontSize="14" Text="{Binding ServerFolder, StringFormat={} {0}}" />
 
         <!-- #region ====================== Mod List Region ====================== -->
 
@@ -39,9 +38,24 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding FileName}"/>
-                        <TextBox x:Name="ModLinkTextBox" Text="{Binding Link}" Width="270" Margin="0,0,0,0" FontSize="11"
-                                 Foreground="{DynamicResource ForegroundMedium}" Background="Transparent" Tag="Paste link here...">
+                        <TextBlock Text="{Binding FileName}">
+                            <TextBlock.Style>
+                                <Style>
+                                    <Style.Triggers>
+                                        <DataTrigger Value="True" Binding="{Binding Path=IsSelected,
+                                            RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem }}}">
+                                            <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+                                        </DataTrigger>
+                                        <DataTrigger Value="False" Binding="{Binding Path=IsSelected,
+                                            RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem }}}">
+                                            <Setter Property="TextBlock.FontWeight" Value="Regular"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBox x:Name="ModLinkTextBox" Text="{Binding Link}" Width="250" Margin="5,0,0,0" TextWrapping="Wrap"
+                                 Foreground="#909498" Background="Transparent" Tag="Paste link here...">
                             <TextBox.Style>
                                 <Style>
                                     <Setter Property="TextBox.Background" Value="Transparent" />
@@ -71,24 +85,31 @@
             
         </ListBox>
 
-        <ComboBox x:Name="ModsCombobox" Grid.Column="0" Grid.Row="2" Margin="5,0,0,0" Width="265"
-                  HorizontalAlignment="left" SelectionChanged="ModsComboBox_SelectionChanged" VerticalContentAlignment="Center"
-                  ItemsSource="{Binding LocalModList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                  IsEnabled="{Binding HasItems, RelativeSource={RelativeSource Self}, FallbackValue=False}">
-        </ComboBox>
+        <StackPanel Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Stretch">
 
-        <Button x:Name="AddModButton" Grid.Column="0" Grid.Row="2" Click="ClickedAddMod" FontFamily="Consolas"
-                VerticalAlignment="Stretch" HorizontalAlignment="Right" Margin="0,0,0,0" Width="30"
-                Content="+" ToolTip="Add Mod" FontSize="18" VerticalContentAlignment="Center" IsEnabled="True">
-            <Button.Style>
-                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
-                    <Setter Property="Button.Visibility" Value="Visible"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=ModsComboBox, Path=SelectedIndex}" Value="-1"/>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
+            <ComboBox x:Name="ModsCombobox" Width="250" Margin="5,0,3,0" Padding="10,4"
+                      SelectionChanged="TypeComboBox_SelectionChanged"
+                      VerticalAlignment="Stretch" HorizontalAlignment="Left" VerticalContentAlignment="Center"
+                      ItemsSource="{Binding LocalModList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      IsEnabled="{Binding HasItems, RelativeSource={RelativeSource Self}, FallbackValue=False}"/>
+
+            <Button x:Name="AddModButton" Content="Add" Click="ClickedAddMod"
+                    Height="24" Padding="6,0" Margin="0,0,0,0"
+                    VerticalAlignment="Top" HorizontalAlignment="Right" HorizontalContentAlignment="Center"
+                    ToolTip="Add Mod" VerticalContentAlignment="Center">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                        <Setter Property="Button.IsEnabled" Value="True"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=ModsCombobox, Path=SelectedIndex}" Value="-1">
+                                <Setter Property="Button.IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+        </StackPanel>
 
         <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="10,4"
                     VerticalAlignment="Bottom" Orientation="Horizontal">
@@ -101,7 +122,7 @@
         </StackPanel>
         <!-- #endregion -->
 
-        <GridSplitter Grid.Column="1" Grid.RowSpan="4" HorizontalAlignment="Stretch" Background="Transparent" />
+        <!-- <GridSplitter Grid.Column="1" Width="0" HorizontalAlignment="Stretch" Background="Transparent" /> -->
 
         <!-- #region ====================== Gametype List Region ====================== -->
 
@@ -111,7 +132,22 @@
                  SelectionChanged="TypesListBox_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding TypeName}"/>
+                        <TextBlock Text="{Binding TypeName}">
+                            <TextBlock.Style>
+                                <Style>
+                                    <Style.Triggers>
+                                        <DataTrigger Value="True" Binding="{Binding Path=IsSelected,
+                                                RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem }}}">
+                                            <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+                                        </DataTrigger>
+                                        <DataTrigger Value="False" Binding="{Binding Path=IsSelected,
+                                                RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem }}}">
+                                            <Setter Property="TextBlock.FontWeight" Value="Regular"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
                 <ListBox.ContextMenu>
@@ -121,41 +157,66 @@
                 </ListBox.ContextMenu>
         </ListBox>
 
-        <ComboBox x:Name="TypesCombobox" Grid.Column="2" Grid.Row="2" Margin="0" Width="270"
-                  HorizontalAlignment="Left" SelectionChanged="TypeComboBox_SelectionChanged" VerticalContentAlignment="Center"
-                  ItemsSource="{Binding LocalGametypeList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                  IsEnabled="{Binding HasItems, RelativeSource={RelativeSource Self}, FallbackValue=False}" />
+        <StackPanel Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Stretch">
 
-        <Button x:Name="AddTypeButton" Grid.Column="2" Grid.Row="2" Click="ClickedAddGametype"
-                VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="30" FontFamily="Consolas"
-                Content="+" ToolTip="Add Gametype" FontSize="18" VerticalContentAlignment="Center">
-            <Button.Style>
-                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
-                    <Setter Property="Button.Visibility" Value="Visible"></Setter>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=ModsListBox, Path=SelectedIndex}" Value="-1">
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
+            <ComboBox x:Name="TypesCombobox" Width="200" Margin="31,0,3,0" Padding="10,4"
+                      SelectionChanged="TypeComboBox_SelectionChanged"
+                      VerticalAlignment="Stretch" HorizontalAlignment="Left" VerticalContentAlignment="Center"
+                      ItemsSource="{Binding LocalGametypeList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      IsEnabled="{Binding HasItems, RelativeSource={RelativeSource Self}, FallbackValue=False}">
+                <ComboBox.Style>
+                    <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+                        <Setter Property="Visibility" Value="Visible"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=ModsListBox, Path=SelectedIndex}" Value="-1">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ComboBox.Style>
+            </ComboBox>
+
+            <Button x:Name="AddTypeButton" Content="Add" Click="ClickedAddGametype"
+                    Height="24" Padding="6,0" Margin="0,0,0,0"
+                    VerticalAlignment="Top" HorizontalAlignment="Right" HorizontalContentAlignment="Center"
+                    ToolTip="Add Gametype" VerticalContentAlignment="Center">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                        <Setter Property="Button.IsEnabled" Value="True"/>
+                        <Setter Property="Visibility" Value="Visible"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=TypesCombobox, Path=SelectedIndex}" Value="-1">
+                                <Setter Property="Button.IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=ModsListBox, Path=SelectedIndex}" Value="-1">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+        </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column ="4" Margin="77,0,0,0"
                     VerticalAlignment="Bottom" Orientation="Horizontal">
+            
             <Separator HorizontalContentAlignment="Stretch"/>
+            
             <Button Content="Save Voting JSONs" Width="130" Margin="14,0" Padding="10,4"
                     VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="SaveButtonClicked"/>
+            
             <Button Content="Reload" Width="70" Margin="4,0" Padding="10,4" Click="ReloadAllClicked"
                     VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            
         </StackPanel>
 
         <!-- #endregion -->
 
         <!-- #region ====================== Gametype Properties Region ====================== -->
 
-        <Border BorderBrush="{DynamicResource InnerBorderColor}" CornerRadius="{DynamicResource FieldCornerRadius}"
-                BorderThickness="1" Width="400" Grid.Column="4" Grid.Row="1"
-                Background="{DynamicResource BackgroundDark}" HorizontalAlignment="Left" VerticalAlignment="Stretch" Padding="15,5,10,0">
+        <Border BorderBrush="#3F3F46" BorderThickness="1" Width="400" Grid.Column="3" Grid.Row="1" VerticalAlignment="Stretch"
+                Background="#222222" HorizontalAlignment="Left" Padding="15,5,10,0">
             <ItemsControl>
                 <Grid Name="TypeDataGrid" VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
@@ -172,14 +233,15 @@
                     <StackPanel x:Name="TypeStack" Grid.Row="0" Margin="0" VerticalAlignment="Bottom" Orientation="Horizontal">
                         <TextBlock Width="150" Text="Gametype Name" Padding="0,5" TextAlignment="Left"/>
                         <TextBox x:Name="TypeNameTextBox" Text="{Binding TypeName}" Padding="1,0"
-                                 ToolTip="This is the filename of this gametype. It is immutable from here."
+                                 FontWeight="Bold" Background="Transparent" BorderBrush="Transparent"
+                                 ToolTip="This is the local folder name of this gametype. It is immutable from here."
                                  Width="215" Height="25" VerticalContentAlignment="Center" Focusable="False"/>
                     </StackPanel>
 
                     <StackPanel x:Name="TypeDisplayStack" Grid.Row="1" Margin="0" VerticalAlignment="Bottom" Orientation="Horizontal">
                         <TextBlock Width="150" Text="Display Name" Padding="0,5" TextAlignment="Left"/>
                         <TextBox x:Name="TypeDisplayNameTextBox" Text="{Binding TypeDisplayName}" Padding="1,0"
-                                 ToolTip="This is an optional replacement name for the voting menu."
+                                 ToolTip="Optional display name for this gametype when voting."
                                  Width="215" Height="25" VerticalContentAlignment="Center"/>
                     </StackPanel>
 
@@ -291,7 +353,9 @@
                             </ListBox.ItemTemplate>
                             <ListBox.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="Remove" Click="ClickedRemoveMap"/>
+                                    <MenuItem Header="Copy Map To All Gametypes" Click="ClickedCopyMapToAllGametypes"/>
+                                    <MenuItem Header="Copy Map List To All Gametypes" Click="ClickedCopyMapListToAllGametypes"/>
+                                    <MenuItem Header="Remove Map" Click="ClickedRemoveMap"/>
                                 </ContextMenu>
                             </ListBox.ContextMenu>
                         </ListBox>
