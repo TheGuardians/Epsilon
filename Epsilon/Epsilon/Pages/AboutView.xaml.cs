@@ -19,7 +19,12 @@ namespace Epsilon.Pages
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            Process.Start(e.Uri.AbsoluteUri);
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                FileName = e.Uri.AbsoluteUri,
+                UseShellExecute = true
+            };
+            Process.Start(startInfo);
         }
     }
 }
